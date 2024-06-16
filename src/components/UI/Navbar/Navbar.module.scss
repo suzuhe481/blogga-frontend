@@ -1,0 +1,155 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 50px;
+  width: 100vw;
+
+  padding: 10px 0;
+  background-color: rgb(247, 247, 247);
+
+  // Contains the Title.
+  .left {
+    width: 25%;
+    margin-left: 10px;
+
+    .title {
+      font-size: 2rem;
+    }
+  }
+
+  // Contains the Username, Profile icon, Dropdown menu.
+  .right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    margin-right: 10px;
+    width: 50%;
+
+    .profile-container {
+      width: 100%;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+
+      .name {
+        font-size: 1rem;
+      }
+
+      .profile {
+        // Centers the svg icon
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        // Circle around icon.
+        border: 2px solid black;
+        border-radius: 100px;
+
+        min-height: 35px;
+        min-width: 35px;
+
+        // Hides icon from leaving circle
+        overflow: hidden;
+
+        cursor: pointer;
+
+        // Font awesome user icon
+        .icon {
+          font-size: 2rem; // Icon size
+          color: darkgray;
+        }
+
+        // Changes icon color on dropdown open
+        .icon.open {
+          color: rgb(92, 92, 92);
+        }
+      }
+
+      // Changes icon color on hover
+      .profile:hover .icon {
+        color: rgb(92, 92, 92);
+      }
+    }
+
+    .dropdownMenuContainer {
+      position: absolute;
+      right: 70px;
+
+      cursor: pointer;
+
+      .name {
+        margin: 5px 0;
+      }
+
+      // Items in dropdown menu
+      .dropdownItems {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        padding: 5px 15px;
+
+        border-radius: 5px;
+        background-color: rgb(197, 197, 197);
+
+        width: 100%;
+
+        list-style-type: none;
+
+        .separator {
+          margin: 4px 0;
+        }
+
+        li {
+          padding: 12px 8px;
+          border-radius: 15px;
+        }
+
+        li:hover {
+          background-color: rgb(139, 139, 139);
+        }
+
+        // Separator line between dropdown items.
+        hr {
+          border-top: 1px solid black;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// Removes link decorations from text
+.remove-link-style {
+  text-decoration: none;
+  color: black;
+}
+
+/* Prevents text highlighting with cursor dragging */
+.no-highlight {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Stylings for desktops */
+@media screen and (min-width: 600px) {
+  .navbar {
+    .left {
+      .title {
+        font-size: 3rem;
+      }
+    }
+  }
+}
