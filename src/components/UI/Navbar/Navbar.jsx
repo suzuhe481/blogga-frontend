@@ -34,7 +34,7 @@ const Navbar = () => {
 
       <hr className={styles.separator} />
       <li>
-        <a href="/" className={logoStyles}>
+        <a className={logoStyles} onClick={logout}>
           Log out
         </a>
       </li>
