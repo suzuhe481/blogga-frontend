@@ -31,6 +31,9 @@ const LoginForm = () => {
           </div>
         </form>
       </div>
+      <div className={styles["account-create-container"]}>
+        <a href="/signup">Create an account here</a>
+      </div>
     </div>
   );
 };
