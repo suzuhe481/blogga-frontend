@@ -14,7 +14,7 @@
     border: 1px solid black;
     padding: 15px;
 
-    width: 70vw;
+    width: 80vw;
   }
 
   .form-group-container {
@@ -53,5 +53,9 @@
 @media screen and (min-width: 600px) {
   .form-container {
     font-size: 2rem;
+
+    .form {
+      width: 50vw;
+    }
   }
 }
