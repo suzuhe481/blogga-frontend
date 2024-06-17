@@ -1,0 +1,32 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 60%;
+
+  font-size: 2rem;
+
+  form {
+    border: 1px solid black;
+    padding: 15px;
+  }
+
+  .form-group-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 0;
+  }
+
+  .form-group {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 15px;
+  }
+}
+
+/* Stylings for desktops */
+@media screen and (min-width: 600px) {
+}
