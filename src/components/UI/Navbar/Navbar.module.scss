@@ -81,7 +81,7 @@
 
     .dropdownMenuContainer {
       position: absolute;
-      right: 70px;
+      right: 55px;
 
       cursor: pointer;
 
@@ -125,8 +125,7 @@
     }
 
     .signin {
-      padding: 12px 24px;
-      margin-right: 20px;
+      padding: 8px 16px;
 
       /* Centers text in button */
       display: flex;
@@ -140,7 +139,7 @@
 
       border-radius: 10px;
 
-      font-size: 1.5rem;
+      font-size: 1rem;
     }
 
     .signin:hover {
@@ -172,6 +171,23 @@
     .left {
       .title {
         font-size: 3rem;
+      }
+    }
+
+    .right {
+      .profile-container {
+        .name {
+          font-size: 1.5rem;
+        }
+      }
+
+      .dropdownMenuContainer {
+        right: 70px;
+      }
+
+      .signin {
+        font-size: 1.5rem;
+        padding: 12px 24px;
       }
     }
   }
