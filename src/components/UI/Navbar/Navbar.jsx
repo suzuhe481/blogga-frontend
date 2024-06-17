@@ -3,6 +3,9 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
+import { logout } from "../../../helpers/localStorageUtil";
+import { isLoggedIn } from "../../../helpers/localStorageUtil";
+
 import styles from "./Navbar.module.scss";
 
 const Navbar = () => {
