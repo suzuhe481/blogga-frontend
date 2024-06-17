@@ -5,6 +5,7 @@ import Post from "./components/PageComponents/Post/Post";
 import Profile from "./components/PageComponents/Profile/Profile";
 import Search from "./components/PageComponents/Search/Search";
 import LoginForm from "./components/PageComponents/LoginForm/LoginForm";
+import SignupForm from "./components/PageComponents/SignupForm/SignupForm";
 
 import Test from "./components/Test/Test";
 
@@ -32,7 +33,7 @@ const Router = () => {
     },
     {
       path: "/signup",
-      //   element: <SignupForm />,
+      element: <SignupForm />,
     },
     {
       path: "test",
