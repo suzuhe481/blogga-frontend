@@ -3,7 +3,7 @@ import { login } from "./localStorageUtil";
 const loginUtil = (event) => {
   event.preventDefault();
 
-  const URL = `${import.meta.env.VITE_DEV_LOGIN_URL}/log-in`;
+  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/log-in`;
 
   const headers = {
     accept: "application/json",
