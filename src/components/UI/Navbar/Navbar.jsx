@@ -53,27 +53,18 @@ const Navbar = () => {
     </div>
   );
 
-  return (
-    <div className={`${styles.navbar} ${styles["no-highlight"]}`}>
-      <div className={styles.left}>
-        <a href="/" className={logoStyles}>
-          Blogga
-        </a>
-      </div>
+  // Only appears when user is not signed in.
+  const signinButton = (
+    <div>
+      <a
+        href="/login"
+        className={`${styles.signin} ${styles["remove-link-style"]}`}
+      >
+        Sign in
+      </a>
+    </div>
+  );
 
-      <div className={styles.right}>
-        <div
-          className={styles["profile-container"]}
-          onClick={toggleDropDown}
-          onBlur={closeDropDown}
-          tabIndex={0}
-        >
-          <div className={styles.dropdownMenuContainer}>
-            <div className={styles.name}>Firstname Lastname</div>
-            {isdropDownOpen ? dropdownItems : null}
-          </div>
-          {profileIcon}
-        </div>
       </div>
     </div>
   );
