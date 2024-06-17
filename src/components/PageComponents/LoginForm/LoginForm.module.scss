@@ -6,7 +6,9 @@
 
   height: 60%;
 
-  font-size: 2rem;
+  margin-top: 50px;
+
+  font-size: 1.5rem;
 
   form {
     border: 1px solid black;
@@ -24,9 +26,21 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 15px;
+
+    padding: 1px 0;
+
+    input {
+      border-radius: 6px;
+      border: 1px solid black;
+
+      padding: 2px 8px;
+    }
   }
 }
 
 /* Stylings for desktops */
 @media screen and (min-width: 600px) {
+  .form-container {
+    font-size: 2rem;
+  }
 }
