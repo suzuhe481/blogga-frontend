@@ -8,7 +8,7 @@ const Home = () => {
       <Navbar />
       <div className={styles.home}>
         <h1>Links</h1>
-        <a href="">Sign Up</a>
+        <a href="/signup">Sign Up</a>
         <br />
         <a href="/login">Log in</a>
         <br />
