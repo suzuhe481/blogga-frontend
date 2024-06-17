@@ -34,6 +34,13 @@
       border: 1px solid black;
 
       padding: 2px 8px;
+
+      outline: none;
+    }
+
+    /* Highlights focused input. */
+    input:focus {
+      border: 3px solid black;
     }
   }
 }
