@@ -45,6 +45,31 @@
   }
 }
 
+.account-create-container {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  font-size: 2rem;
+  margin: 10px 0;
+
+  cursor: pointer;
+
+  a {
+    text-decoration: none;
+    color: black;
+    padding: 4px 8px;
+    border-radius: 100px;
+    border: 1px solid black;
+  }
+
+  a:hover {
+    background-color: #c7deff;
+  }
+}
+
 /* Stylings for desktops */
 @media screen and (min-width: 600px) {
   .form-container {
