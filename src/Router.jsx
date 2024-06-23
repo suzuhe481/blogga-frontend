@@ -7,7 +7,7 @@ import Search from "./components/PageComponents/Search/Search";
 import LoginForm from "./components/PageComponents/LoginForm/LoginForm";
 import SignupForm from "./components/PageComponents/SignupForm/SignupForm";
 
-import Test from "./components/Test/Test";
+// import Test from "./components/Test/Test";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -35,10 +35,10 @@ const Router = () => {
       path: "/signup",
       element: <SignupForm />,
     },
-    {
-      path: "test",
-      element: <Test />,
-    },
+    // {
+    //   path: "test",
+    //   element: <Test />,
+    // },
   ]);
 
   return <RouterProvider router={router} />;
