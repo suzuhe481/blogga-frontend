@@ -4,12 +4,24 @@ import styles from "./LoginForm.module.scss";
 import loginUtil from "../../../helpers/loginUtil";
 
 const LoginForm = () => {
+  async function loginHandler(event) {
+    const result = await loginUtil(event); // Call login to server.
+
+    if (result.error) {
+      console.log(result.msg);
+      return;
+    }
+
+    // Redirects user to home page.
+    window.location.href = "/";
+  }
+
   return (
     <div className={styles["page-container"]}>
       <Navbar />
 
       <div className={styles["form-container"]}>
-        <form className={styles.form} onSubmit={loginUtil}>
+        <form className={styles.form} onSubmit={loginHandler}>
           <div className="form-title">
             <h1>Log In</h1>
           </div>
