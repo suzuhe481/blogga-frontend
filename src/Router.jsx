@@ -6,6 +6,7 @@ import Profile from "./components/PageComponents/Profile/Profile";
 import Search from "./components/PageComponents/Search/Search";
 import LoginForm from "./components/PageComponents/LoginForm/LoginForm";
 import SignupForm from "./components/PageComponents/SignupForm/SignupForm";
+import Verify from "./components/PageComponents/Verify/Verify";
 
 // import Test from "./components/Test/Test";
 
@@ -35,10 +36,10 @@ const Router = () => {
       path: "/signup",
       element: <SignupForm />,
     },
-    // {
-    //   path: "test",
-    //   element: <Test />,
-    // },
+    {
+      path: "/verify/:token",
+      element: <Verify />,
+    },
   ]);
 
   return <RouterProvider router={router} />;
