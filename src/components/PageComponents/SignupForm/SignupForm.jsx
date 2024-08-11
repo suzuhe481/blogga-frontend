@@ -64,6 +64,11 @@ const SignupForm = () => {
             </div>
 
             <div className={styles["form-group"]}>
+              <label htmlFor="username">Username (@ Display name)</label>
+              <input type="text" name="username" required />
+            </div>
+
+            <div className={styles["form-group"]}>
               <label htmlFor="email">Email</label>
               <input type="text" name="email" required />
             </div>
