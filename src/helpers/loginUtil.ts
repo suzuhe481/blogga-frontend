@@ -1,6 +1,4 @@
-import { login } from "./localStorageUtil";
-
-const loginUtil = (event) => {
+const loginUtil = (event: any) => {
   event.preventDefault();
 
   const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/log-in`;
@@ -19,17 +17,20 @@ const loginUtil = (event) => {
   return fetch(URL, {
     method: "POST",
     headers: headers,
+    credentials: "include",
     body: body,
   })
     .then((response) => {
       return response.json();
     })
     .then((json) => {
-      login(json);
       return json;
     })
     .catch((error) => {
-      const errorMessage = "Failed to load Data";
+      const errorMessage = {
+        error: true,
+        msg: "Failed to get data from server",
+      };
       console.log(error);
       return errorMessage;
     });
