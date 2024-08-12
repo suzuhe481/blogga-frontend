@@ -5,7 +5,11 @@ export default {
     screens: {
       desktop: "600px",
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        FuzzyBubbles: ["Fuzzy-Bubbles"],
+      },
+    },
   },
   plugins: [],
 };
