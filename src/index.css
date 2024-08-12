@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Fuzzy-Bubbles";
+  src: url("./assets//fonts/FuzzyBubbles-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Fuzzy-Bubbles";
+  src: url("./assets/fonts/FuzzyBubbles-Bold.ttf");
+  font-weight: bold;
+}
