@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .env
+
+# Test components
+src/components/Test
