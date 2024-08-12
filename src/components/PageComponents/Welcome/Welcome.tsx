@@ -16,6 +16,20 @@ const Welcome = () => {
           <button>Browse</button>
         </a>
       </div>
+
+      <div className="grid grid-rows-2 my-12 mx-4 gap-y-6">
+        <div className="flex w-full justify-start">
+          <div className="absolute flex text-center justify-center items-center border-2 border-black h-48 w-48 ml-8 -rotate-6 desktop:h-96 desktop:w-96 desktop:ml-36">
+            This app has cool features.
+          </div>
+        </div>
+
+        <div className="flex w-full justify-end">
+          <div className="flex text-center justify-center items-center border-2 border-black h-48 w-48 mr-8 rotate-6 desktop:h-96 desktop:w-96 desktop:mr-36">
+            Here's some more features this app has.
+          </div>
+        </div>
+      </div>
     </>
   );
 };
