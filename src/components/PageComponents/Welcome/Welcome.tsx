@@ -6,13 +6,13 @@ const Welcome = () => {
     <>
       <Navbar />
 
-      <div className="flex flex-col justify-center items-center gap-8 h-96 w-screen bg-sky-400  text-4xl text-white font-FuzzyBubbles font-bold desktop:gap-0">
+      <div className="flex flex-col shadow-xl justify-center gap-2 items-center h-48 w-full bg-sky-400 text-2xl desktop:text-5xl text-white font-FuzzyBubbles font-bold desktop:h-96 desktop:gap-0">
         Welcome to
         <img
           src={LOGO_WHITE}
-          className=" h-36 object-contain aspect-auto desktop:h-64"
+          className="h-20 object-contain aspect-auto desktop:h-60"
         />
-        <a className="border-2 rounded-full px-4 py-2 hover:bg-sky-600 bg-sl text-white">
+        <a className="border-2 border-sky-200 rounded-full px-2 py-1 text-lg desktop:text-4xl desktop:4xl desktop:px-4 desktop:py-2 hover:bg-sky-600 text-white">
           <button>Browse</button>
         </a>
       </div>
