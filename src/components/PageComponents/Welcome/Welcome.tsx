@@ -4,6 +4,11 @@ import LOGO_WHITE from "../../../assets/images/LOGO_WHITE.png";
 import FeatureCards from "./FeatureCards";
 
 const Welcome = () => {
+  const FeaturesData = [
+    "This app has cool features.",
+    "Here's some more features this app has.",
+  ];
+
   return (
     <>
       <Navbar />
