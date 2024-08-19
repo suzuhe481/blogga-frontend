@@ -4,24 +4,24 @@ type FeaturesDataTypes = {
 
 const FeatureCards = ({ featuresData }: FeaturesDataTypes) => {
   const featureCards = featuresData.map((cardData, index) => {
-    var containerClassNameText = "";
-    var classNameText = "";
+    var containerClasses = "";
+    var cardClasses = "";
 
     if (index % 2 === 0) {
-      classNameText =
+      cardClasses =
         "animate-float-left flex text-center justify-center items-center border-2 border-black size-48 ml-8 desktop:size-96 desktop:ml-48";
 
-      containerClassNameText = "relative flex h-full w-screen justify-start";
+      containerClasses = "relative flex h-full w-screen justify-start";
     } else {
-      classNameText =
+      cardClasses =
         "animate-float-right flex text-center justify-center items-center border-2 border-black size-48 mr-8 desktop:size-96 desktop:mr-48";
 
-      containerClassNameText = "relative flex h-full w-screen justify-end";
+      containerClasses = "relative flex h-full w-screen justify-end";
     }
 
     return (
-      <div key={index} className={containerClassNameText}>
-        <div className={classNameText}>{cardData}</div>
+      <div key={index} className={containerClasses}>
+        <div className={cardClasses}>{cardData}</div>
       </div>
     );
   });
