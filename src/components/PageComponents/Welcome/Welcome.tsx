@@ -2,6 +2,7 @@ import Navbar from "../../UI/Navbar/Navbar";
 import LOGO_WHITE from "../../../assets/images/LOGO_WHITE.png";
 
 import FeatureCards from "./FeatureCards";
+import Footer from "./Footer";
 
 const Welcome = () => {
   const FeaturesData = [
@@ -25,7 +26,7 @@ const Welcome = () => {
       </div>
 
       <FeatureCards featuresData={FeaturesData} />
-    </>
+      <Footer />
   );
 };
 
