@@ -23,7 +23,7 @@ const VerifyBanner = ({ user }: IProps) => {
 
   function calculateBannerClasses() {
     var bannerClasses =
-      "relative flex flex-row justify-center items-center w-screen h-auto bg-yellow-100";
+      "relative flex flex-row justify-center items-center w-screen h-auto bg-yellow-100 py-2 px-8 gap-2 desktop:gap-8";
 
     if (!showBanner) {
       bannerClasses += " ";
@@ -41,11 +41,11 @@ const VerifyBanner = ({ user }: IProps) => {
     <div className={calculateBannerClasses()}>
       <div
         onClick={closeBannerHandler}
-        className="absolute left-0 text-2xl font-bold px-2 cursor-pointer hover:text-slate-500"
+        className="left-0 text-lg desktop:text-2xl font-bold px-2 cursor-pointer hover:text-slate-500"
       >
         X
       </div>
-      <div className="text-3xl w-auto">
+      <div className="text-sm desktop:text-lg w-auto">
         You have not verified your account yet. Click here to verify.
       </div>
       <a
