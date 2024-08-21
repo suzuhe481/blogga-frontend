@@ -37,18 +37,18 @@ const ProfileContainer = ({ user }: IProps) => {
   // Calculates classes for profile container
   function calculateProfileContainerClasses() {
     const profileContainerClasses =
-      "desktop:text-2xl text-base w-full flex flex-row justify-end items-center gap-2";
+      "relative desktop:text-2xl text-base flex flex-row items-center gap-2 cursor-pointer";
 
     return profileContainerClasses;
   }
 
   // Calculates classes for Icon
   function calculateIconClasses() {
-    var iconClasses = "text-2xl group-hover:text-slate-200";
+    var iconClasses = "text-2xl group-hover:text-sky-400";
 
     if (isdropDownOpen) {
       iconClasses += " ";
-      iconClasses += "text-slate-400";
+      iconClasses += "text-sky-400";
       return iconClasses;
     } else {
       iconClasses += " ";
@@ -60,15 +60,9 @@ const ProfileContainer = ({ user }: IProps) => {
   // Calculates classes
   function calculateDropDownItemsClasses() {
     const dropDownItemsClasses =
-      "absolute flex flex-col rounded-md bg-blue-400 list-none z-10";
+      "absolute flex flex-col rounded-md bg-blue-400 list-none z-10 top-[120%] right-0 shadow-xl font-FuzzyBubbles";
 
     return dropDownItemsClasses;
-  }
-
-  function calculateDropDownMenuContainerClasses() {
-    const dropdownMenuContainerClasses = "absolute desktop:right-16 right-12";
-
-    return dropdownMenuContainerClasses;
   }
 
   // Contains the round profile icon with an inner font awesome icon.
@@ -81,7 +75,7 @@ const ProfileContainer = ({ user }: IProps) => {
   // Dropdown menu contains "My profile", "Logout" links
   const dropdownItems = (
     <div className={calculateDropDownItemsClasses()}>
-      <div className="flex flex-col justify-center items-center relative w-36 h-16 p-1 rounded-xl hover:bg-slate-500">
+      <div className="flex flex-col justify-center items-center relative w-36 desktop:w-44 h-14 p-1 rounded-t-lg hover:bg-sky-600 px-2">
         <a
           href="/"
           className="flex flex-col justify-center items-start w-full h-full"
@@ -91,9 +85,9 @@ const ProfileContainer = ({ user }: IProps) => {
       </div>
 
       {/* Separator */}
-      <hr className="my-1 mx-0" />
+      <hr />
 
-      <div className="flex flex-col justify-center items-center relative w-36 h-16 p-1 rounded-xl hover:bg-slate-500">
+      <div className="flex flex-col justify-center items-center relative w-36 desktop:w-44 h-14 p-1 rounded-b-lg hover:bg-sky-600 px-2">
         <button
           className="flex flex-col justify-center items-start w-full h-full"
           onMouseDown={logoutHandler}
@@ -112,11 +106,11 @@ const ProfileContainer = ({ user }: IProps) => {
       onBlur={closeDropDown}
       tabIndex={0}
     >
-      <div className={calculateDropDownMenuContainerClasses()}>
-        <div className="m-1 desktop:text-2xl text-xl w-24">{`${user.first_name} ${user.last_name}`}</div>
-        {isdropDownOpen ? dropdownItems : null}
+      <div>
+        <div className="desktop:text-2xl text-xl font-FuzzyBubbles">{`${user.first_name} ${user.last_name}`}</div>
       </div>
       {profileIcon}
+      {isdropDownOpen ? dropdownItems : null}
     </div>
   );
 
