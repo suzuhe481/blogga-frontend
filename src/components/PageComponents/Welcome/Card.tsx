@@ -4,7 +4,7 @@ type CardTypes = {
 };
 
 const Card = ({ cardData, index }: CardTypes) => {
-  var containerClasses = "relative flex h-full w-screen ";
+  var containerClasses = "relative flex h-full ";
   var cardClasses =
     "flex text-center hover:[animation-play-state:paused] justify-center items-center border-2 border-black size-48 shadow-sky-400 shadow-md desktop:size-96 ";
 
@@ -13,7 +13,7 @@ const Card = ({ cardData, index }: CardTypes) => {
 
     containerClasses += "justify-start";
   } else {
-    cardClasses += "animate-float-right mr-8 desktop:mr-48";
+    cardClasses += "animate-float-right mr-8 desktop:mr-48 ";
 
     containerClasses += "justify-end";
   }
