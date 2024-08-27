@@ -16,7 +16,7 @@ const Welcome = () => {
     <div>
       <Navbar />
 
-      <div className="flex flex-col shadow-xl justify-center gap-2 items-center h-48 w-full bg-sky-400 text-2xl desktop:text-5xl text-white font-FuzzyBubbles font-bold desktop:h-96 desktop:gap-0">
+      <div className="flex flex-col shadow-xl justify-center gap-2 items-center h-48 bg-sky-400 text-2xl desktop:text-5xl text-white font-FuzzyBubbles font-bold desktop:h-96 desktop:gap-0">
         Welcome to
         <img
           src={LOGO_WHITE}
