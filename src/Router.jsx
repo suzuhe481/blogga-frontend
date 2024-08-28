@@ -8,8 +8,6 @@ import LoginForm from "./components/PageComponents/LoginForm/LoginForm";
 import SignupForm from "./components/PageComponents/SignupForm/SignupForm";
 import Verify from "./components/PageComponents/Verify/Verify";
 
-import Test from "./components/Test/Test";
-
 const Router = () => {
   const router = createBrowserRouter([
     {
@@ -43,10 +41,6 @@ const Router = () => {
     {
       path: "/verify/:token",
       element: <Verify />,
-    },
-    {
-      path: "test",
-      element: <Test />,
     },
   ]);
 
