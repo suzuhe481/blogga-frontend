@@ -4,18 +4,14 @@ type CardTypes = {
 };
 
 const Card = ({ cardData, index }: CardTypes) => {
-  var containerClasses = "relative flex h-full ";
+  var containerClasses = "relative flex h-full justify-center ";
   var cardClasses =
-    "flex text-center hover:[animation-play-state:paused] justify-center items-center border-2 border-black size-48 shadow-sky-400 shadow-md desktop:size-96 ";
+    "flex text-center hover:[animation-play-state:paused] m-2 justify-center items-center border-2 border-black size-48 shadow-sky-400 shadow-md desktop:size-96 ";
 
   if (index % 2 === 0) {
-    cardClasses += "animate-float-left ml-8 desktop:ml-48 ";
-
-    containerClasses += "justify-start";
+    cardClasses += "animate-float-left ";
   } else {
-    cardClasses += "animate-float-right mr-8 desktop:mr-48 ";
-
-    containerClasses += "justify-end";
+    cardClasses += "animate-float-right ";
   }
 
   return (
