@@ -8,6 +8,7 @@ import LoginForm from "./components/PageComponents/LoginForm/LoginForm";
 import SignupForm from "./components/PageComponents/SignupForm/SignupForm";
 import Verify from "./components/PageComponents/Verify/Verify";
 
+import ErrorPage from "./components/PageComponents/ErrorPage/ErrorPage";
 const Router = () => {
   const router = createBrowserRouter([
     {
@@ -41,6 +42,8 @@ const Router = () => {
     {
       path: "/verify/:token",
       element: <Verify />,
+      path: "*",
+      element: <ErrorPage />,
     },
   ]);
 
