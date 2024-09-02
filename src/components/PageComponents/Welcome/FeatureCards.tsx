@@ -10,7 +10,7 @@ const FeatureCards = ({ featuresData }: FeaturesDataTypes) => {
   });
 
   return (
-    <div className="grid grid-flow-row my-12 gap-y-6 font-FuzzyBubbles">
+    <div className="grid grid-cols-1 desktop:grid-cols-2 desktop:grid-rows-2 my-12 desktop:mx-12 gap-y-6 font-FuzzyBubbles font-bold text-xl desktop:text-4xl">
       {featureCards}
     </div>
   );
