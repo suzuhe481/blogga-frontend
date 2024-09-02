@@ -37,14 +37,14 @@ const ProfileContainer = ({ user }: IProps) => {
   // Calculates classes for profile container
   function calculateProfileContainerClasses() {
     const profileContainerClasses =
-      "relative desktop:text-2xl text-base flex flex-row items-center gap-2 cursor-pointer";
+      "desktop:text-2xl text-base flex flex-row items-center gap-2 cursor-pointer";
 
     return profileContainerClasses;
   }
 
   // Calculates classes for Icon
   function calculateIconClasses() {
-    var iconClasses = "text-2xl group-hover:text-sky-400";
+    var iconClasses = "text-2xl desktop:group-hover:text-sky-400";
 
     if (isdropDownOpen) {
       iconClasses += " ";
@@ -52,15 +52,27 @@ const ProfileContainer = ({ user }: IProps) => {
       return iconClasses;
     } else {
       iconClasses += " ";
-      iconClasses += "text-black";
+      iconClasses += "text-black ";
       return iconClasses;
     }
   }
 
   // Calculates classes
   function calculateDropDownItemsClasses() {
-    const dropDownItemsClasses =
-      "absolute flex flex-col rounded-md bg-blue-400 list-none z-10 top-[120%] right-0 shadow-xl font-FuzzyBubbles";
+    const dropDownItemsClasses = `absolute
+    flex flex-col rounded-md bg-blue-400 list-none z-10
+    shadow-xl font-FuzzyBubbles
+    transition-all
+    translate-y-6
+    
+    ${
+      isdropDownOpen
+        ? "-translate-x-full "
+        : "translate-x-5 desktop:translate-x-48"
+    }
+
+    desktop:h-auto
+    `;
 
     return dropDownItemsClasses;
   }
@@ -110,7 +122,7 @@ const ProfileContainer = ({ user }: IProps) => {
         <div className="desktop:text-2xl text-xl font-FuzzyBubbles">{`${user.first_name} ${user.last_name}`}</div>
       </div>
       {profileIcon}
-      {isdropDownOpen ? dropdownItems : null}
+      <div className="relative">{dropdownItems}</div>
     </div>
   );
 
