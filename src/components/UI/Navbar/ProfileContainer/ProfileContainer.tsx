@@ -99,6 +99,15 @@ const ProfileContainer = ({ user }: IProps) => {
       {/* Separator */}
       <hr />
 
+      <div className="flex flex-col justify-center items-center relative w-36 desktop:w-44 h-14 p-1 hover:bg-sky-600 px-2">
+        <button className="flex flex-col justify-center items-start w-full h-full">
+          Settings
+        </button>
+      </div>
+
+      {/* Separator */}
+      <hr />
+
       <div className="flex flex-col justify-center items-center relative w-36 desktop:w-44 h-14 p-1 rounded-b-lg hover:bg-sky-600 px-2">
         <button
           className="flex flex-col justify-center items-start w-full h-full"
