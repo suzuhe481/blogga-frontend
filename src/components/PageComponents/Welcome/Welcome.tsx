@@ -6,10 +6,10 @@ import Footer from "./Footer";
 
 const Welcome = () => {
   const FeaturesData = [
-    "This app has cool features.",
-    "Here's some more features this app has.",
-    "Third thing",
-    "Another thing",
+    "A new blogging website!",
+    "Share your stories, ideas, articles, and more!",
+    "Rich text editor to emphasize your words, your way.",
+    "Stay tuned. Blogga is coming soon!",
   ];
 
   return (
