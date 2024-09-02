@@ -14,7 +14,7 @@ const Welcome = () => {
   ];
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <Navbar />
       <Header />
       <FeatureCards featuresData={FeaturesData} />
