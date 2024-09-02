@@ -60,7 +60,7 @@ const ProfileContainer = ({ user }: IProps) => {
   // Calculates classes
   function calculateDropDownItemsClasses() {
     const dropDownItemsClasses = `absolute
-    flex flex-col rounded-md bg-blue-400 list-none z-10
+    flex flex-col rounded-lg bg-blue-400 list-none z-10
     shadow-xl font-FuzzyBubbles
     transition-all
     translate-y-6
