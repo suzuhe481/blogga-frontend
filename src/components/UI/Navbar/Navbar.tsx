@@ -1,17 +1,4 @@
-import { useState, useEffect } from "react";
-
-import VerifyBanner from "./VerifyBanner/VerifyBanner";
 import LogoContainer from "./LogoContainer/LogoContainer";
-import MenuPublic from "./MenuPublic/MenuPublic";
-import ProfileContainer from "./ProfileContainer/ProfileContainer";
-
-import navbarDataUtil from "../../../helpers/navbarDataUtil";
-
-export interface Iuser {
-  first_name: string;
-  last_name: string;
-  verified: Boolean;
-}
 
 const Navbar = () => {
   // null = before fetching user
@@ -48,7 +35,6 @@ const Navbar = () => {
           ""
         )}
       </div>
-      <VerifyBanner user={user} />
     </div>
   );
 };
