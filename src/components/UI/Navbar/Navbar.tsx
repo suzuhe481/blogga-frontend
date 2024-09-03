@@ -14,15 +14,15 @@ export interface Iuser {
 }
 
 const Navbar = () => {
-  // false = before fetching user
-  // null = no user
-  const [user, setUser] = useState<Iuser | false | null>(false);
+  // null = before fetching user
+  // false = user not logged in
+  const [user, setUser] = useState<Iuser | false | null>(null);
 
   // Retrieves and sets user data for navbar.
   useEffect(() => {
     navbarDataUtil().then((result) => {
       if (result.error === true) {
-        setUser(null);
+        setUser(false);
         return;
       }
 
