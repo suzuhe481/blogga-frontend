@@ -12,6 +12,7 @@ const LoginForm = () => {
   bouncy.register();
 
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [submitHovered, setSubmitHovered] = useState(false);
 
   async function loginHandler(event: any) {
     setFormSubmitted(true);
@@ -28,6 +29,24 @@ const LoginForm = () => {
       window.location.href = "/";
     }, 1000);
   }
+
+  // Sets state when mouse enters login button
+  function loginMouseEnterHandler() {
+    setSubmitHovered(true);
+  }
+
+  // Sets state when mouse leaves login button
+  function loginMouseLeaveHandler() {
+    setSubmitHovered(false);
+  }
+
+  // White - When Login button is hovered after form submit, animation is white.
+  const HoveredAnimation = <l-bouncy size="30" speed="1.75" color="white" />;
+
+  // Blue - When Login button is NOT hovered after form submit, animation is blue.
+  const UnHoveredAnimation = (
+    <l-bouncy size="30" speed="1.75" color="#00A9FF" />
+  );
 
   return (
     <div>
@@ -65,13 +84,15 @@ const LoginForm = () => {
             <div className="form-submit">
               <button
                 type="submit"
+                onMouseEnter={loginMouseEnterHandler}
+                onMouseLeave={loginMouseLeaveHandler}
                 className="p-2 border-2 border-sky-400 min-w-36 text-sky-400 hover:bg-sky-400 hover:text-white rounded-lg"
               >
-                {formSubmitted ? (
-                  <l-bouncy size="30" speed="1.75" color="white"></l-bouncy>
-                ) : (
-                  "Log In"
-                )}
+                {formSubmitted
+                  ? submitHovered
+                    ? HoveredAnimation
+                    : UnHoveredAnimation
+                  : "Log In"}
               </button>
             </div>
           </div>
