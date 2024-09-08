@@ -53,10 +53,10 @@ const LoginForm = () => {
     <div>
       <Navbar />
 
-      <div className="flex flex-col pt-36 justify-start items-center text-xl font-mono h-screen bg-sky-400">
+      <div className="flex flex-col py-24 desktop:pt-36 justify-start items-center text-xl font-mono desktop:min-h-screen w-full bg-sky-400">
         <form
           onSubmit={loginHandler}
-          className="flex flex-col gap-4 border-2 border-black p-8 desktop:py-12 bg-white"
+          className="flex flex-col items-center gap-12 w-[90vw] desktop:w-[40rem] border-2 border-black p-4 desktop:py-12 bg-white"
         >
           <div className="flex flex-col justify-center items-center gap-4 py-4 desktop:p-0 text-4xl font-bold">
             <div className="w-1/2">
@@ -68,14 +68,14 @@ const LoginForm = () => {
             <h1>Log In</h1>
           </div>
 
-          <div className="flex flex-col gap-4 desktop:w-[40vw]">
+          <div className="flex flex-col gap-4 desktop:w-[90%]">
             <div className="flex flex-col">
               <label htmlFor="email">Email</label>
               <input
                 type="text"
                 name="email"
                 required
-                className="border-2 border-black p-1"
+                className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
               />
             </div>
 
@@ -85,15 +85,15 @@ const LoginForm = () => {
                 type="password"
                 name="password"
                 required
-                className="border-2 border-black p-1"
+                className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
               />
             </div>
-            <div className="form-submit">
+            <div className="flex flex-col gap-8">
               <button
                 type="submit"
                 onMouseEnter={loginMouseEnterHandler}
                 onMouseLeave={loginMouseLeaveHandler}
-                className="p-2 border-2 border-sky-400 min-w-36 text-sky-400 hover:bg-sky-400 hover:text-white rounded-lg"
+                className="p-2 border-2 border-sky-400 desktop:min-w-36 text-sky-400 hover:bg-sky-400 hover:text-white rounded-lg"
               >
                 {formSubmitted
                   ? submitHovered
