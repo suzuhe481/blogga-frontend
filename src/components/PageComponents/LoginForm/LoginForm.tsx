@@ -58,8 +58,14 @@ const LoginForm = () => {
           onSubmit={loginHandler}
           className="flex flex-col gap-4 border-2 border-black p-8 desktop:py-12 bg-white"
         >
-          <div className="flex justify-center items-center text-4xl font-bold my-8">
-            <h1>Login</h1>
+          <div className="flex flex-col justify-center items-center gap-4 py-4 desktop:p-0 text-4xl font-bold">
+            <div className="w-1/2">
+              <img
+                src={LOGO_BLUE}
+                className="h-full object-contain aspect-auto"
+              />
+            </div>
+            <h1>Log In</h1>
           </div>
 
           <div className="flex flex-col gap-4 desktop:w-[40vw]">
