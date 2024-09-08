@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../Welcome/Footer";
-// import styles from "./LoginForm.module.scss";
+
+import LOGO_BLUE from "../../../assets/images/LOGO_BLUE.png";
 
 import loginUtil from "../../../helpers/loginUtil";
 
