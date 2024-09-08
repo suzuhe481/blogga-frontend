@@ -56,7 +56,7 @@ const LoginForm = () => {
       <div className="flex flex-col py-24 desktop:pt-36 justify-start items-center text-xl font-mono desktop:min-h-screen w-full bg-sky-400">
         <form
           onSubmit={loginHandler}
-          className="flex flex-col items-center gap-12 w-[90vw] desktop:w-[40rem] border-2 border-black p-4 desktop:py-12 bg-white"
+          className="flex flex-col items-center gap-12 w-[90vw] desktop:w-[40rem] rounded-lg p-4 desktop:py-12 bg-white"
         >
           <div className="flex flex-col justify-center items-center gap-4 py-4 desktop:p-0 text-4xl font-bold">
             <div className="w-1/2">
