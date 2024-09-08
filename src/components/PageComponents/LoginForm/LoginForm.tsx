@@ -101,6 +101,12 @@ const LoginForm = () => {
                     : UnHoveredAnimation
                   : "Log In"}
               </button>
+              <a
+                href="/signup"
+                className="flex justify-start items-center cursor"
+              >
+                Don't have an account? Create one here!
+              </a>
             </div>
           </div>
         </form>
