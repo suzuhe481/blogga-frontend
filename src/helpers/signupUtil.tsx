@@ -1,6 +1,6 @@
 // import { login } from "./localStorageUtil";
 
-const signUpUtil = (event) => {
+const signUpUtil = (event: any) => {
   event.preventDefault();
 
   const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/users`;
@@ -16,6 +16,7 @@ const signUpUtil = (event) => {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email: req.body.email,
+    username: req.body.username,
     account_created_date: date,
     status: "Member",
   });
@@ -23,12 +24,19 @@ const signUpUtil = (event) => {
   */
 
   // Body values from form.
-  const first_name = event.target[0].value;
-  const last_name = event.target[1].value;
-  const email = event.target[2].value;
-  const password = event.target[3].value;
+  const email = event.target[0].value;
+  const password = event.target[1].value;
+  const first_name = event.target[4].value;
+  const last_name = event.target[5].value;
+  const username = event.target[6].value;
 
-  const body = JSON.stringify({ first_name, last_name, email, password });
+  const body = JSON.stringify({
+    email,
+    password,
+    first_name,
+    last_name,
+    username,
+  });
 
   return fetch(URL, {
     method: "POST",
