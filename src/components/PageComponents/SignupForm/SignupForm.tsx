@@ -178,6 +178,9 @@ const SignupForm = () => {
               </div>
             </form>
           </div>
+          <a href="/login" className="flex justify-start items-center cursor">
+            Already have an account? Log in here!
+          </a>
         </div>
       </div>
       <Footer />
