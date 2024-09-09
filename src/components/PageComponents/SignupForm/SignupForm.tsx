@@ -74,7 +74,7 @@ const SignupForm = () => {
       <Navbar />
 
       <div className="flex flex-col py-24 desktop:pt-36 justify-start items-center text-xl font-mono desktop:min-h-screen w-full bg-sky-400">
-        <div className="w-[90vw] desktop:w-[40rem] rounded-lg p-4 desktop:py-12 bg-white overflow-hidden">
+        <div className="w-[90vw] desktop:w-[40rem] rounded-lg p-4 desktop:py-12 bg-white">
           <div className="flex flex-col justify-center items-center gap-4 py-4 desktop:p-0 text-4xl font-bold">
             <div className="w-1/2">
               <img
@@ -84,7 +84,6 @@ const SignupForm = () => {
             </div>
             <h1>Sign Up</h1>
           </div>
-
           <div className="w-full overflow-hidden">
             <form
               onSubmit={handleSubmit}
