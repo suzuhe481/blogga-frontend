@@ -33,6 +33,12 @@ const FormPageOne = ({
     ? "border-red-700"
     : "border-transparent";
 
+  // Runs on onKeyUp to store email in state.
+  const emailOnChangeHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const event = e.target as HTMLInputElement;
+    setEmail(event.value);
+  };
+
   const passwordOnChangeHandler = (
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
