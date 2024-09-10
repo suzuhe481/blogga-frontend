@@ -81,8 +81,18 @@ const FormPageOne = ({
     }
   };
 
-  // Checks if email is valid using regex and sets errors.
+  // Checks if email is error or valid using regex and sets errors.
   const isValidEmail = () => {
+    // Checks if email is empty.
+    if (email === "") {
+      setErrors((prev) => {
+        return [...prev, "Email is empty"];
+      });
+
+      return false;
+    }
+
+    // Checks if email is valid format.
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
     if (reg.test(email) == false) {
