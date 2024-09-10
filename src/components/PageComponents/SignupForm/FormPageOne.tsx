@@ -12,6 +12,8 @@ const FormPageOne = ({
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [emailError, setEmailError] = useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
   const confirmPasswordInputRef = useRef<HTMLInputElement>(null);
 
   const [errors, setErrors] = useState<Array<string>>([]);
