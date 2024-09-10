@@ -115,7 +115,7 @@ const FormPageOne = ({
       <div className="flex flex-col">
         <label htmlFor="email">Email</label>
         <input
-          type="text"
+          type="email"
           name="email"
           required
           className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
