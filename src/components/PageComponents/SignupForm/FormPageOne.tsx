@@ -141,7 +141,7 @@ const FormPageOne = ({
           required
           onKeyUp={confirmPasswordOnChangeHandler}
           ref={confirmPasswordInputRef}
-          className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
+          className={ConfirmPasswordInputStyles}
         />
       </div>
       <div className="flex flex-row justify-center items-center h-16 w-full">
