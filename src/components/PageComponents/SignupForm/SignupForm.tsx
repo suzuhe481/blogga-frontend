@@ -79,6 +79,7 @@ const SignupForm = () => {
               <div
                 className="flex justify-center items-center w-full transition-all duration-300"
                 style={inlineMarginLeft}
+                onTransitionEnd={pageAnimationTransitionEnd}
               >
                 <div className="flex flex-col w-1/3 gap-4 mx-1">
                   <FormPageOne nextPage={nextPage} />
