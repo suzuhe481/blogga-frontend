@@ -11,6 +11,10 @@ const FormPageTwo = ({
 }: FormPageTwoProps) => {
   const [errors, setErrors] = useState<Array<string>>([]);
 
+  const prevClickHandler = () => {
+    prevPage();
+  };
+
   return (
     <>
       <h1 className="text-4xl font-bold">Profile Info</h1>
@@ -44,7 +48,7 @@ const FormPageTwo = ({
       <div className="flex flex-row justify-center items-center h-16 w-full gap-2">
         <button
           type="button"
-          onClick={prevPage}
+          onClick={prevClickHandler}
           className="h-full w-full bg-sky-400"
         >
           Previous
