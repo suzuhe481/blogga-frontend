@@ -2,9 +2,13 @@ import { useState, useRef } from "react";
 
 interface FormPageOneProps {
   nextPage: () => void;
+  isFormPageAnimated: boolean;
 }
 
-const FormPageOne = ({ nextPage = () => {} }: FormPageOneProps) => {
+const FormPageOne = ({
+  nextPage = () => {},
+  isFormPageAnimated,
+}: FormPageOneProps) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
