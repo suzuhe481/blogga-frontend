@@ -82,11 +82,17 @@ const SignupForm = () => {
                 onTransitionEnd={pageAnimationTransitionEnd}
               >
                 <div className="flex flex-col w-1/3 gap-4 mx-1">
-                  <FormPageOne nextPage={nextPage} />
+                  <FormPageOne
+                    nextPage={nextPage}
+                    isFormPageAnimated={isFormPageAnimated}
+                  />
                 </div>
 
                 <div className="flex flex-col w-1/3 gap-4 mx-1">
-                  <FormPageTwo prevPage={prevPage} />
+                  <FormPageTwo
+                    prevPage={prevPage}
+                    isFormPageAnimated={isFormPageAnimated}
+                  />
                 </div>
 
                 <div className="flex flex-col w-1/3 gap-4 mx-1">
