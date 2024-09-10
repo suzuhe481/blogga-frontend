@@ -50,10 +50,15 @@ const FormPageTwo = ({
           type="button"
           onClick={prevClickHandler}
           className="h-full w-full bg-sky-400"
+          disabled={isFormPageAnimated}
         >
           Previous
         </button>
-        <button type="submit" className="h-full w-full bg-sky-400">
+        <button
+          type="submit"
+          disabled={isFormPageAnimated}
+          className="h-full w-full bg-sky-400"
+        >
           Sign Up
         </button>
       </div>

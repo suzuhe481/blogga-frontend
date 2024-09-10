@@ -110,6 +110,7 @@ const FormPageOne = ({
           type="button"
           onClick={nextClickHandler}
           className="h-full w-full bg-sky-400"
+          disabled={isFormPageAnimated}
         >
           Next
         </button>
