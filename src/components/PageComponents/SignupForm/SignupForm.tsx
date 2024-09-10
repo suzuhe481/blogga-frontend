@@ -51,6 +51,11 @@ const SignupForm = () => {
     setIsFormPageAnimated(true);
   };
 
+  // Runs when sliding transition of form changes ends.
+  const pageAnimationTransitionEnd = () => {
+    setIsFormPageAnimated(false);
+  };
+
   return (
     <div>
       <Navbar />
