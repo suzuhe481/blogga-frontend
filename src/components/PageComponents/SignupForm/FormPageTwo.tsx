@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-interface FormPageOneProps {
+interface FormPageTwoProps {
   prevPage: () => void;
   isFormPageAnimated: boolean;
 }
@@ -8,7 +8,7 @@ interface FormPageOneProps {
 const FormPageTwo = ({
   prevPage = () => {},
   isFormPageAnimated,
-}: FormPageOneProps) => {
+}: FormPageTwoProps) => {
   const [errors, setErrors] = useState<Array<string>>([]);
 
   return (
