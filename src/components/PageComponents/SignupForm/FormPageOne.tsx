@@ -118,7 +118,9 @@ const FormPageOne = ({
           type="email"
           name="email"
           required
-          className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
+          ref={emailInputRef}
+          onKeyUp={emailOnChangeHandler}
+          className={EmailInputStyles}
         />
       </div>
       <div className="flex flex-col">
