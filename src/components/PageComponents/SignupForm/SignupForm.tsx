@@ -14,6 +14,10 @@ import signUpUtil from "../../../helpers/signupUtil";
 const SignupForm = () => {
   const [formPage, setFormPage] = useState(0);
 
+  // Controls form button's disabled property to prevent quick, repeated button presses
+  // from breaking form.
+  const [isFormPageAnimated, setIsFormPageAnimated] = useState(false);
+
   // Used in inline css due to difficulty of implementing dynamically in Tailwind.
   // Sets the left margin based on the current form page to animate slide appropriately.
   // -100 * (number of forms - 1) / totalforms
