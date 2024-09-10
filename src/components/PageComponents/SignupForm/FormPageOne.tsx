@@ -102,11 +102,28 @@ const FormPageOne = ({
   const nextClickHandler = () => {
     // Clears current errors.
     setErrors([]);
+    var errorsExist = false;
+    setEmailError(false);
+    setConfirmPasswordError(false);
 
-    // Check for equal passwords before continuing.
-    if (isPasswordsEqual()) {
-      nextPage();
+    // Checks for valid email
+    if (!isValidEmail()) {
+      errorsExist = true;
+      setEmailError(true);
     }
+
+    // Check for equal passwords
+    if (!isPasswordsEqual()) {
+      errorsExist = true;
+      setConfirmPasswordError(true);
+    }
+
+    // If there are errors, do not continue.
+    if (errorsExist) {
+      return;
+    }
+
+    nextPage();
   };
 
   return (
