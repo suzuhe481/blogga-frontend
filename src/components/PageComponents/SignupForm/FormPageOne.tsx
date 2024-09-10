@@ -84,6 +84,20 @@ const FormPageOne = ({
     }
   };
 
+  // Checks if email is valid using regex.
+  const isValidEmail = () => {
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+    if (reg.test(email) == false) {
+      setErrors((prev) => {
+        return [...prev, "Email is invalid format"];
+      });
+      return false;
+    }
+
+    return true;
+  };
+
   // Handles the next button click for THIS form.
   const nextClickHandler = () => {
     // Clears current errors.
