@@ -18,6 +18,18 @@ const FormPageOne = ({
 
   const [errors, setErrors] = useState<Array<string>>([]);
 
+  // Styles for email input.
+  var EmailInputStyles =
+    "shadow-black shadow-sm border-4 p-1 focus:border-black outline-none rounded-lg ";
+  EmailInputStyles += emailError ? "border-red-700" : "border-transparent";
+
+  // Styles for confirm password input.
+  var ConfirmPasswordInputStyles =
+    "shadow-black shadow-sm first-line:shadow-sm border-4 p-1 focus:border-black outline-none rounded-lg ";
+  ConfirmPasswordInputStyles += confirmPasswordError
+    ? "border-red-700"
+    : "border-transparent";
+
   const passwordOnChangeHandler = (
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
