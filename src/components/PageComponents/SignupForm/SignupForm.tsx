@@ -37,12 +37,18 @@ const SignupForm = () => {
     }
   };
 
+  // Increments formPage by 1.
+  // Set setIsFormPageAnimated to true.
   const nextPage = () => {
     setFormPage((prev) => prev + 1);
+    setIsFormPageAnimated(true);
   };
 
+  // Decrements formPage by 1.
+  // Set setIsFormPageAnimated to true.
   const prevPage = () => {
     setFormPage((prev) => prev - 1);
+    setIsFormPageAnimated(true);
   };
 
   return (
