@@ -60,7 +60,7 @@ const FormPageOne = ({
       return;
     }
 
-    // If either password field is empty.
+    // If either password field is empty and sets errors.
     if (password === "" || confirmPassword === "") {
       setErrors((prev) => {
         return [...prev, "Password must be filled out"];
@@ -69,25 +69,19 @@ const FormPageOne = ({
       return false;
     }
 
-    // Changes password input's border color to black/red if there is error.
+    // Checks for matching passwords and sets errors.
     if (password === confirmPassword) {
-      confirmPasswordInputRef.current.style.borderColor = "#ccc";
-      setErrors([]);
-
       return true;
     } else {
-      confirmPasswordInputRef.current.style.borderColor = "red";
-
       setErrors((prev) => {
         return [...prev, "Passwords do not match"];
       });
 
-      //   setErrors("Passwords do not match");
       return false;
     }
   };
 
-  // Checks if email is valid using regex.
+  // Checks if email is valid using regex and sets errors.
   const isValidEmail = () => {
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
