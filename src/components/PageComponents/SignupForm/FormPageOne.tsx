@@ -57,10 +57,12 @@ const FormPageOne = ({ nextPage = () => {} }: FormPageOneProps) => {
     }
   };
 
+  // Handles the next button click for THIS form.
   const nextClickHandler = () => {
     // Clears current errors.
     setErrors([]);
 
+    // Check for equal passwords before continuing.
     if (isPasswordsEqual()) {
       nextPage();
     }
