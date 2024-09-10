@@ -39,6 +39,7 @@ const FormPageOne = ({
     setEmail(event.value);
   };
 
+  // Runs on onKeyUp to store password in state.
   const passwordOnChangeHandler = (
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
@@ -46,12 +47,14 @@ const FormPageOne = ({
     setPassword(event.value);
   };
 
+  // Runs on onKeyUp to store confirm password in state.
   const confirmPasswordOnChangeHandler = (e: React.KeyboardEvent) => {
     const event = e.target as HTMLInputElement;
 
     setConfirmPassword(event.value);
   };
 
+  // Checks if the 2 passwords in both input fields are equal.
   const isPasswordsEqual = () => {
     if (confirmPasswordInputRef.current === null) {
       return;
