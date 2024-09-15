@@ -142,7 +142,11 @@ const FormPageTwo = ({
           Sign Up
         </button>
       </div>
-      <div className="text-red-600">{errors}</div>
+      <div className="text-red-600">
+        {errors.map((error, index) => {
+          return <li key={index}>{error}</li>;
+        })}
+      </div>
     </>
   );
 };
