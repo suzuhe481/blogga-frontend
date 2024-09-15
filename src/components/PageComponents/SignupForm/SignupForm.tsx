@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
 import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../Welcome/Footer";
