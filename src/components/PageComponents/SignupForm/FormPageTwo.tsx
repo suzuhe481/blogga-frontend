@@ -3,11 +3,13 @@ import { useState } from "react";
 interface FormPageTwoProps {
   prevPage: () => void;
   isFormPageAnimated: boolean;
+  setIsInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FormPageTwo = ({
   prevPage = () => {},
   isFormPageAnimated,
+  setIsInputFocused,
 }: FormPageTwoProps) => {
   const [errors, setErrors] = useState<Array<string>>([]);
 
@@ -24,6 +26,8 @@ const FormPageTwo = ({
           type="text"
           name="first_name"
           required
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={() => setIsInputFocused(false)}
           className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
         />
       </div>
@@ -33,6 +37,8 @@ const FormPageTwo = ({
           type="text"
           name="last_name"
           required
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={() => setIsInputFocused(false)}
           className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
         />
       </div>
@@ -42,6 +48,8 @@ const FormPageTwo = ({
           type="text"
           name="username"
           required
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={() => setIsInputFocused(false)}
           className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
         />
       </div>
