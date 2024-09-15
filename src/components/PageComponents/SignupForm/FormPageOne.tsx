@@ -3,11 +3,13 @@ import { useState, useRef, FormEvent } from "react";
 interface FormPageOneProps {
   nextPage: () => void;
   isFormPageAnimated: boolean;
+  setIsInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FormPageOne = ({
   nextPage = () => {},
   isFormPageAnimated,
+  setIsInputFocused,
 }: FormPageOneProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
