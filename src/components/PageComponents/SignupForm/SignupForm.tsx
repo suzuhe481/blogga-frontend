@@ -32,8 +32,21 @@ const SignupForm = () => {
     if (result === "good") {
       // Go to final success page
       nextPage();
-    } else {
-      console.log("error");
+    }
+  };
+
+  // Handles enter press while an input is focused to submit form.
+  const handleEnterPress = (e: any) => {
+    if (e.key === "Enter" && isInputFocused) {
+      e.preventDefault();
+
+      if (formPage === 1) {
+        // This form event is used to pass the form to handleSubmit()
+        const syntheticFormEvent = {
+          preventDefault: () => {},
+        } as FormEvent<HTMLFormElement>;
+        handleSubmit(syntheticFormEvent);
+      }
     }
   };
 
