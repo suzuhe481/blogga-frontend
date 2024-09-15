@@ -102,6 +102,7 @@ const SignupForm = () => {
                   <FormPageOne
                     nextPage={nextPage}
                     isFormPageAnimated={isFormPageAnimated}
+                    setIsInputFocued={setIsInputFocued}
                   />
                 </div>
 
@@ -109,6 +110,7 @@ const SignupForm = () => {
                   <FormPageTwo
                     prevPage={prevPage}
                     isFormPageAnimated={isFormPageAnimated}
+                    setIsInputFocued={setIsInputFocued}
                   />
                 </div>
 
