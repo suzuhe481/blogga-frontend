@@ -17,6 +17,12 @@ const FormPageTwo = ({
 
   const [errors, setErrors] = useState<Array<string>>([]);
 
+  const [isShaking, setIsShaking] = useState(false);
+
+  var buttonContainerStyles =
+    "flex flex-row justify-center items-center h-16 w-full gap-2 ";
+  buttonContainerStyles += isShaking ? "animate-shake" : "";
+
   // Runs on onKeyUp to store first name in state.
   const firstNameOnChangeHandler = (e: FormEvent<HTMLInputElement>) => {
     const event = e.target as HTMLInputElement;
@@ -124,7 +130,7 @@ const FormPageTwo = ({
           className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
         />
       </div>
-      <div className="flex flex-row justify-center items-center h-16 w-full gap-2">
+      <div className={buttonContainerStyles}>
         <button
           type="button"
           onClick={prevClickHandler}
