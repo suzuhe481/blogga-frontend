@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, FormEvent } from "react";
 
 interface FormPageOneProps {
   nextPage: () => void;
