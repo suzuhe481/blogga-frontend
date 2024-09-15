@@ -26,13 +26,16 @@ const SignupForm = () => {
   const defaultMarginValue = (-100 * 2) / 3; // -66.6% or 2/3 of -100
   const inlineMarginLeft = { marginLeft: `${formPage * defaultMarginValue}%` };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const result = await signUpUtil(e);
-    // If signup successful,
-    if (result === "good") {
-      // Go to final success page
+
+    // // If error during signup
+    if (result.error) {
+      console.log("unsuccessful sign in");
+    } else {
+      console.log("form submitted");
       nextPage();
     }
   };
@@ -93,6 +96,7 @@ const SignupForm = () => {
           <div className="w-full overflow-hidden">
             <form
               onSubmit={handleSubmit}
+              onKeyDown={handleEnterPress}
               className="flex flex-col justify-center items-center gap-12 w-[300%] "
             >
               <div
