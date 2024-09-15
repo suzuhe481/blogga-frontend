@@ -69,7 +69,7 @@ const FormPageOne = ({
     // If either password field is empty and sets errors.
     if (password === "" || confirmPassword === "") {
       setErrors((prev) => {
-        return [...prev, "Password must be filled out"];
+        return [...prev, "Password is empty"];
       });
 
       return false;
