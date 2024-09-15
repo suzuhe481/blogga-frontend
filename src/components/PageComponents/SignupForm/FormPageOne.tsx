@@ -133,6 +133,16 @@ const FormPageOne = ({
     nextPage();
   };
 
+  // Prevents tabbing, but not shift+tabing.
+  // Used on the next button to prevent going to the next form page.
+  const keyDownHandler = (e: any) => {
+    if (e.key === "Tab" && e.shiftKey) {
+      return;
+    } else if (e.key === "Tab") {
+      e.preventDefault();
+    }
+  };
+
   return (
     <>
       <h1 className="text-4xl font-bold">Login Info</h1>
