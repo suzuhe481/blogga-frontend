@@ -39,6 +39,52 @@ const FormPageTwo = ({
     prevPage();
   };
 
+  const signupHandler = () => {
+    // Clears current errors.
+    setErrors([]);
+    var errorsExist = false;
+    setFirstNameError(false);
+    setLastNameError(false);
+    setUsernameError(false);
+
+    if (firstName === "") {
+      setFirstNameError(true);
+      errorsExist = true;
+
+      setErrors((prev) => {
+        return [...prev, "First name is empty"];
+      });
+    }
+
+    if (lastName === "") {
+      setLastNameError(true);
+      errorsExist = true;
+
+      setErrors((prev) => {
+        return [...prev, "Last name is empty"];
+      });
+    }
+
+    if (username === "") {
+      setUsernameError(true);
+      errorsExist = true;
+
+      setErrors((prev) => {
+        return [...prev, "Username is empty"];
+      });
+    }
+
+    // If there are errors, do not continue.
+    if (errorsExist) {
+      setIsShaking(true);
+
+      setTimeout(() => {
+        setIsShaking(false);
+      }, 200);
+      return;
+    }
+  };
+
   return (
     <>
       <h1 className="text-4xl font-bold">Profile Info</h1>
@@ -89,6 +135,7 @@ const FormPageTwo = ({
         </button>
         <button
           type="submit"
+          onClick={signupHandler}
           disabled={isFormPageAnimated}
           className="h-full w-full bg-sky-400"
         >
