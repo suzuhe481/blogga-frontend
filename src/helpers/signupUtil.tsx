@@ -50,7 +50,7 @@ const signUpUtil = (event: any) => {
       return json;
     })
     .catch((error) => {
-      const errorMessage = "Failed to sign in";
+      const errorMessage = { error: true, message: "Failed to sign in" };
       console.log(error);
       return errorMessage;
     });
