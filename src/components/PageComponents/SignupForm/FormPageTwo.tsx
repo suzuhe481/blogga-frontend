@@ -11,7 +11,29 @@ const FormPageTwo = ({
   isFormPageAnimated,
   setIsInputFocused,
 }: FormPageTwoProps) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+
   const [errors, setErrors] = useState<Array<string>>([]);
+
+  // Runs on onKeyUp to store first name in state.
+  const firstNameOnChangeHandler = (e: FormEvent<HTMLInputElement>) => {
+    const event = e.target as HTMLInputElement;
+    setFirstName(event.value);
+  };
+
+  // Runs on onKeyUp to store last name in state.
+  const lastNameOnChangeHandler = (e: FormEvent<HTMLInputElement>) => {
+    const event = e.target as HTMLInputElement;
+    setLastName(event.value);
+  };
+
+  // Runs on onKeyUp to store username in state.
+  const usernameOnChangeHandler = (e: FormEvent<HTMLInputElement>) => {
+    const event = e.target as HTMLInputElement;
+    setUsername(event.value);
+  };
 
   const prevClickHandler = () => {
     prevPage();
@@ -26,6 +48,7 @@ const FormPageTwo = ({
           type="text"
           name="first_name"
           required
+          onChange={firstNameOnChangeHandler}
           onFocus={() => setIsInputFocused(true)}
           onBlur={() => setIsInputFocused(false)}
           className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
@@ -37,6 +60,7 @@ const FormPageTwo = ({
           type="text"
           name="last_name"
           required
+          onChange={lastNameOnChangeHandler}
           onFocus={() => setIsInputFocused(true)}
           onBlur={() => setIsInputFocused(false)}
           className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
@@ -48,6 +72,7 @@ const FormPageTwo = ({
           type="text"
           name="username"
           required
+          onChange={usernameOnChangeHandler}
           onFocus={() => setIsInputFocused(true)}
           onBlur={() => setIsInputFocused(false)}
           className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
