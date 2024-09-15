@@ -18,7 +18,7 @@ const SignupForm = () => {
   // from breaking form.
   const [isFormPageAnimated, setIsFormPageAnimated] = useState(false);
 
-  const [isInputFocused, setIsInputFocued] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   // Used in inline css due to difficulty of implementing dynamically in Tailwind.
   // Sets the left margin based on the current form page to animate slide appropriately.
@@ -108,7 +108,7 @@ const SignupForm = () => {
                   <FormPageOne
                     nextPage={nextPage}
                     isFormPageAnimated={isFormPageAnimated}
-                    setIsInputFocued={setIsInputFocued}
+                    setIsInputFocused={setIsInputFocused}
                   />
                 </div>
 
@@ -116,7 +116,7 @@ const SignupForm = () => {
                   <FormPageTwo
                     prevPage={prevPage}
                     isFormPageAnimated={isFormPageAnimated}
-                    setIsInputFocued={setIsInputFocued}
+                    setIsInputFocused={setIsInputFocused}
                   />
                 </div>
 
