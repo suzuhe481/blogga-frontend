@@ -153,7 +153,9 @@ const FormPageOne = ({
           name="email"
           required
           ref={emailInputRef}
-          onKeyUp={emailOnChangeHandler}
+          onChange={emailOnChangeHandler}
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={() => setIsInputFocused(false)}
           className={EmailInputStyles}
         />
       </div>
@@ -163,7 +165,9 @@ const FormPageOne = ({
           type="password"
           name="password"
           required
-          onKeyUp={passwordOnChangeHandler}
+          onChange={passwordOnChangeHandler}
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={() => setIsInputFocused(false)}
           className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
         />
       </div>
@@ -173,7 +177,9 @@ const FormPageOne = ({
           type="password"
           name="confirm_password"
           required
-          onKeyUp={confirmPasswordOnChangeHandler}
+          onChange={confirmPasswordOnChangeHandler}
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={() => setIsInputFocused(false)}
           ref={confirmPasswordInputRef}
           className={ConfirmPasswordInputStyles}
         />
@@ -182,6 +188,7 @@ const FormPageOne = ({
         <button
           type="button"
           onClick={nextClickHandler}
+          onKeyDown={keyDownHandler}
           className="h-full w-full bg-sky-400"
           disabled={isFormPageAnimated}
         >
