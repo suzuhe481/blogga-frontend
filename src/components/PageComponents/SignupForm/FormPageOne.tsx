@@ -36,21 +36,19 @@ const FormPageOne = ({
     : "border-transparent";
 
   // Runs on onKeyUp to store email in state.
-  const emailOnChangeHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const emailOnChangeHandler = (e: FormEvent<HTMLInputElement>) => {
     const event = e.target as HTMLInputElement;
     setEmail(event.value);
   };
 
   // Runs on onKeyUp to store password in state.
-  const passwordOnChangeHandler = (
-    e: React.KeyboardEvent<HTMLInputElement>
-  ) => {
+  const passwordOnChangeHandler = (e: FormEvent<HTMLInputElement>) => {
     const event = e.target as HTMLInputElement;
     setPassword(event.value);
   };
 
   // Runs on onKeyUp to store confirm password in state.
-  const confirmPasswordOnChangeHandler = (e: React.KeyboardEvent) => {
+  const confirmPasswordOnChangeHandler = (e: FormEvent<HTMLInputElement>) => {
     const event = e.target as HTMLInputElement;
 
     setConfirmPassword(event.value);
