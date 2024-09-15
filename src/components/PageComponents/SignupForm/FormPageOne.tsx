@@ -21,6 +21,8 @@ const FormPageOne = ({
   const emailInputRef = useRef<HTMLInputElement>(null);
   const confirmPasswordInputRef = useRef<HTMLInputElement>(null);
 
+  const [isShaking, setIsShaking] = useState(false);
+
   const [errors, setErrors] = useState<Array<string>>([]);
 
   // Styles for email input.
@@ -34,6 +36,10 @@ const FormPageOne = ({
   ConfirmPasswordInputStyles += confirmPasswordError
     ? "border-red-700"
     : "border-transparent";
+
+  var buttonContainerStyles =
+    "flex flex-row justify-center items-center h-16 w-full ";
+  buttonContainerStyles += isShaking ? "animate-shake" : "";
 
   // Runs on onKeyUp to store email in state.
   const emailOnChangeHandler = (e: FormEvent<HTMLInputElement>) => {
@@ -127,6 +133,11 @@ const FormPageOne = ({
 
     // If there are errors, do not continue.
     if (errorsExist) {
+      setIsShaking(true);
+
+      setTimeout(() => {
+        setIsShaking(false);
+      }, 200);
       return;
     }
 
@@ -184,7 +195,7 @@ const FormPageOne = ({
           className={ConfirmPasswordInputStyles}
         />
       </div>
-      <div className="flex flex-row justify-center items-center h-16 w-full">
+      <div className={buttonContainerStyles}>
         <button
           type="button"
           onClick={nextClickHandler}
