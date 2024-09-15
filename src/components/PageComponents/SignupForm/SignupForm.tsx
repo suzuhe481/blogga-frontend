@@ -40,15 +40,19 @@ const SignupForm = () => {
   // Increments formPage by 1.
   // Set setIsFormPageAnimated to true.
   const nextPage = () => {
-    setFormPage((prev) => prev + 1);
-    setIsFormPageAnimated(true);
+    if (formPage < 2) {
+      setFormPage((prev) => prev + 1);
+      setIsFormPageAnimated(true);
+    }
   };
 
   // Decrements formPage by 1.
   // Set setIsFormPageAnimated to true.
   const prevPage = () => {
-    setFormPage((prev) => prev - 1);
-    setIsFormPageAnimated(true);
+    if (formPage > 0) {
+      setFormPage((prev) => prev - 1);
+      setIsFormPageAnimated(true);
+    }
   };
 
   // Runs when sliding transition of form changes ends.
