@@ -18,6 +18,8 @@ const SignupForm = () => {
   // from breaking form.
   const [isFormPageAnimated, setIsFormPageAnimated] = useState(false);
 
+  const [isInputFocused, setIsInputFocued] = useState(false);
+
   // Used in inline css due to difficulty of implementing dynamically in Tailwind.
   // Sets the left margin based on the current form page to animate slide appropriately.
   // -100 * (number of forms - 1) / totalforms
