@@ -7,6 +7,7 @@ import Search from "./components/PageComponents/Search/Search";
 import LoginForm from "./components/PageComponents/LoginForm/LoginForm";
 import SignupForm from "./components/PageComponents/SignupForm/SignupForm";
 import Verify from "./components/PageComponents/Verify/Verify";
+import CreateBlogPage from "./components/PageComponents/CreateBlogPage/CreateBlogPage";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const Router = () => {
     {
       path: "/verify/:token",
       element: <Verify />,
+    },
+    {
+      path: "/create",
+      element: <CreateBlogPage />,
     },
   ]);
 
