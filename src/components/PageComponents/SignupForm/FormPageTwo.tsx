@@ -15,9 +15,34 @@ const FormPageTwo = ({
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
 
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [lastNameError, setLastNameError] = useState(false);
+  const [usernameError, setUsernameError] = useState(false);
+
   const [errors, setErrors] = useState<Array<string>>([]);
 
   const [isShaking, setIsShaking] = useState(false);
+
+  // Styles for first name input.
+  var FirstNameInputStyles =
+    "shadow-black shadow-sm border-4 p-1 focus:border-black outline-none rounded-lg ";
+  FirstNameInputStyles += firstNameError
+    ? "border-red-700"
+    : "border-transparent";
+
+  // Styles for last name input.
+  var LastNameInputStyles =
+    "shadow-black shadow-sm first-line:shadow-sm border-4 p-1 focus:border-black outline-none rounded-lg ";
+  LastNameInputStyles += lastNameError
+    ? "border-red-700"
+    : "border-transparent";
+
+  // Styles for username input.
+  var UsernameInputStyles =
+    "shadow-black shadow-sm first-line:shadow-sm border-4 p-1 focus:border-black outline-none rounded-lg ";
+  UsernameInputStyles += usernameError
+    ? "border-red-700"
+    : "border-transparent";
 
   var buttonContainerStyles =
     "flex flex-row justify-center items-center h-16 w-full gap-2 ";
@@ -103,7 +128,7 @@ const FormPageTwo = ({
           onChange={firstNameOnChangeHandler}
           onFocus={() => setIsInputFocused(true)}
           onBlur={() => setIsInputFocused(false)}
-          className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
+          className={FirstNameInputStyles}
         />
       </div>
       <div className="flex flex-col">
@@ -115,7 +140,7 @@ const FormPageTwo = ({
           onChange={lastNameOnChangeHandler}
           onFocus={() => setIsInputFocused(true)}
           onBlur={() => setIsInputFocused(false)}
-          className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
+          className={LastNameInputStyles}
         />
       </div>
       <div className="flex flex-col">
@@ -127,7 +152,7 @@ const FormPageTwo = ({
           onChange={usernameOnChangeHandler}
           onFocus={() => setIsInputFocused(true)}
           onBlur={() => setIsInputFocused(false)}
-          className="shadow-black shadow-sm border-transparent border-4 p-1 focus:border-black outline-none rounded-lg"
+          className={UsernameInputStyles}
         />
       </div>
       <div className={buttonContainerStyles}>
