@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 interface FormPageTwoProps {
   prevPage: () => void;
