@@ -100,7 +100,7 @@ const SignupForm = () => {
               className="flex flex-col justify-center items-center gap-12 w-[300%] "
             >
               <div
-                className="flex justify-center items-center w-full transition-all duration-300"
+                className="flex justify-center items-start w-full transition-all duration-300"
                 style={inlineMarginLeft}
                 onTransitionEnd={pageAnimationTransitionEnd}
               >
