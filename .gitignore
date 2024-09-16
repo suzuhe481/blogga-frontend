@@ -27,3 +27,6 @@ dist-ssr
 
 # Test components
 src/components/Test
+
+# TinyMCE text editor files
+/public/tinymce/
