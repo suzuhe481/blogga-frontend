@@ -3,8 +3,11 @@ import { Editor } from "@tinymce/tinymce-react";
 
 import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../Welcome/Footer";
+import { bouncy } from "ldrs";
 
 const CreateBlogPage = () => {
+  bouncy.register();
+
   const editorRef = useRef(null);
 
   const [titleValue, setTitleValue] = useState("");
@@ -34,6 +37,14 @@ const CreateBlogPage = () => {
   function loginMouseLeaveHandler() {
     setSubmitHovered(false);
   }
+
+  // White - When Login button is hovered after form submit, animation is white.
+  const HoveredAnimation = <l-bouncy size="30" speed="1.75" color="white" />;
+
+  // Blue - When Login button is NOT hovered after form submit, animation is blue.
+  const UnHoveredAnimation = (
+    <l-bouncy size="30" speed="1.75" color="#00A9FF" />
+  );
 
 
   return (
