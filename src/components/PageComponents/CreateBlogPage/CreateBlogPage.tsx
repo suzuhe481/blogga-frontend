@@ -5,6 +5,37 @@ import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../Welcome/Footer";
 
 const CreateBlogPage = () => {
+  const editorRef = useRef(null);
+
+  const [titleValue, setTitleValue] = useState("");
+  const [blogValue, setBlogValue] = useState("");
+
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [submitHovered, setSubmitHovered] = useState(false);
+
+  const [errors, setErrors] = useState<Array<string>>([]);
+
+  // Changes titleValue state when title input gets changed.
+  function handleTitleChange(e) {
+    setTitleValue(e.target.value);
+  }
+
+  // Changes blogValue state when text editor gets a change.
+  function handleEditorChange(content) {
+    setBlogValue(content);
+  }
+
+  // Sets state when mouse enters login button
+  function loginMouseEnterHandler() {
+    setSubmitHovered(true);
+  }
+
+  // Sets state when mouse leaves login button
+  function loginMouseLeaveHandler() {
+    setSubmitHovered(false);
+  }
+
+
   return (
     <div className="flex flex-col justify-between min-h-screen">
       <Navbar />
