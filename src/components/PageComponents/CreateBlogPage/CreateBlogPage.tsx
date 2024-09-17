@@ -1,3 +1,4 @@
+import React, { useState, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
 import Navbar from "../../UI/Navbar/Navbar";
