@@ -3,6 +3,9 @@ import { Editor } from "@tinymce/tinymce-react";
 
 import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../Welcome/Footer";
+
+import submitBlogUtil from "../../../helpers/submitBlogUtil";
+
 import { bouncy } from "ldrs";
 
 const CreateBlogPage = () => {
@@ -46,6 +49,39 @@ const CreateBlogPage = () => {
     <l-bouncy size="30" speed="1.75" color="#00A9FF" />
   );
 
+  async function onSubmitHandler(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setFormSubmitted(true);
+
+    // Clears errors
+    setErrors([]);
+
+    // Create object to be sent to server
+    const blogData = {
+      title: titleValue,
+      blog: blogValue,
+    };
+
+    const result = await submitBlogUtil(blogData); // Call login to server.
+
+    setTimeout(() => {
+      setFormSubmitted(false);
+
+      if (result.error) {
+        console.log(result.msg);
+
+        // Set errors
+        setErrors((prev) => {
+          return [...prev, result.msg];
+        });
+
+        return;
+      }
+
+      // Redirects user to home page.
+      //   window.location.href = "/";
+    }, 1000);
+  }
 
   return (
     <div className="flex flex-col justify-between min-h-screen">
