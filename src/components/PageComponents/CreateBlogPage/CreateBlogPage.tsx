@@ -88,7 +88,7 @@ const CreateBlogPage = () => {
       <Navbar />
       <div className="flex justify-center items-center w-full">
         <div className="w-[95vw] desktop:w-[75rem] my-4">
-          <form>
+          <form className="flex flex-col gap-4">
             <div className="flex flex-col">
               <label htmlFor="text">Title</label>
               <input
@@ -96,7 +96,7 @@ const CreateBlogPage = () => {
                 name="title"
                 required
                 onChange={handleTitleChange}
-                className="shadow-black shadow-sm border-transparent border-4 p-1  outline-none rounded-lg"
+                className="shadow-black shadow-sm border-transparent border-4 p-1 outline-none rounded-lg"
               />
             </div>
 
