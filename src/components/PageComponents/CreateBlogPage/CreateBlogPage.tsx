@@ -96,7 +96,7 @@ const CreateBlogPage = () => {
                 name="title"
                 required
                 onChange={handleTitleChange}
-                className="shadow-black shadow-sm border-transparent border-4 p-1 outline-none rounded-lg"
+                className="shadow-black shadow-sm border-transparent border-2 p-1 focus:border-blue-400 outline-none rounded-lg"
               />
             </div>
 
