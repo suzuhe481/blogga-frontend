@@ -1,4 +1,4 @@
-const getBlogUtil = (blogId) => {
+const getBlogUtil = (blogId: string) => {
   const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/posts/${blogId}`;
 
   const headers = {
