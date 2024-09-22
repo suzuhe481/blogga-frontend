@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Welcome from "./components/PageComponents/Welcome/Welcome";
-import Post from "./components/PageComponents/Post/Post";
+import Blog from "./components/PageComponents/Blog/Blog";
 import Profile from "./components/PageComponents/Profile/Profile";
 import Search from "./components/PageComponents/Search/Search";
 import LoginForm from "./components/PageComponents/LoginForm/LoginForm";
@@ -20,8 +20,8 @@ const Router = () => {
       element: <Profile />,
     },
     {
-      path: "/post/:id",
-      element: <Post />,
+      path: "/blog/:id",
+      element: <Blog />,
     },
     {
       path: "/search",
