@@ -16,7 +16,7 @@ const BlogView = () => {
   // false = Blog could not be loaded.
   // null = blog is being fetched
   const [blog, setBlog] = useState<Iblog | false | null>(null);
-  const { id } = useParams();
+  const { id = "" } = useParams() as { id: string }; // Fallback value of ""
 
   // Loading and error elements for blog.
   const BlogLoading = <div>Blog loading...</div>;
