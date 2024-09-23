@@ -5,8 +5,6 @@ import Footer from "../Welcome/Footer";
 import BlogCreateForm from "./BlogCreateForm";
 import BlogCreateSuccess from "./BlogCreateSuccess";
 
-import { bouncy } from "ldrs";
-
 const CreateBlogPage = () => {
   const [formSuccess, setFormSuccess] = useState(false);
   const [blogId, setBlogId] = useState("");
