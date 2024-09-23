@@ -26,11 +26,26 @@ export default {
           "50%": { "margin-left": "-0.2rem" },
           "100%": { "margin-left": "0rem" },
         },
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+        slide: {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+        fadeInSlide: {
+          "0%": { opacity: 0, transform: "translateY(-100%)" },
+          "100%": { oapcity: 1, transform: "translateY(0)" },
+        },
       },
       animation: {
         "float-left": "floatLeft 3s ease-in-out infinite",
         "float-right": "floatRight 3s ease-in-out infinite",
         shake: "shake 0.2s linear 0s 2",
+        fadeIn: "fadeIn 0.5s",
+        slide: "slide 0.5s",
+        fadeInSlide: "fadeInSlide 0.5s",
       },
     },
   },
