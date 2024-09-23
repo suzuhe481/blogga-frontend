@@ -68,11 +68,12 @@ const CreateBlogPage = () => {
       setFormSubmitted(false);
 
       if (result.error) {
-        console.log(result.msg);
+        var errorsArray = result.msg;
+        // console.log(errorsArray);
 
         // Set errors
         setErrors((prev) => {
-          return [...prev, result.msg];
+          return [...prev, errorsArray.msg];
         });
 
         return;
@@ -157,7 +158,7 @@ const CreateBlogPage = () => {
           </form>
           <div className="text-red-600 ml-3">
             {errors.map((error, index) => {
-              return <li key={index}>{error}</li>;
+              return <li key={index}>{error.msg}</li>;
             })}
           </div>
         </div>
