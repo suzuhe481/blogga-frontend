@@ -21,6 +21,7 @@ const CreateBlogPage = () => {
   const [submitHovered, setSubmitHovered] = useState(false);
 
   const [formSuccess, setFormSuccess] = useState(false);
+  const [blogId, setBlogId] = useState("");
 
   const [errors, setErrors] = useState<Array<string>>([]);
 
@@ -89,6 +90,9 @@ const CreateBlogPage = () => {
 
         return;
       }
+
+      setFormSuccess(true);
+      setBlogId(result.post.shortId);
 
       // Redirects user to home page.
       //   window.location.href = "/";
@@ -175,8 +179,8 @@ const CreateBlogPage = () => {
   return (
     <div className="flex flex-col justify-between min-h-screen">
       <Navbar />
-      <div className="flex justify-center items-center w-full">
-        {formSuccess ? <BlogCreateSuccess /> : FormSection}
+      <div className="flex justify-center items-center w-full h-full">
+        {formSuccess ? <BlogCreateSuccess blogId={blogId} /> : FormSection}
       </div>
       <Footer />
     </div>
