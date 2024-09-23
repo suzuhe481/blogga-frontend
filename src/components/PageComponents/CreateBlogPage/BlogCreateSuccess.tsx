@@ -1,5 +1,8 @@
-const BlogCreateSuccess = (blogId: string) => {
-  console.log(blogId);
+interface IblogId {
+  blogId: string;
+}
+
+const BlogCreateSuccess = ({ blogId }: IblogId) => {
   return (
     <div>
       <h1>Congratulations!</h1>
