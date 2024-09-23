@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import { Editor as TinyMCEEditor } from "tinymce";
 
 import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../Welcome/Footer";
@@ -12,7 +13,7 @@ import { bouncy } from "ldrs";
 const CreateBlogPage = () => {
   bouncy.register();
 
-  const editorRef = useRef(null);
+  const editorRef = useRef<TinyMCEEditor | null>(null);
 
   const [titleValue, setTitleValue] = useState("");
   const [blogValue, setBlogValue] = useState("");
@@ -26,12 +27,14 @@ const CreateBlogPage = () => {
   const [errors, setErrors] = useState<Array<string>>([]);
 
   // Changes titleValue state when title input gets changed.
-  function handleTitleChange(e) {
+  function handleTitleChange(e: {
+    target: { value: React.SetStateAction<string> };
+  }) {
     setTitleValue(e.target.value);
   }
 
   // Changes blogValue state when text editor gets a change.
-  function handleEditorChange(content) {
+  function handleEditorChange(content: React.SetStateAction<string>) {
     setBlogValue(content);
   }
 
@@ -53,7 +56,7 @@ const CreateBlogPage = () => {
     <l-bouncy size="30" speed="1.75" color="#00A9FF" />
   );
 
-  async function onSubmitHandler(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmitHandler(e: { preventDefault: () => void }) {
     e.preventDefault();
     setFormSubmitted(true);
 
