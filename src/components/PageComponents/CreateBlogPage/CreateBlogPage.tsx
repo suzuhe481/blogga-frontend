@@ -71,13 +71,21 @@ const CreateBlogPage = () => {
       setFormSubmitted(false);
 
       if (result.error) {
-        var errorsArray = result.msg;
+        var errorsArray = result.msg; // Contains an array of objects from server
         // console.log(errorsArray);
 
+        // Stores each error message into an array
+        var errorsArrayMessages = errorsArray.map(
+          (errorObj: { msg: string }) => {
+            return errorObj.msg;
+          }
+        );
+
         // Set errors
-        setErrors((prev) => {
-          return [...prev, errorsArray.msg];
-        });
+        // setErrors((prev) => {
+        //   return [...prev, errorsArray.msg];
+        // });
+        setErrors(errorsArrayMessages);
 
         return;
       }
@@ -156,9 +164,9 @@ const CreateBlogPage = () => {
           </button>
         </div>
       </form>
-      <div className="text-red-600 ml-3">
-        {errors.map((error, index) => {
-          return <li key={index}>{error.msg}</li>;
+      <div className="text-red-600 ml-3 font-bold">
+        {errors.map((errorMsg, index) => {
+          return <li key={index}>{errorMsg}</li>;
         })}
       </div>
     </div>
