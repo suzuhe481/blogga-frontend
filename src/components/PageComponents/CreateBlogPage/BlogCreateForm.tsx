@@ -131,7 +131,7 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
       {isFormLoading ? loadingAnimation : ""}
       <form
         className="flex flex-col gap-4"
-        style={{ display: isFormLoading ? "none" : "block" }}
+        style={{ display: isFormLoading ? "none" : "flex" }}
       >
         <div className="flex flex-col">
           <label htmlFor="text">Title</label>
