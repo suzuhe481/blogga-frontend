@@ -4,6 +4,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { Editor as TinyMCEEditor } from "tinymce";
 
 import { bouncy } from "ldrs";
+import { ring } from "ldrs";
 
 import submitBlogUtil from "../../../helpers/submitBlogUtil";
 
@@ -14,6 +15,7 @@ interface IBlogCreateForm {
 
 const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
   bouncy.register();
+  ring.register();
 
   const [titleValue, setTitleValue] = useState("");
   const [blogValue, setBlogValue] = useState("");
@@ -23,19 +25,18 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
 
   const [errors, setErrors] = useState<Array<string>>([]);
 
+  const [isFormLoading, setIsFormLoading] = useState(true);
   const editorRef = useRef<TinyMCEEditor | null>(null);
 
   // Changes titleValue state when title input gets changed.
   function handleTitleChange(e: {
     target: { value: React.SetStateAction<string> };
   }) {
-    console.log(e.target.value);
     setTitleValue(e.target.value);
   }
 
   // Changes blogValue state when text editor gets a change.
   function handleEditorChange(content: React.SetStateAction<string>) {
-    console.log(content);
     setBlogValue(content);
   }
 
@@ -56,6 +57,28 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
   const UnHoveredAnimation = (
     <l-bouncy size="30" speed="1.75" color="#00A9FF" />
   );
+
+  // Loading animation for form.
+  // Note: TinyMCE editor cannot be conditionally rendered or it won't initialize.
+  // Hide the form with css and display loading animation.
+  // Then display form when it initializes.
+  const loadingAnimation = (
+    <div className="flex justify-center items-center w-full">
+      <l-ring
+        size="40"
+        stroke="5"
+        bg-opacity="0"
+        speed="2"
+        color="rgb(59, 189, 248)"
+      />
+    </div>
+  );
+
+  // Runs when editor is initialized.
+  const handleEditorInit = (_evt: any, editor: TinyMCEEditor) => {
+    editorRef.current = editor;
+    setIsFormLoading(false);
+  };
 
   async function onSubmitHandler(e: { preventDefault: () => void }) {
     e.preventDefault();
@@ -105,7 +128,11 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
 
   return (
     <div className="w-[95vw] desktop:w-[75rem] m-4">
-      <form className="flex flex-col gap-4">
+      {isFormLoading ? loadingAnimation : ""}
+      <form
+        className="flex flex-col gap-4"
+        style={{ display: isFormLoading ? "none" : "block" }}
+      >
         <div className="flex flex-col">
           <label htmlFor="text">Title</label>
           <input
@@ -121,7 +148,7 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
           tinymceScriptSrc="/tinymce/tinymce.min.js"
           licenseKey="gpl"
           onEditorChange={(newValue) => handleEditorChange(newValue)}
-          onInit={(_evt, editor) => (editorRef.current = editor)}
+          onInit={handleEditorInit}
           init={{
             height: 500,
             menubar: true,
