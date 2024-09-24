@@ -5,15 +5,11 @@ import path from "path";
 
 const devMode = import.meta.VITE_DEV_MODE;
 
+// devMode = true => Uses the local directory
+// devMode = false => Gets the directory in a Node.js context
 const topDir = devMode
   ? import.meta.dirname
   : path.dirname(new URL(import.meta.url).pathname);
-
-// const topDir = import.meta.dirname;
-
-// const topDir = path.dirname(new URL(import.meta.url).pathname);
-
-console.log(topDir);
 
 fse.emptyDirSync(path.join(topDir, "public", "tinymce"));
 fse.copySync(
