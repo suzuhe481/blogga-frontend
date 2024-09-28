@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Welcome from "./components/PageComponents/Welcome/Welcome";
 import Blog from "./components/PageComponents/Blog/Blog";
 import Profile from "./components/PageComponents/Profile/Profile";
-import Search from "./components/PageComponents/Search/Search";
+import BrowseBlogsPage from "./components/PageComponents/BrowseBlogsPage/BrowseBlogsPage";
 import LoginForm from "./components/PageComponents/LoginForm/LoginForm";
 import SignupForm from "./components/PageComponents/SignupForm/SignupForm";
 import Verify from "./components/PageComponents/Verify/Verify";
@@ -24,8 +24,8 @@ const Router = () => {
       element: <Blog />,
     },
     {
-      path: "/search",
-      element: <Search />,
+      path: "/browse",
+      element: <BrowseBlogsPage />,
     },
     {
       path: "/login",
