@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 
 import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../Welcome/Footer";
+import PageSwitcher from "./PageSwitcher";
+
+import { ring } from "ldrs";
 
 import getMultipleBlogsUtil from "../../../helpers/getMultipleBlogsUtil";
 
@@ -13,77 +16,92 @@ export interface Iblog {
 
 const BrowseBlogsPage = () => {
   const [blogData, setBlogData] = useState<Iblog[] | []>([]);
-  const [blogCount, setBlogCount] = useState(5);
-  const [blogEndReached, setBlogEndReached] = useState(false);
   const [blogsLoading, setBlogsLoading] = useState(false);
+  const [blogsPerPage, setBlogsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalBlogCount, setTotalBlogCount] = useState(0);
 
-  //   console.log(blogData);
-  //   console.log(blogCount);
+  ring.register();
 
-  function LoadMoreBlogs() {
-    setBlogCount((prev) => prev + 5);
+  // Loading spinner when blogs are being retrieved.
+  const loadingAnimation = (
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <l-ring
+        size="100"
+        stroke="5"
+        bg-opacity="0"
+        speed="2"
+        color="rgb(59, 189, 248)"
+      />
+    </div>
+  );
 
-    // getMultipleBlogsUtil(blogCount).then((result) => {
-    //   //   console.log(result);
-    //   //   setBlogData(result.multiplePosts);
-    //   setBlogData([...result.multiplePosts]);
-    //   setBlogCount((prev) => prev + 3);
-    // });
+  // Handler function for the select element to chang the blogsPerPage state.
+  function handleBlogsPerPageChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    setBlogsPerPage(Number(e.target.value));
   }
 
-  // Gets multiple blogs
+  const EmptyBlogs = <div>No blogs to display</div>;
+
+  // Gets multiple blogs on page change and blogsPerPage change.
   useEffect(() => {
-    if (blogEndReached) {
-      return;
-    }
     setBlogsLoading(true);
 
     setTimeout(() => {
-      getMultipleBlogsUtil(blogCount).then((result) => {
-        //   console.log(result);
+      getMultipleBlogsUtil(currentPage, blogsPerPage).then((result) => {
+        if (result.error) {
+          setTotalBlogCount(0);
+          setBlogsLoading(false);
+          return;
+        }
 
+        setCurrentPage(result.newCurrentPage);
+        setTotalBlogCount(result.totalBlogCount);
         setBlogData(result.multiplePosts);
-        setBlogEndReached(result.blogEndReached);
         setBlogsLoading(false);
-
-        //   setBlogCount((prev) => prev + 3);
       });
     }, 700);
-
-    // LoadMoreBlogs();
-    // setInitialLoad(false);
-    // getMultipleBlogsUtil(blogCount).then((result) => {
-    //   //   console.log(result);
-
-    //   setBlogData(result.multiplePosts);
-    //   setBlogEndReached(result.blogEndReached);
-    //   setBlogsLoading(false);
-
-    //   //   setBlogCount((prev) => prev + 3);
-    // });
-  }, [blogCount]);
+  }, [currentPage, blogsPerPage]);
 
   return (
     <div className="flex flex-col justify-between min-h-screen">
       <Navbar />
-      <div className="flex flex-col justify-center items-center w-full h-full">
-        <div>BlogCount: {blogCount}</div>
+      <div className="flex flex-col justify-center items-center w-full h-full px-40">
+        {blogsLoading ? loadingAnimation : ""}
+        <div className="flex flex-row w-full justify-end gap-1">
+          <label htmlFor="blogsPerPage">Blogs Per Page:</label>
+          <select
+            name="blogsPerPage"
+            id="blogsPerPage"
+            onChange={handleBlogsPerPageChange}
+            className="border-black border-2"
+          >
+            <option value="2">2</option>
+            <option value="5" selected={true}>
+              5
+            </option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+          </select>
+        </div>
+
         <div>
           <div>
-            {blogData.map((blog, index) => {
-              return <div key={index}>{blog.title}</div>;
-            })}
+            {totalBlogCount === 0
+              ? EmptyBlogs
+              : blogData.map((blog, index) => {
+                  return <div key={index}>{blog.title}</div>;
+                })}
           </div>
-          {blogsLoading ? (
-            <div>Loading...</div>
-          ) : blogEndReached ? (
-            <div>End of Blogs</div>
-          ) : (
-            <button onClick={LoadMoreBlogs}>
-              Click here to load more blogs
-            </button>
-          )}
         </div>
+
+        <PageSwitcher
+          blogsPerPage={blogsPerPage}
+          currentPage={currentPage}
+          totalBlogCount={totalBlogCount}
+          setCurrentPage={setCurrentPage}
+          blogsLoading={blogsLoading}
+        />
       </div>
       <Footer />
     </div>
