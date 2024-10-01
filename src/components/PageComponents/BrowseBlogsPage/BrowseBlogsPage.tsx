@@ -93,7 +93,11 @@ const BrowseBlogsPage = () => {
   return (
     <div className="relative flex flex-col justify-between min-h-screen">
       <Navbar />
-      <div className="flex flex-col justify-center items-center w-full h-full">
+      <div
+        className={`flex flex-col justify-start items-center w-full ${
+          blogsLoading ? "h-screen" : "h-full"
+        }`}
+      >
         {blogsLoading ? loadingAnimation : null}
 
         <div className="flex flex-row w-[90vw] my-8 p-2 justify-end gap-1">
