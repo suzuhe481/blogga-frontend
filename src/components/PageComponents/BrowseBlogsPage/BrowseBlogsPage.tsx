@@ -103,13 +103,15 @@ const BrowseBlogsPage = () => {
           </div>
         </div>
 
-        <PageSwitcher
-          blogsPerPage={blogsPerPage}
-          currentPage={currentPage}
-          totalBlogCount={totalBlogCount}
-          setCurrentPage={setCurrentPage}
-          blogsLoading={blogsLoading}
-        />
+        {totalBlogCount && totalBlogCount > 0 ? (
+          <PageSwitcher
+            blogsPerPage={blogsPerPage}
+            currentPage={currentPage}
+            totalBlogCount={totalBlogCount}
+            setCurrentPage={setCurrentPage}
+            blogsLoading={blogsLoading}
+          />
+        ) : null}
       </div>
       <Footer />
     </div>
