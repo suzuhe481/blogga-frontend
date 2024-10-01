@@ -3,6 +3,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 
 import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../Welcome/Footer";
+import BlogCard from "./BlogCard";
 import PageSwitcher from "./PageSwitcher";
 
 import { ring } from "ldrs";
@@ -90,35 +91,47 @@ const BrowseBlogsPage = () => {
   }, [currentPage, blogsPerPage, setSearchParams]);
 
   return (
-    <div className="flex flex-col justify-between min-h-screen">
+    <div className="relative flex flex-col justify-between min-h-screen">
       <Navbar />
-      <div className="flex flex-col justify-center items-center w-full h-full px-40">
-        {blogsLoading ? loadingAnimation : ""}
-        <div className="flex flex-row w-full justify-end gap-1">
+      <div className="flex flex-col justify-center items-center w-full h-full">
+        {blogsLoading ? loadingAnimation : null}
+
+        <div className="flex flex-row w-[90vw] my-8 p-2 justify-end gap-1">
           <label htmlFor="blogsPerPage">Blogs Per Page:</label>
           <select
             name="blogsPerPage"
+            defaultValue={"5"}
             id="blogsPerPage"
             onChange={handleBlogsPerPageChange}
             className="border-black border-2"
           >
-            <option value="2">2</option>
-            <option value="5" selected={true}>
-              5
-            </option>
+            <option value="5">5</option>
             <option value="10">10</option>
             <option value="25">25</option>
           </select>
         </div>
 
-        <div>
-          <div>
-            {totalBlogCount === 0
-              ? EmptyBlogs
-              : blogData.map((blog, index) => {
-                  return <div key={index}>{blog.title}</div>;
-                })}
-          </div>
+        <div className="flex justify-center items-center">
+          {totalBlogCount === 0 ? (
+            EmptyBlogs
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-3">
+              {blogData.map((blog, index) => {
+                return (
+                  <BlogCard
+                    key={index}
+                    title={blog.title}
+                    author={{
+                      first_name: blog.author.first_name,
+                      last_name: blog.author.last_name,
+                    }}
+                    date={blog.date}
+                    shortId={blog.shortId}
+                  />
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {totalBlogCount && totalBlogCount > 0 ? (
