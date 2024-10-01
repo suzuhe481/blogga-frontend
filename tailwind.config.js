@@ -4,6 +4,7 @@ export default {
   theme: {
     screens: {
       desktop: "600px",
+      lg: "1500px",
     },
     extend: {
       fontFamily: {
