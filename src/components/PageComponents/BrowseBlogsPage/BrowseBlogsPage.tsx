@@ -9,10 +9,14 @@ import { ring } from "ldrs";
 
 import getMultipleBlogsUtil from "../../../helpers/getMultipleBlogsUtil";
 
+import { IAuthor } from "./BlogCard";
+
 export interface Iblog {
   title: string;
   date: string;
   blog: string;
+  author: IAuthor;
+  shortId: string;
 }
 
 const BrowseBlogsPage = () => {
