@@ -31,13 +31,14 @@ const BrowseBlogsPage = () => {
 
   ring.register();
 
-  // Loading spinner when blogs are being retrieved.
+  // Display loading spinner when blogs are being retrieved.
+  // Loading animation is fixed in the center of the screen.
   const loadingAnimation = (
-    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <l-ring
         size="100"
-        stroke="5"
-        bg-opacity="0"
+        stroke="15"
+        bg-opacity="0.4"
         speed="2"
         color="rgb(59, 189, 248)"
       />
