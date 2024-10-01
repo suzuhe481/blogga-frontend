@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../Welcome/Footer";
@@ -15,11 +16,18 @@ export interface Iblog {
 }
 
 const BrowseBlogsPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
   const [blogData, setBlogData] = useState<Iblog[] | []>([]);
   const [blogsLoading, setBlogsLoading] = useState(false);
-  const [blogsPerPage, setBlogsPerPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalBlogCount, setTotalBlogCount] = useState(0);
+  const [blogsPerPage, setBlogsPerPage] = useState(
+    Number(searchParams.get("blogsPerPage")) || 5
+  );
+  const [currentPage, setCurrentPage] = useState<number>(
+    Number(searchParams.get("page")) || 1
+  );
+  const [totalBlogCount, setTotalBlogCount] = useState<number | null>(null);
 
   ring.register();
 
