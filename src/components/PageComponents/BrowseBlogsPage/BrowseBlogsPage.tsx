@@ -70,9 +70,20 @@ const BrowseBlogsPage = () => {
         setTotalBlogCount(result.totalBlogCount);
         setBlogData(result.multiplePosts);
         setBlogsLoading(false);
+
+        // Change url based on new currentPage and blogsPerPage states.
+        navigate(`/browse/?page=${currentPage}&blogsPerPage=${blogsPerPage}`);
       });
     }, 700);
   }, [currentPage, blogsPerPage]);
+
+  // Used for the useSearchParams hook
+  useEffect(() => {
+    setSearchParams({
+      page: currentPage.toString(),
+      blogsPerPage: blogsPerPage.toString(),
+    });
+  }, [currentPage, blogsPerPage, setSearchParams]);
 
   return (
     <div className="flex flex-col justify-between min-h-screen">
