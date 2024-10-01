@@ -50,7 +50,9 @@ const BrowseBlogsPage = () => {
     setBlogsPerPage(Number(e.target.value));
   }
 
-  const EmptyBlogs = <div>No blogs to display</div>;
+  const EmptyBlogs = (
+    <div className="text-center font-bold text-lg">No blogs to display</div>
+  );
 
   // Gets multiple blogs on page change and blogsPerPage change.
   useEffect(() => {
