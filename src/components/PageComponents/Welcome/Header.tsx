@@ -7,6 +7,12 @@ const Header = () => {
         src={LOGO_WHITE}
         className="h-20 object-contain aspect-auto desktop:h-60"
       />
+      <a
+        href="/browse"
+        className="bg-sky-600 w-1/2 desktop:w-1/3 text-center rounded-2xl p-1 desktop:p-2 hover:brightness-110"
+      >
+        Browse
+      </a>
     </div>
   );
 };
