@@ -6,6 +6,56 @@ interface IpageData {
   blogsLoading: boolean;
 }
 
+// Creates an array of the buffer pages which appear around the current page.
+function createBufferArray(
+  currentPage: number,
+  pageBuffer: number,
+  totalPagesInt: number
+) {
+  // Create the array of buffer pages.
+  const bufferArr = [];
+  for (var i = currentPage - pageBuffer; i <= currentPage + pageBuffer; i++) {
+    bufferArr.push(i);
+  }
+
+  const bufferFiltered = bufferArr.filter((page) => {
+    return page > 1 && page < totalPagesInt;
+  });
+
+  return bufferFiltered;
+}
+
+// Creates the full array of visible pages with ellipsis.
+// Updates the given pagesArray variable.
+function createPagesArray(
+  pagesArray: (number | string)[] = [],
+  bufferArray: number[],
+  totalPagesInt: number
+) {
+  // Add first page.
+  pagesArray.push(1);
+
+  // If buffer isn't empty
+  if (bufferArray.length !== 0) {
+    // Add first set of ellipsis, if needed.
+    if (2 !== bufferArray[0]) {
+      pagesArray.push("...");
+    }
+
+    // Add buffer to pageArr.
+    bufferArray.forEach((page: number) => {
+      pagesArray.push(page);
+    });
+
+    // Add second set of ellipsis, if needed.
+    if (totalPagesInt - 1 !== bufferArray[bufferArray.length - 1]) {
+      pagesArray.push("...");
+    }
+    // Add last page.
+    pagesArray.push(totalPagesInt);
+  }
+}
+
 const PageSwitcher = ({
   totalBlogCount,
   currentPage,
@@ -15,59 +65,18 @@ const PageSwitcher = ({
 }: IpageData) => {
   const pageBuffer = 1;
   const totalPagesInt = Math.ceil(totalBlogCount / blogsPerPage);
-  const totalPagesArr = Array(totalPagesInt)
-    .fill(undefined)
-    .map((x, index) => index + 1);
 
-  // Flags for tracking if first/second set of ellipsis are added.
-  var firstEllipsisAdded = false;
-  var secondEllipsisAdded = false;
+  // Creates a buffer array.
+  const bufferArray = createBufferArray(currentPage, pageBuffer, totalPagesInt);
 
-  const pageArray: (number | string)[] = []; // Initializing empty array.
-
-  // Creating the array containing current pages to be viewed.
-  // NOT HTML elements.
-  totalPagesArr.forEach((page) => {
-    // Always add first page
-    if (page === 1) {
-      pageArray.push(page);
-    }
-    // Always add last page
-    else if (page == totalPagesInt) {
-      pageArray.push(page);
-    }
-    // When page is outside of lower buffer limit, add the first set of ellipsis.
-    else if (page < currentPage - pageBuffer) {
-      if (firstEllipsisAdded) {
-        return;
-      }
-
-      pageArray.push("...");
-      firstEllipsisAdded = true;
-    }
-    // When page is within buffer, add the page.
-    else if (
-      page >= currentPage - pageBuffer &&
-      page <= currentPage + pageBuffer
-    ) {
-      pageArray.push(page);
-    }
-    // When page is outside the upper buffer limit, add the second set of ellipsis.
-    else if (page > currentPage + pageBuffer) {
-      if (secondEllipsisAdded) {
-        return;
-      }
-
-      pageArray.push("...");
-      secondEllipsisAdded = true;
-    }
-  });
+  const pagesArray: (number | string)[] = []; // Initializing empty array.
+  createPagesArray(pagesArray, bufferArray, totalPagesInt);
 
   // Creating the array of HTML elements based on pageArray.
   const pageElementArray =
     totalPagesInt === 0
       ? null
-      : pageArray.map((value, index) => {
+      : pagesArray.map((value, index) => {
           if (Number(value) === Number(currentPage)) {
             return (
               <div
