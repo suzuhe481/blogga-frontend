@@ -4,6 +4,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../Welcome/Footer";
 import BlogCard from "./BlogCard";
+import LoadingBlogCard from "./LoadingBlogCard";
 import PageSwitcher from "./PageSwitcher";
 
 import { ring } from "ldrs";
@@ -25,7 +26,9 @@ const BrowseBlogsPage = () => {
   const navigate = useNavigate();
 
   const [blogData, setBlogData] = useState<Iblog[] | []>([]);
-  const [blogsLoading, setBlogsLoading] = useState(false);
+  const [blogsLoading, setBlogsLoading] = useState(true);
+  const [showSpinner, setShowSpinner] = useState(true);
+  const [displayLoadingCards, setDisplayLoadingCards] = useState(false);
   const [blogsPerPage, setBlogsPerPage] = useState(
     Number(searchParams.get("blogsPerPage")) || 5
   );
@@ -50,6 +53,10 @@ const BrowseBlogsPage = () => {
     </div>
   );
 
+  const LoadingBlogCards = [...Array(6)].map((value, index) => {
+    return <LoadingBlogCard key={index} />;
+  });
+
   // Handler function for the select element to chang the blogsPerPage state.
   function handleBlogsPerPageChange(e: React.ChangeEvent<HTMLSelectElement>) {
     setBlogsPerPage(Number(e.target.value));
@@ -61,25 +68,53 @@ const BrowseBlogsPage = () => {
 
   // Gets multiple blogs on page change and blogsPerPage change.
   useEffect(() => {
-    setBlogsLoading(true);
+    // Function that fetches requested blogs based on current page and blogs per page.
+    const fetchBlogs = async () => {
+      // Set initial loading states for a blog fetch.
+      setShowSpinner(true);
+      setBlogsLoading(true);
+      setDisplayLoadingCards(false);
 
-    setTimeout(() => {
-      getMultipleBlogsUtil(currentPage, blogsPerPage).then((result) => {
-        if (result.error) {
+      // Timer.
+      // If fetching blogs goes over specified time, displays loading blog cards.
+      // TIME SET TO 0 to show loading cards.
+      const timeoutId = setTimeout(() => {
+        // If blogs are still loading,
+        // replace the loading spinner with loading cards.
+        if (blogsLoading) {
+          setShowSpinner(false);
+          setDisplayLoadingCards(true);
+        }
+      }, 0);
+
+      getMultipleBlogsUtil(currentPage, blogsPerPage)
+        .then((result) => {
+          if (result.error) {
+            throw result;
+          }
+
+          setCurrentPage(result.newCurrentPage);
+          setTotalBlogCount(result.totalBlogCount);
+          setBlogData(result.multiplePosts);
+        })
+        .catch((error) => {
+          console.log(error);
           setTotalBlogCount(0);
           setBlogsLoading(false);
-          return;
-        }
+        })
+        .finally(() => {
+          // After data is successfully retrieved.
+          setBlogsLoading(false);
+          setDisplayLoadingCards(false);
+          setShowSpinner(false);
+          clearTimeout(timeoutId);
 
-        setCurrentPage(result.newCurrentPage);
-        setTotalBlogCount(result.totalBlogCount);
-        setBlogData(result.multiplePosts);
-        setBlogsLoading(false);
+          // Change url based on new currentPage and blogsPerPage states.
+          navigate(`/browse/?page=${currentPage}&blogsPerPage=${blogsPerPage}`);
+        });
+    };
 
-        // Change url based on new currentPage and blogsPerPage states.
-        navigate(`/browse/?page=${currentPage}&blogsPerPage=${blogsPerPage}`);
-      });
-    }, 700);
+    fetchBlogs();
   }, [currentPage, blogsPerPage]);
 
   // Used for the useSearchParams hook
@@ -94,11 +129,13 @@ const BrowseBlogsPage = () => {
     <div className="relative flex flex-col justify-between min-h-screen">
       <Navbar />
       <div
-        className={`flex flex-col justify-start items-center w-full ${
-          blogsLoading ? "h-screen" : "h-full"
-        }`}
+        className={`flex flex-col justify-start items-center w-full min-h-screen`}
       >
-        {blogsLoading ? loadingAnimation : null}
+        {blogsLoading && showSpinner ? (
+          <div className="grid grid-cols-1 lg:grid-cols-3">
+            {loadingAnimation}
+          </div>
+        ) : null}
 
         <div className="flex flex-row w-[90vw] my-8 p-2 justify-end gap-1">
           <label htmlFor="blogsPerPage">Blogs Per Page:</label>
@@ -116,11 +153,12 @@ const BrowseBlogsPage = () => {
         </div>
 
         <div className="flex justify-center items-center">
-          {totalBlogCount === 0 ? (
-            EmptyBlogs
-          ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-3">
-              {blogData.map((blog, index) => {
+          {totalBlogCount === 0 ? EmptyBlogs : null}
+          <div className="grid grid-cols-1 lg:grid-cols-3">
+            {blogsLoading && displayLoadingCards ? LoadingBlogCards : null}
+            {!blogsLoading &&
+              blogData.length > 0 &&
+              blogData.map((blog, index) => {
                 return (
                   <BlogCard
                     key={index}
@@ -134,8 +172,7 @@ const BrowseBlogsPage = () => {
                   />
                 );
               })}
-            </div>
-          )}
+          </div>
         </div>
 
         {totalBlogCount && totalBlogCount > 0 ? (
