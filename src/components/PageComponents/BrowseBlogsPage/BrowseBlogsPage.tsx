@@ -146,6 +146,7 @@ const BrowseBlogsPage = () => {
             onChange={handleBlogsPerPageChange}
             className="border-black border-2"
           >
+            <option value="2">2</option>
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="25">25</option>
