@@ -1,6 +1,6 @@
 const LoadingBlogCard = () => {
   return (
-    <div className="flex w-full p-4 animate-pulse">
+    <div className="flex w-full animate-pulse shadow-xl rounded-xl overflow-hidden">
       <div className="group flex flex-col w-full">
         <div className="flex justify-center bg-slate-300 0 w-[90vw] lg:w-[30rem] rounded-xl">
           <img className="h-32 object-contain aspect-auto my-4" />
