@@ -1,6 +1,16 @@
 import LOGO from "../../../assets/images/LOGO_BLUE.png";
 
-const SignInForm = () => {
+interface ISignInPageProps {
+  onLogin: boolean;
+  handleToggleForm: () => void;
+  handleChangeSigninForm: React.ChangeEventHandler<HTMLInputElement>;
+}
+
+const SignInForm = ({
+  onLogin,
+  handleToggleForm,
+  handleChangeSigninForm,
+}: ISignInPageProps) => {
   return (
     <div className="flex flex-col justify-center items-center mt-[2.5rem] mx-auto mb-0 max-w-[90vw] desktop:max-w-[636px]">
       <div className="flex justify-center items-center mb-4 min-w-[90vw]">
