@@ -33,7 +33,10 @@ const SignInForm = ({
         </div>
         <div className="w-[1px] h-[78px] bg-slate-400 mx-4" />
         <div className="flex-1">
-          <button className="w-full border-slate-400 border-2 p-2 rounded-md hover:bg-sky-50 hover:shadow-[0_0_5px_rgba(56,189,248,0.8)]">
+          <button
+            onClick={handleToggleForm}
+            className="w-full border-slate-400 border-2 p-2 rounded-md hover:bg-sky-50 hover:shadow-[0_0_5px_rgba(56,189,248,0.8)]"
+          >
             Create Account
           </button>
         </div>
@@ -51,6 +54,7 @@ const SignInForm = ({
               type="text"
               name="email"
               required
+              onChange={handleChangeSigninForm}
               className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
             />
           </div>
@@ -63,6 +67,7 @@ const SignInForm = ({
               type="password"
               name="password"
               required
+              onChange={handleChangeSigninForm}
               className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
             />
           </div>
