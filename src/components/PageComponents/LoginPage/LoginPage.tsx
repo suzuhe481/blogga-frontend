@@ -39,6 +39,18 @@ const LoginPage = () => {
     });
   };
 
+  // Controls hash value that appears in the URL based on form selected.
+  const handleToggleForm = () => {
+    setOnLogin((prev) => {
+      const newState = !prev;
+
+      window.location.hash = newState ? "#login" : "#register";
+
+      return newState;
+    });
+  };
+
+
   return (
     <div className="relative flex flex-col justify-between min-h-screen">
       {/* <SignInForm /> */}
