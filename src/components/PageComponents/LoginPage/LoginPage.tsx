@@ -50,6 +50,25 @@ const LoginPage = () => {
     });
   };
 
+  // Sets onLogin state on page load based on hash.
+  // Adds event listener to detect future hash changes.
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === "#register") {
+        setOnLogin(false);
+      } else {
+        setOnLogin(true);
+      }
+    };
+
+    handleHashChange();
+
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
 
   return (
     <div className="relative flex flex-col justify-between min-h-screen">
