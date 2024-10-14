@@ -12,9 +12,18 @@ const SignInForm = ({
   handleChangeSigninForm,
 }: ISignInPageProps) => {
   return (
-    <div className="flex flex-col justify-center items-center mt-[2.5rem] mx-auto mb-0 max-w-[90vw] desktop:max-w-[636px]">
-      <div className="flex justify-center items-center mb-4 min-w-[90vw]">
-        <img src={LOGO} className="h-24" />
+    <div
+      className={`animate-fadeInSlide flex flex-col justify-center items-center mt-[2.5rem] mx-auto mb-0 max-w-[90vw] desktop:max-w-[636px] ${
+        onLogin ? "" : "hidden"
+      }`}
+    >
+      <div className="min-w-[90vw] flex justify-center items-center mb-4">
+        <a
+          href="/"
+          className="inline-flex justify-center items-center flex-none"
+        >
+          <img src={LOGO} className="max-h-24" />
+        </a>
       </div>
       <div className="w-[368px] flex flex-row justify-center items-center mb-4">
         <div className="flex-1">
