@@ -72,8 +72,16 @@ const LoginPage = () => {
 
   return (
     <div className="relative flex flex-col justify-between min-h-screen">
-      {/* <SignInForm /> */}
-      {/* <RegisterForm /> */}
+      <SignInForm
+        onLogin={onLogin}
+        handleToggleForm={handleToggleForm}
+        handleChangeSigninForm={handleChangeSigninForm}
+      />
+      <RegisterForm
+        onLogin={onLogin}
+        handleToggleForm={handleToggleForm}
+        handleChangeRegisterForm={handleChangeRegisterForm}
+      />
       <Footer />
     </div>
   );
