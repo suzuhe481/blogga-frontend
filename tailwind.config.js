@@ -39,6 +39,10 @@ export default {
           "0%": { opacity: 0, transform: "translateY(-100%)" },
           "100%": { opacity: 1, transform: "translateY(0)" },
         },
+        fadeInSlideUp: {
+          "0%": { opacity: 0, transform: "translateY(100%)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
       },
       animation: {
         "float-left": "floatLeft 3s ease-in-out infinite",
@@ -47,6 +51,7 @@ export default {
         fadeIn: "fadeIn 0.5s",
         slide: "slide 0.5s",
         fadeInSlideDown: "fadeInSlideDown 0.5s",
+        fadeInSlideUp: "fadeInSlideUp 0.5s",
       },
     },
   },
