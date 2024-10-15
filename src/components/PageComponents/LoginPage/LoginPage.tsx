@@ -79,6 +79,26 @@ const LoginPage = () => {
     }, 1000);
   }
 
+  async function registerHandler(e: React.FormEvent) {
+    const result = await signUpUtil(e); // Call signup to server.
+    setRegisterErrors([]);
+    setRegisterSubmitted(true);
+
+    // Simulates a 1 second load time.
+    setTimeout(() => {
+      setRegisterSubmitted(false);
+
+      // NOTE: Register: result.message is an array of strings receieved from the backend.
+      if (result.error) {
+        console.log(result.message);
+        setRegisterErrors(result.message);
+        return;
+      }
+
+      // Redirects user to home page.
+      window.location.href = "/";
+    }, 1000);
+  }
 
   // Sets onLogin state on page load based on hash.
   // Adds event listener to detect future hash changes.
