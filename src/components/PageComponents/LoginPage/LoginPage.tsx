@@ -126,6 +126,9 @@ const LoginPage = () => {
         onLogin={onLogin}
         handleToggleForm={handleToggleForm}
         handleChangeSigninForm={handleChangeSigninForm}
+        loginHandler={loginHandler}
+        loginSubmitted={loginSubmitted}
+        loginErrors={loginErrors}
       />
       <RegisterForm
         onLogin={onLogin}
