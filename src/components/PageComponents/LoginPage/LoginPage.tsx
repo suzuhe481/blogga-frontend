@@ -134,6 +134,9 @@ const LoginPage = () => {
         onLogin={onLogin}
         handleToggleForm={handleToggleForm}
         handleChangeRegisterForm={handleChangeRegisterForm}
+        registerHandler={registerHandler}
+        registerSubmitted={registerSubmitted}
+        registerErrors={registerErrors}
       />
       <Footer />
     </div>
