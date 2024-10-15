@@ -158,6 +158,20 @@ const RegisterForm = ({
               onChange={handleChangeEmail}
               className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
             />
+
+            <div
+              className={`flex flex-col my-1 text-red-500 ${
+                isEmailValid ? "hidden" : ""
+              }`}
+            >
+              <div className="flex flex-row items-center gap-2 font-bold">
+                <FontAwesomeIcon
+                  icon={faExclamation}
+                  className="border-2  p-1 rounded-full w-4 h-4 border-red-500"
+                />
+                <div>Email is not in a valid format.</div>
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-col w-full mb-6">
@@ -171,6 +185,31 @@ const RegisterForm = ({
               onChange={handleChangePassword}
               className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
             />
+
+            <div className="flex flex-col text-slate-500">
+              <div>Your password must contain:</div>
+              <div
+                className={`flex flex-row items-center gap-2 font-bold ${
+                  passwordValid === null
+                    ? "text-slate-500"
+                    : passwordValid
+                    ? "text-green-500"
+                    : "text-red-500"
+                }`}
+              >
+                <FontAwesomeIcon
+                  icon={faExclamation}
+                  className={`border-2  p-1 rounded-full w-4 h-4 ${
+                    passwordValid === null
+                      ? "border-slate-500"
+                      : passwordValid
+                      ? "border-green-500"
+                      : "border-red-500"
+                  }`}
+                />
+                <div>8 characters</div>
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-col w-full mb-6">
@@ -184,6 +223,20 @@ const RegisterForm = ({
               onChange={handleChangeConfirmPassword}
               className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
             />
+
+            <div
+              className={`flex flex-col my-1 text-red-500 ${
+                passwordsMatch || passwordsMatch === null ? "hidden" : ""
+              }`}
+            >
+              <div className="flex flex-row items-center gap-2 font-bold">
+                <FontAwesomeIcon
+                  icon={faExclamation}
+                  className="border-2  p-1 rounded-full w-4 h-4 border-red-500"
+                />
+                <div>Passwords do not match.</div>
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-col w-full mb-6">
