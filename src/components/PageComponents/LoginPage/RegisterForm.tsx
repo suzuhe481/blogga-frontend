@@ -25,6 +25,33 @@ const RegisterForm = ({
   const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
   const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
 
+  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleChangeRegisterForm(e);
+
+    const { value } = e.target as HTMLInputElement;
+
+    setEmail(value);
+  };
+
+  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleChangeRegisterForm(e);
+
+    const { value } = e.target as HTMLInputElement;
+
+    setPassword(value);
+  };
+
+  const handleChangeConfirmPassword = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    handleChangeRegisterForm(e);
+
+    const { value } = e.target as HTMLInputElement;
+
+    setConfirmPassword(value);
+  };
+
+
   return (
     <div
       className={`animate-fadeInSlideUp flex flex-col justify-center items-center mt-[2.5rem] mx-auto mb-0 max-w-[90vw] desktop:max-w-[636px] ${
