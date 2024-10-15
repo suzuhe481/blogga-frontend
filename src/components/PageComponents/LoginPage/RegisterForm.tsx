@@ -7,6 +7,8 @@ import LOGO from "../../../assets/images/LOGO_BLUE.png";
 
 import { isPasswordsEqual, isValidEmail } from "../../../helpers/formUtil";
 
+import "ldrs/bouncy";
+
 interface IRegisterPageProps {
   onLogin: boolean;
   handleToggleForm: () => void;
@@ -30,6 +32,11 @@ const RegisterForm = ({
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
   const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
+
+  // Loading animation for submit button.
+  const SubmitLoadingAnimation = (
+    <l-bouncy size="30" speed="1.75" color="white" />
+  );
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleChangeRegisterForm(e);
@@ -285,8 +292,11 @@ const RegisterForm = ({
           </div>
 
           <div className="flex flex-col w-full mb-6">
-            <button className="rounded-md bg-sky-400 hover:bg-sky-600 text-white font-bold py-3 px-4">
-              Create Account
+            <button
+              type="submit"
+              className="rounded-md bg-sky-400 hover:bg-sky-600 text-white font-bold py-3 px-4"
+            >
+              {registerSubmitted ? SubmitLoadingAnimation : "Create Account"}
             </button>
           </div>
 
