@@ -11,12 +11,18 @@ interface IRegisterPageProps {
   onLogin: boolean;
   handleToggleForm: () => void;
   handleChangeRegisterForm: React.ChangeEventHandler<HTMLInputElement>;
+  registerHandler: (e: React.FormEvent) => void;
+  registerSubmitted: boolean;
+  registerErrors: Array<string>;
 }
 
 const RegisterForm = ({
   onLogin,
   handleToggleForm,
   handleChangeRegisterForm,
+  registerHandler,
+  registerSubmitted,
+  registerErrors,
 }: IRegisterPageProps) => {
   const [email, setEmail] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
@@ -146,7 +152,7 @@ const RegisterForm = ({
         <div className="w-full text-center font-bold font-FuzzyBubbles text-4xl mb-6">
           Create Account
         </div>
-        <form className="w-full">
+        <form onSubmit={registerHandler} className="w-full">
           <div className="flex flex-col w-full mb-6">
             <label htmlFor="email" className="mb-1">
               Email
@@ -282,6 +288,16 @@ const RegisterForm = ({
             <button className="rounded-md bg-sky-400 hover:bg-sky-600 text-white font-bold py-3 px-4">
               Create Account
             </button>
+          </div>
+
+          <div className="text-red-600">
+            {registerErrors.map((error, index) => {
+              return (
+                <li key={index} className="list-disc">
+                  {error}
+                </li>
+              );
+            })}
           </div>
         </form>
       </div>
