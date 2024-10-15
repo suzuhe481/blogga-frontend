@@ -19,7 +19,7 @@ const SignInForm = ({
 }: ISignInPageProps) => {
   return (
     <div
-      className={`animate-fadeInSlide flex flex-col justify-center items-center mt-[2.5rem] mx-auto mb-0 max-w-[90vw] desktop:max-w-[636px] ${
+      className={`animate-fadeInSlideDown flex flex-col justify-center items-center mt-[2.5rem] mx-auto mb-0 max-w-[90vw] desktop:max-w-[636px] ${
         onLogin ? "" : "hidden"
       }`}
     >
