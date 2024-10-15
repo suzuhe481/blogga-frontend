@@ -1,4 +1,11 @@
+import { useState, useEffect } from "react";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+
 import LOGO from "../../../assets/images/LOGO_BLUE.png";
+
+import { isPasswordsEqual, isValidEmail } from "../../../helpers/formUtil";
 
 interface IRegisterPageProps {
   onLogin: boolean;
