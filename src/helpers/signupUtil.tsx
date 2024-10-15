@@ -26,9 +26,9 @@ const signUpUtil = (event: any) => {
   // Body values from form.
   const email = event.target[0].value;
   const password = event.target[1].value;
-  const first_name = event.target[4].value;
-  const last_name = event.target[5].value;
-  const username = event.target[6].value;
+  const first_name = event.target[3].value;
+  const last_name = event.target[4].value;
+  const username = event.target[5].value;
 
   const body = JSON.stringify({
     email,
