@@ -4,6 +4,9 @@ import SignInForm from "./SignInForm";
 import RegisterForm from "./RegisterForm";
 import Footer from "../Welcome/Footer";
 
+import loginUtil from "../../../helpers/loginUtil";
+import signUpUtil from "../../../helpers/signupUtil";
+
 const LoginPage = () => {
   const [onLogin, setOnLogin] = useState<boolean>(true);
 
