@@ -51,6 +51,66 @@ const RegisterForm = ({
     setConfirmPassword(value);
   };
 
+  // Handles setting errors for email input.
+  useEffect(() => {
+    const timeoutID = setTimeout(() => {
+      // Hides "Email is not in a valid format" error when email field is empty.
+      if (email.length === 0) {
+        setIsEmailValid(true);
+        return;
+      }
+
+      if (isValidEmail(email)) {
+        setIsEmailValid(true);
+      } else {
+        setIsEmailValid(false);
+      }
+    }, 500);
+
+    return () => clearTimeout(timeoutID);
+  }, [email]);
+
+  // Handles setting errors for password input.
+  useEffect(() => {
+    const timeoutID = setTimeout(() => {
+      // Ignores first page load
+      if (password.length === 0 && passwordValid === null) {
+        return;
+      }
+
+      if (password.length >= 8) {
+        setPasswordValid(true);
+      } else {
+        setPasswordValid(false);
+      }
+    }, 500);
+
+    return () => clearTimeout(timeoutID);
+  }, [password]);
+
+  // Handles setting errors for confirm password input.
+  useEffect(() => {
+    const timeoutID = setTimeout(() => {
+      // Hides "Passwords do not match" error when both password fields are empty.
+      if (password.length === 0 && confirmPassword.length === 0) {
+        setPasswordsMatch(true);
+        return;
+      }
+
+      // Ignore first page load
+      if (password.length === 0 || confirmPassword.length === 0) {
+        return;
+      }
+
+      if (isPasswordsEqual(password, confirmPassword)) {
+        setPasswordsMatch(true);
+      } else {
+        setPasswordsMatch(false);
+      }
+    }, 500);
+
+    return () => clearTimeout(timeoutID);
+  }, [password, confirmPassword]);
 
   return (
     <div
