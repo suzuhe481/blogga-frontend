@@ -59,6 +59,27 @@ const LoginPage = () => {
     });
   };
 
+  async function loginHandler(event: React.FormEvent) {
+    const result = await loginUtil(event); // Call login to server.
+    setLoginErrors([]);
+    setLoginSubmitted(true);
+
+    // Simulates a 1 second load time.
+    setTimeout(() => {
+      setLoginSubmitted(false);
+
+      // NOTE: Login: result.message is a single string receieved from the backend.
+      if (result.error) {
+        setLoginErrors(result.message);
+        return;
+      }
+
+      // Redirects user to home page.
+      window.location.href = "/";
+    }, 1000);
+  }
+
+
   // Sets onLogin state on page load based on hash.
   // Adds event listener to detect future hash changes.
   useEffect(() => {
