@@ -18,6 +18,13 @@ const RegisterForm = ({
   handleToggleForm,
   handleChangeRegisterForm,
 }: IRegisterPageProps) => {
+  const [email, setEmail] = useState<string>("");
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
+  const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
+
   return (
     <div
       className={`animate-fadeInSlideUp flex flex-col justify-center items-center mt-[2.5rem] mx-auto mb-0 max-w-[90vw] desktop:max-w-[636px] ${
