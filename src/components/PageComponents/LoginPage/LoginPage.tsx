@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import SignInForm from "./SignInForm";
 import RegisterForm from "./RegisterForm";
@@ -6,6 +6,12 @@ import Footer from "../Welcome/Footer";
 
 const LoginPage = () => {
   const [onLogin, setOnLogin] = useState<boolean>(true);
+
+  const [loginErrors, setLoginErrors] = useState<Array<string>>([]);
+  const [loginSubmitted, setLoginSubmitted] = useState<boolean>(false);
+
+  const [registerErrors, setRegisterErrors] = useState<Array<string>>([]);
+  const [registerSubmitted, setRegisterSubmitted] = useState<boolean>(false);
 
   const [signinFormData, setSigninFormData] = useState({
     email: "",
