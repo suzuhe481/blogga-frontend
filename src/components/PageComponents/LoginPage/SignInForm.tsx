@@ -4,12 +4,18 @@ interface ISignInPageProps {
   onLogin: boolean;
   handleToggleForm: () => void;
   handleChangeSigninForm: React.ChangeEventHandler<HTMLInputElement>;
+  loginHandler: (e: React.FormEvent) => void;
+  loginSubmitted: boolean;
+  loginErrors: Array<string>;
 }
 
 const SignInForm = ({
   onLogin,
   handleToggleForm,
   handleChangeSigninForm,
+  loginHandler,
+  loginSubmitted,
+  loginErrors,
 }: ISignInPageProps) => {
   return (
     <div
@@ -45,7 +51,7 @@ const SignInForm = ({
         <div className="w-full text-center font-bold font-FuzzyBubbles text-4xl mb-6">
           Sign In
         </div>
-        <form className="w-full">
+        <form onSubmit={loginHandler} className="w-full">
           <div className="flex flex-col w-full mb-6">
             <label htmlFor="email" className="mb-1">
               Email
@@ -76,6 +82,12 @@ const SignInForm = ({
             <button className="rounded-md bg-sky-400 hover:bg-sky-600 text-white font-bold py-3 px-4">
               Sign In
             </button>
+          </div>
+
+          <div className="text-red-600">
+            {loginErrors.map((error, index) => {
+              return <li key={index}>{error}</li>;
+            })}
           </div>
         </form>
       </div>
