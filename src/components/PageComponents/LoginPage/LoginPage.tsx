@@ -21,7 +21,7 @@ const LoginPage = () => {
     username: "",
   });
 
-  const handleChangeSigninForm = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleChangeSigninForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target as HTMLInputElement;
 
     setSigninFormData({
@@ -30,7 +30,7 @@ const LoginPage = () => {
     });
   };
 
-  const handleChangeRegisterForm = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleChangeRegisterForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target as HTMLInputElement;
 
     setRegisterFormData({
