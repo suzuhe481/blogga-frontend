@@ -1,5 +1,7 @@
 import LOGO from "../../../assets/images/LOGO_BLUE.png";
 
+import "ldrs/bouncy";
+
 interface ISignInPageProps {
   onLogin: boolean;
   handleToggleForm: () => void;
@@ -17,6 +19,11 @@ const SignInForm = ({
   loginSubmitted,
   loginErrors,
 }: ISignInPageProps) => {
+  // Loading animation for submit button.
+  const SubmitLoadingAnimation = (
+    <l-bouncy size="30" speed="1.75" color="white" />
+  );
+
   return (
     <div
       className={`animate-fadeInSlideDown flex flex-col justify-center items-center mt-[2.5rem] mx-auto mb-0 max-w-[90vw] desktop:max-w-[636px] ${
@@ -79,8 +86,11 @@ const SignInForm = ({
           </div>
 
           <div className="flex flex-col w-full mb-6">
-            <button className="rounded-md bg-sky-400 hover:bg-sky-600 text-white font-bold py-3 px-4">
-              Sign In
+            <button
+              type="submit"
+              className="rounded-md bg-sky-400 hover:bg-sky-600 text-white font-bold py-3 px-4"
+            >
+              {loginSubmitted ? SubmitLoadingAnimation : "Sign In"}
             </button>
           </div>
 
