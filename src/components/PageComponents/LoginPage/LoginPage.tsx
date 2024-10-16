@@ -16,6 +16,8 @@ const LoginPage = () => {
   const [registerErrors, setRegisterErrors] = useState<Array<string>>([]);
   const [registerSubmitted, setRegisterSubmitted] = useState<boolean>(false);
 
+  const [newUserSuccess, setNewUserSuccess] = useState<boolean>(false);
+
   const [signinFormData, setSigninFormData] = useState({
     email: "",
     password: "",
@@ -95,8 +97,11 @@ const LoginPage = () => {
         return;
       }
 
-      // Redirects user to home page.
-      window.location.href = "/";
+      // User successfully created.
+      setNewUserSuccess(true);
+
+      // Redirects user to the login page.
+      window.location.href = "/login/#login";
     }, 1000);
   }
 
@@ -129,6 +134,7 @@ const LoginPage = () => {
         loginHandler={loginHandler}
         loginSubmitted={loginSubmitted}
         loginErrors={loginErrors}
+        newUserSuccess={newUserSuccess}
       />
       <RegisterForm
         onLogin={onLogin}
