@@ -35,8 +35,12 @@ export default {
           "0%": { transform: "translateY(-100%)" },
           "100%": { transform: "translateY(0)" },
         },
-        fadeInSlide: {
+        fadeInSlideDown: {
           "0%": { opacity: 0, transform: "translateY(-100%)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+        fadeInSlideUp: {
+          "0%": { opacity: 0, transform: "translateY(100%)" },
           "100%": { opacity: 1, transform: "translateY(0)" },
         },
       },
@@ -46,7 +50,8 @@ export default {
         shake: "shake 0.2s linear 0s 2",
         fadeIn: "fadeIn 0.5s",
         slide: "slide 0.5s",
-        fadeInSlide: "fadeInSlide 0.5s",
+        fadeInSlideDown: "fadeInSlideDown 0.5s",
+        fadeInSlideUp: "fadeInSlideUp 0.5s",
       },
     },
   },

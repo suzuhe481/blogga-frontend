@@ -4,8 +4,7 @@ import Welcome from "./components/PageComponents/Welcome/Welcome";
 import Blog from "./components/PageComponents/Blog/Blog";
 import Profile from "./components/PageComponents/Profile/Profile";
 import BrowseBlogsPage from "./components/PageComponents/BrowseBlogsPage/BrowseBlogsPage";
-import LoginForm from "./components/PageComponents/LoginForm/LoginForm";
-import SignupForm from "./components/PageComponents/SignupForm/SignupForm";
+import LoginPage from "./components/PageComponents/LoginPage/LoginPage";
 import Verify from "./components/PageComponents/Verify/Verify";
 import CreateBlogPage from "./components/PageComponents/CreateBlogPage/CreateBlogPage";
 
@@ -29,11 +28,7 @@ const Router = () => {
     },
     {
       path: "/login",
-      element: <LoginForm />,
-    },
-    {
-      path: "/signup",
-      element: <SignupForm />,
+      element: <LoginPage />,
     },
     {
       path: "/verify",
