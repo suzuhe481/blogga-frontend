@@ -9,6 +9,7 @@ interface ISignInPageProps {
   loginHandler: (e: React.FormEvent) => void;
   loginSubmitted: boolean;
   loginErrors: Array<string>;
+  newUserSuccess: boolean;
 }
 
 const SignInForm = ({
@@ -18,10 +19,24 @@ const SignInForm = ({
   loginHandler,
   loginSubmitted,
   loginErrors,
+  newUserSuccess,
 }: ISignInPageProps) => {
   // Loading animation for submit button.
   const SubmitLoadingAnimation = (
     <l-bouncy size="30" speed="1.75" color="white" />
+  );
+
+  const RegisteredSuccessSection = (
+    <div className="flex flex-col justify-center items-center mb-8 bg-sky-100 p-4 rounded-md border-[#75C1FF] shadow-[0_0_0_2px_#B3E0FF]">
+      <h1 className="text-4xl font-bold">Congratulations!</h1>
+      <div className="flex flex-col justify-center items-center">
+        <p>You have successfully created your Blogga account.</p>
+        <p>
+          Please verify your account with the verification link sent to your
+          email.
+        </p>
+      </div>
+    </div>
   );
 
   return (
@@ -55,6 +70,7 @@ const SignInForm = ({
         </div>
       </div>
       <div className="w-full flex flex-col justify-center items-center mb-8">
+        {newUserSuccess ? RegisteredSuccessSection : null}
         <div className="w-full text-center font-bold font-FuzzyBubbles text-4xl mb-6">
           Sign In
         </div>
