@@ -7,6 +7,7 @@ import BrowseBlogsPage from "./components/PageComponents/BrowseBlogsPage/BrowseB
 import LoginPage from "./components/PageComponents/LoginPage/LoginPage";
 import Verify from "./components/PageComponents/Verify/Verify";
 import CreateBlogPage from "./components/PageComponents/CreateBlogPage/CreateBlogPage";
+import UserSettingsPage from "./components/PageComponents/UserSettingsPage/UserSettingsPage";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const Router = () => {
     {
       path: "/create",
       element: <CreateBlogPage />,
+    },
+    {
+      path: "/user/settings",
+      element: <UserSettingsPage />,
     },
   ]);
 
