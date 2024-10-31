@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faExclamation, faCheck, faX } from "@fortawesome/free-solid-svg-icons";
 
 import LOGO from "../../../assets/images/LOGO_BLUE.png";
 
 import { isPasswordsEqual, isValidEmail } from "../../../helpers/formUtil";
+import {
+  isEmailAvailable,
+  isUsernameAvailable,
+} from "../../../helpers/registerUtil";
 
 import "ldrs/bouncy";
+import "ldrs/tailspin";
 
 interface IRegisterPageProps {
   onLogin: boolean;
@@ -32,10 +37,72 @@ const RegisterForm = ({
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
   const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
+  const [username, setUsername] = useState<string>("");
+
+  const [emailAvailable, setEmailAvailable] = useState<
+    boolean | null | undefined
+  >(undefined);
+
+  const [usernameAvailable, setUsernameAvailable] = useState<
+    boolean | null | undefined
+  >(undefined);
 
   // Loading animation for submit button.
   const SubmitLoadingAnimation = (
     <l-bouncy size="30" speed="1.75" color="white" />
+  );
+
+  const FontAwesomeCheck = (
+    <FontAwesomeIcon
+      icon={faCheck}
+      className="flex text-green-500 justify-center items-center border-2 p-1 rounded-full w-4 h-4 border-green-500"
+    />
+  );
+
+  const FontAwesomeX = (
+    <FontAwesomeIcon
+      icon={faX}
+      className="flex text-red-500 justify-center items-center border-2 p-1 rounded-full w-4 h-4 border-red-500"
+    />
+  );
+
+  // Email input
+  // Loading animation circle that goes inside inputs when checking server response.
+  const EmailInputLoadingCircle = (
+    <div className="absolute flex justify-center items-center right-2 top-1/2 transform -translate-y-1/2">
+      {emailAvailable === null ? (
+        <l-tailspin
+          size="25"
+          stroke="5"
+          speed="0.8"
+          color="rgb(59, 189, 248)"
+        />
+      ) : emailAvailable === undefined ? null : emailAvailable &&
+        isEmailValid ? (
+        FontAwesomeCheck
+      ) : (
+        FontAwesomeX
+      )}
+    </div>
+  );
+
+  // Username input
+  // Loading animation circle that goes inside inputs when checking server response.
+  const UsernameInputLoadingCircle = (
+    <div className="absolute flex justify-center items-center right-2 top-1/2 transform -translate-y-1/2">
+      {usernameAvailable === null ? (
+        <l-tailspin
+          size="25"
+          stroke="5"
+          speed="0.8"
+          color="rgb(59, 189, 248)"
+        />
+      ) : usernameAvailable === undefined ? null : usernameAvailable ? (
+        FontAwesomeCheck
+      ) : (
+        FontAwesomeX
+      )}
+    </div>
   );
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,6 +129,14 @@ const RegisterForm = ({
     const { value } = e.target as HTMLInputElement;
 
     setConfirmPassword(value);
+  };
+
+  const handleChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleChangeRegisterForm(e);
+
+    const { value } = e.target as HTMLInputElement;
+
+    setUsername(value);
   };
 
   // Handles setting errors for email input.
@@ -125,6 +200,54 @@ const RegisterForm = ({
     return () => clearTimeout(timeoutID);
   }, [password, confirmPassword]);
 
+  // Handles checking if typed email is valid.
+  useEffect(() => {
+    // Ignores first page load.
+    if (email.length === 0) {
+      setEmailAvailable(undefined);
+      return;
+    }
+
+    // Displays loading spinner.
+    setEmailAvailable(null);
+
+    const timeoutID = setTimeout(async () => {
+      const result = await isEmailAvailable(email);
+
+      if (result.emailAvailable) {
+        setEmailAvailable(true);
+      } else {
+        setEmailAvailable(false);
+      }
+    }, 500);
+
+    return () => clearTimeout(timeoutID);
+  }, [email]);
+
+  // Handles checking if typed username is available.
+  useEffect(() => {
+    // Ignores first page load.
+    if (username.length === 0) {
+      setUsernameAvailable(undefined);
+      return;
+    }
+
+    // Displays loading spinner.
+    setUsernameAvailable(null);
+
+    const timeoutID = setTimeout(async () => {
+      const result = await isUsernameAvailable(username);
+
+      if (result.usernameAvailable) {
+        setUsernameAvailable(true);
+      } else {
+        setUsernameAvailable(false);
+      }
+    }, 500);
+
+    return () => clearTimeout(timeoutID);
+  }, [username]);
+
   return (
     <div
       className={`animate-fadeInSlideUp flex flex-col justify-center items-center mt-[2.5rem] mx-auto mb-0 max-w-[90vw] desktop:max-w-[636px] ${
@@ -164,13 +287,16 @@ const RegisterForm = ({
             <label htmlFor="email" className="mb-1">
               Email
             </label>
-            <input
-              type="text"
-              name="email"
-              required
-              onChange={handleChangeEmail}
-              className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
-            />
+            <div className="relative">
+              <input
+                type="text"
+                name="email"
+                required
+                onChange={handleChangeEmail}
+                className="rounded-md border-2 border-slate-400 py-3 px-4 w-full focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
+              />
+              {EmailInputLoadingCircle}
+            </div>
 
             <div
               className={`flex flex-col my-1 text-red-500 ${
@@ -282,13 +408,16 @@ const RegisterForm = ({
             <label htmlFor="username" className="mb-1">
               Username (Display name)
             </label>
-            <input
-              type="text"
-              name="username"
-              required
-              onChange={handleChangeRegisterForm}
-              className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
-            />
+            <div className="relative">
+              <input
+                type="text"
+                name="username"
+                required
+                onChange={handleChangeUsername}
+                className="rounded-md border-2 border-slate-400 py-3 px-4 w-full focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
+              />
+              {UsernameInputLoadingCircle}
+            </div>
           </div>
 
           <div className="flex flex-col w-full mb-6">
