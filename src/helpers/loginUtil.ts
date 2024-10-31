@@ -27,12 +27,10 @@ const loginUtil = (event: any) => {
       return json;
     })
     .catch((error) => {
-      const errorMessage = [
-        {
-          error: true,
-          msg: "Failed to get data from server",
-        },
-      ];
+      const errorMessage = {
+        error: true,
+        message: ["Failed to connect."],
+      };
       console.log(error);
       return errorMessage;
     });

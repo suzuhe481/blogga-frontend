@@ -70,7 +70,7 @@ const LoginPage = () => {
     setTimeout(() => {
       setLoginSubmitted(false);
 
-      // NOTE: Login: result.message is a single string receieved from the backend.
+      // NOTE: Login: result.message is an array of string(s) receieved from the backend.
       if (result.error) {
         setLoginErrors(result.message);
         return;
