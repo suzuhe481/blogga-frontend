@@ -158,8 +158,8 @@ export const updatePasswordUtil = (newPassword: IPasswordProps) => {
 };
 
 // Deletes the user's profile.
-export const deleteUserProfileUtil = (userID: string) => {
-  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/users/${userID}`;
+export const deleteUserProfileUtil = () => {
+  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/users`;
 
   const headers = {
     accept: "application/json",
