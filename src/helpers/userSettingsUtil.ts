@@ -30,9 +30,10 @@ export const getUserSettingsUtil = () => {
     });
 };
 
-interface ISettingsProps {
-  display_real_name: string;
-}
+import {
+  IPreferences,
+  ISettings,
+} from "../components/PageComponents/UserSettingsPage/PublicProfileSettings";
 
 // Updates the user's settings.
 export const updateUserSettingsUtil = (newSettings: ISettingsProps) => {
