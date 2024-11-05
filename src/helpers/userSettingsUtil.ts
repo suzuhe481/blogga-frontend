@@ -30,12 +30,16 @@ export const getUserSettingsUtil = () => {
     });
 };
 
-interface ISettingsProps {
-  display_real_name: string;
-}
+import {
+  IPreferences,
+  ISettings,
+} from "../components/PageComponents/UserSettingsPage/PublicProfileSettings";
 
 // Updates the user's settings.
-export const updateUserSettingsUtil = (newSettings: ISettingsProps) => {
+export const updateUserSettingsUtil = (
+  newPreferences: IPreferences,
+  newSettings: ISettings
+) => {
   const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/users/settings`;
 
   const headers = {
@@ -43,7 +47,91 @@ export const updateUserSettingsUtil = (newSettings: ISettingsProps) => {
     "content-type": "application/json",
   };
 
-  const body = JSON.stringify(newSettings);
+  const body = JSON.stringify({ newPreferences, newSettings });
+
+  return fetch(URL, {
+    method: "PUT",
+    headers: headers,
+    credentials: "include",
+    body: body,
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      //   console.log(json);
+      return json;
+    })
+    .catch((error) => {
+      const errorMessage = {
+        error: true,
+        msg: "Failed to connect to server",
+      };
+
+      //   console.log(error);
+      return errorMessage;
+    });
+};
+
+interface IEmailProps {
+  email: string;
+  emailPassword: string;
+}
+
+// Updates the user's email.
+export const updateEmailUtil = (newEmail: IEmailProps) => {
+  const URL = `${
+    import.meta.env.VITE_DEV_BACKEND_URL
+  }/users/settings-update-email`;
+
+  const headers = {
+    accept: "application/json",
+    "content-type": "application/json",
+  };
+
+  const body = JSON.stringify(newEmail);
+
+  return fetch(URL, {
+    method: "PUT",
+    headers: headers,
+    credentials: "include",
+    body: body,
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((json) => {
+      //   console.log(json);
+      return json;
+    })
+    .catch((error) => {
+      const errorMessage = {
+        error: true,
+        msg: "Failed to connect to server",
+      };
+
+      //   console.log(error);
+      return errorMessage;
+    });
+};
+
+interface IPasswordProps {
+  oldPassword: string;
+  newPassword: string;
+}
+
+// Updates the user's email.
+export const updatePasswordUtil = (newPassword: IPasswordProps) => {
+  const URL = `${
+    import.meta.env.VITE_DEV_BACKEND_URL
+  }/users/settings-update-password`;
+
+  const headers = {
+    accept: "application/json",
+    "content-type": "application/json",
+  };
+
+  const body = JSON.stringify(newPassword);
 
   return fetch(URL, {
     method: "PUT",
@@ -70,8 +158,8 @@ export const updateUserSettingsUtil = (newSettings: ISettingsProps) => {
 };
 
 // Deletes the user's profile.
-export const deleteUserProfileUtil = (userID: string) => {
-  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/users/${userID}`;
+export const deleteUserProfileUtil = () => {
+  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/users`;
 
   const headers = {
     accept: "application/json",
