@@ -1,30 +1,27 @@
 import { useState, useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate, useParams } from "react-router-dom";
 
 import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../Welcome/Footer";
-import BlogCard from "./BlogCard";
-import LoadingBlogCard from "./LoadingBlogCard";
-import PageSwitcher from "./PageSwitcher";
+import PageSwitcher from "../BrowseBlogsPage/PageSwitcher";
+import LoadingBlogCard from "../BrowseBlogsPage/LoadingBlogCard";
+import BlogCard from "../BrowseBlogsPage/BlogCard";
 
 import { ring } from "ldrs";
 
-import getMultipleBlogsUtil from "../../../helpers/getMultipleBlogsUtil";
+import { IBlogCard } from "../BrowseBlogsPage/BlogCard";
 
-export interface Iblog {
-  title: string;
-  date: string;
-  blog: string;
-  author: string;
-  shortId: string;
-  authorID: string;
-}
+import getUserBlogsUtil from "../../../helpers/getUserBlogsUtil";
 
-const BrowseBlogsPage = () => {
+const UserBlogs = () => {
+  const { id } = useParams();
+
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const [blogData, setBlogData] = useState<Iblog[] | []>([]);
+  const [userID, setUserID] = useState<string>("");
+  const [author, setAuthor] = useState<string>("");
+  const [blogData, setBlogData] = useState<IBlogCard[] | []>([]);
   const [blogsLoading, setBlogsLoading] = useState(true);
   const [showSpinner, setShowSpinner] = useState(true);
   const [displayLoadingCards, setDisplayLoadingCards] = useState(false);
@@ -35,6 +32,7 @@ const BrowseBlogsPage = () => {
     Number(searchParams.get("page")) || 1
   );
   const [totalBlogCount, setTotalBlogCount] = useState<number | null>(null);
+  const [userExists, setUserExists] = useState<boolean>(false);
 
   ring.register();
 
@@ -65,8 +63,20 @@ const BrowseBlogsPage = () => {
     <div className="text-center font-bold text-lg">No blogs to display</div>
   );
 
+  // Sets the users id
+  useEffect(() => {
+    if (id !== undefined) {
+      setUserID(id);
+    }
+  }, [id]);
+
   // Gets multiple blogs on page change and blogsPerPage change.
   useEffect(() => {
+    // Prevents fetching if userID is empty
+    if (userID === "") {
+      return;
+    }
+
     // Function that fetches requested blogs based on current page and blogs per page.
     const fetchBlogs = async () => {
       // Set initial loading states for a blog fetch.
@@ -86,7 +96,7 @@ const BrowseBlogsPage = () => {
         }
       }, 0);
 
-      getMultipleBlogsUtil(currentPage, blogsPerPage)
+      getUserBlogsUtil(userID, currentPage, blogsPerPage)
         .then((result) => {
           if (result.error) {
             throw result;
@@ -94,12 +104,15 @@ const BrowseBlogsPage = () => {
 
           setCurrentPage(result.newCurrentPage);
           setTotalBlogCount(result.totalBlogCount);
-          setBlogData(result.multiplePosts);
+          setBlogData(result.userPosts);
+          setAuthor(result.author);
+          setUserExists(true);
         })
         .catch((error) => {
           console.log(error);
           setTotalBlogCount(0);
           setBlogsLoading(false);
+          setUserExists(false);
         })
         .finally(() => {
           // After data is successfully retrieved.
@@ -109,12 +122,14 @@ const BrowseBlogsPage = () => {
           clearTimeout(timeoutId);
 
           // Change url based on new currentPage and blogsPerPage states.
-          navigate(`/browse/?page=${currentPage}&blogsPerPage=${blogsPerPage}`);
+          //   navigate(
+          //     `/user/${userID}/blogs?page=${currentPage}&blogsPerPage=${blogsPerPage}`
+          //   );
         });
     };
 
     fetchBlogs();
-  }, [currentPage, blogsPerPage]);
+  }, [userID, currentPage, blogsPerPage]);
 
   // Used for the useSearchParams hook
   useEffect(() => {
@@ -135,13 +150,16 @@ const BrowseBlogsPage = () => {
             {loadingAnimation}
           </div>
         ) : null}
-
+        {userExists ? (
+          <div>{author}'s Blogs</div>
+        ) : (
+          <div>This user does not exist.</div>
+        )}
         <div className="flex flex-row w-[90vw] my-8 p-2 justify-end gap-1">
           <label htmlFor="blogsPerPage">Blogs Per Page:</label>
           <select
             name="blogsPerPage"
             defaultValue={"5"}
-            value={blogsPerPage}
             id="blogsPerPage"
             onChange={handleBlogsPerPageChange}
             className="border-black border-2"
@@ -152,7 +170,6 @@ const BrowseBlogsPage = () => {
             <option value="25">25</option>
           </select>
         </div>
-
         <div className="flex justify-center items-center">
           {totalBlogCount === 0 ? EmptyBlogs : null}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -173,7 +190,6 @@ const BrowseBlogsPage = () => {
               })}
           </div>
         </div>
-
         {totalBlogCount && totalBlogCount > 0 ? (
           <PageSwitcher
             blogsPerPage={blogsPerPage}
@@ -189,4 +205,4 @@ const BrowseBlogsPage = () => {
   );
 };
 
-export default BrowseBlogsPage;
+export default UserBlogs;

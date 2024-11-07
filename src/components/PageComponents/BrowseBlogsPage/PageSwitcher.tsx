@@ -7,6 +7,14 @@ interface IpageData {
 }
 
 // Creates an array of the buffer pages which appear around the current page.
+// eg. if current page is 5, and the buffer is 2
+// array = [3, 4, 5, 6, 7]
+// With the current page in the center, and it's buffer pages around it.
+// NOTE: Does NOT include the current page if currentPage is the ends of the array.
+// eg. if currentpage is 1, and buffer is 2
+// array = [2]
+// eg. if currentPage is last (5) and the buffer is 2
+// array = [4]
 function createBufferArray(
   currentPage: number,
   pageBuffer: number,
@@ -32,6 +40,16 @@ function createPagesArray(
   bufferArray: number[],
   totalPagesInt: number
 ) {
+  // If the buffer is empty, there are minimal pages to display.
+  // Just push totalPagesInt into pages.
+  if (bufferArray.length === 0) {
+    for (var i = 1; i <= totalPagesInt; i++) {
+      pagesArray.push(i);
+    }
+
+    return;
+  }
+
   // Add first page.
   pagesArray.push(1);
 

@@ -3,19 +3,15 @@ import LOGO_WHITE from "../../../assets/images/LOGO_WHITE.png";
 import DOMPurify from "dompurify";
 import { DateTime } from "luxon";
 
-export interface IAuthor {
-  first_name: string;
-  last_name: string;
-}
-
-interface IBlogCard {
+export interface IBlogCard {
   title: string;
-  author: IAuthor;
+  author: string;
   date: string;
   shortId: string;
+  authorID: string;
 }
 
-const BlogCard = ({ title, author, date, shortId }: IBlogCard) => {
+const BlogCard = ({ title, author, date, shortId, authorID }: IBlogCard) => {
   // Function to decode HTML string of blog from database to user friendly text.
   function decodeHtml(encodedString: string) {
     const textarea = document.createElement("textarea");
@@ -23,8 +19,6 @@ const BlogCard = ({ title, author, date, shortId }: IBlogCard) => {
 
     return textarea.value;
   }
-
-  const author_name = `${author.first_name} ${author.last_name}`;
 
   return (
     <a
@@ -46,9 +40,10 @@ const BlogCard = ({ title, author, date, shortId }: IBlogCard) => {
             className="mb-2 group-hover:underline font-bold"
           />
           <div className="flex flex-row gap-4 mb-2">
-            <div
+            <a
+              href={`/user/${authorID}/blogs`}
               dangerouslySetInnerHTML={{
-                __html: decodeHtml(DOMPurify.sanitize(author_name)),
+                __html: decodeHtml(DOMPurify.sanitize(author)),
               }}
             />
             <div>|</div>

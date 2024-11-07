@@ -10,6 +10,8 @@ export interface Iblog {
   title: string;
   date: string;
   blog: string;
+  author: string;
+  shortId: string;
 }
 
 const BlogView = () => {
@@ -50,7 +52,7 @@ const BlogView = () => {
     return textarea.value;
   }
 
-  // Retrieves and sets user data for navbar.
+  // Retrieves and sets blog data.
   useEffect(() => {
     getBlogUtil(id).then((result) => {
       if (result.error === true) {
@@ -62,6 +64,8 @@ const BlogView = () => {
         title: result.post.title,
         date: result.post.date,
         blog: result.post.post,
+        author: result.post.author,
+        shortId: result.post.shortId,
       };
 
       setBlog(blog);
