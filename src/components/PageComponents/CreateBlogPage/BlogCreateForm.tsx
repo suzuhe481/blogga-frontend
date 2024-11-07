@@ -140,7 +140,7 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
             name="title"
             required
             onChange={handleTitleChange}
-            className="shadow-black shadow-sm border-transparent border-2 p-1 focus:border-blue-400 outline-none rounded-lg"
+            className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
           />
         </div>
 
