@@ -142,6 +142,7 @@ const BrowseBlogsPage = () => {
           <select
             name="blogsPerPage"
             defaultValue={"5"}
+            value={blogsPerPage}
             id="blogsPerPage"
             onChange={handleBlogsPerPageChange}
             className="border-black border-2"
