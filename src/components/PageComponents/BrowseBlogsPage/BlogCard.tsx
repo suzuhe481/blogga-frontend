@@ -3,19 +3,15 @@ import LOGO_WHITE from "../../../assets/images/LOGO_WHITE.png";
 import DOMPurify from "dompurify";
 import { DateTime } from "luxon";
 
-export interface IAuthor {
-  first_name: string;
-  last_name: string;
-}
-
-interface IBlogCard {
+export interface IBlogCard {
   title: string;
-  author: IAuthor;
+  author: string;
   date: string;
   shortId: string;
+  authorID: string;
 }
 
-const BlogCard = ({ title, author, date, shortId }: IBlogCard) => {
+const BlogCard = ({ title, author, date, shortId, authorID }: IBlogCard) => {
   // Function to decode HTML string of blog from database to user friendly text.
   function decodeHtml(encodedString: string) {
     const textarea = document.createElement("textarea");
