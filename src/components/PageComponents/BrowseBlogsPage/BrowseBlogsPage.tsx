@@ -11,14 +11,13 @@ import { ring } from "ldrs";
 
 import getMultipleBlogsUtil from "../../../helpers/getMultipleBlogsUtil";
 
-import { IAuthor } from "./BlogCard";
-
 export interface Iblog {
   title: string;
   date: string;
   blog: string;
-  author: IAuthor;
+  author: string;
   shortId: string;
+  authorID: string;
 }
 
 const BrowseBlogsPage = () => {
@@ -165,12 +164,10 @@ const BrowseBlogsPage = () => {
                   <BlogCard
                     key={index}
                     title={blog.title}
-                    author={{
-                      first_name: blog.author.first_name,
-                      last_name: blog.author.last_name,
-                    }}
+                    author={blog.author}
                     date={blog.date}
                     shortId={blog.shortId}
+                    authorID={blog.authorID}
                   />
                 );
               })}
