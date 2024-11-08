@@ -42,13 +42,9 @@ const RegisterForm = ({
   setRegisterErrors,
   registerFormData,
 }: IRegisterPageProps) => {
-  const [email, setEmail] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
   const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
-  const [username, setUsername] = useState<string>("");
 
   const [emailAvailable, setEmailAvailable] = useState<
     boolean | null | undefined
@@ -154,12 +150,12 @@ const RegisterForm = ({
   useEffect(() => {
     const timeoutID = setTimeout(() => {
       // Hides "Email is not in a valid format" error when email field is empty.
-      if (email.length === 0) {
+      if (registerFormData.email.length === 0) {
         setIsEmailValid(true);
         return;
       }
 
-      if (isValidEmail(email)) {
+      if (isValidEmail(registerFormData.email)) {
         setIsEmailValid(true);
       } else {
         setIsEmailValid(false);
@@ -167,17 +163,17 @@ const RegisterForm = ({
     }, 500);
 
     return () => clearTimeout(timeoutID);
-  }, [email]);
+  }, [registerFormData.email]);
 
   // Handles setting errors for password input.
   useEffect(() => {
     const timeoutID = setTimeout(() => {
       // Ignores first page load
-      if (password.length === 0 && passwordValid === null) {
+      if (registerFormData.password.length === 0 && passwordValid === null) {
         return;
       }
 
-      if (password.length >= 8) {
+      if (registerFormData.password.length >= 8) {
         setPasswordValid(true);
       } else {
         setPasswordValid(false);
@@ -185,23 +181,34 @@ const RegisterForm = ({
     }, 500);
 
     return () => clearTimeout(timeoutID);
-  }, [password]);
+  }, [registerFormData.password]);
 
   // Handles setting errors for confirm password input.
   useEffect(() => {
     const timeoutID = setTimeout(() => {
       // Hides "Passwords do not match" error when both password fields are empty.
-      if (password.length === 0 && confirmPassword.length === 0) {
+      if (
+        registerFormData.password.length === 0 &&
+        registerFormData.confirm_password.length === 0
+      ) {
         setPasswordsMatch(true);
         return;
       }
 
       // Ignore first page load
-      if (password.length === 0 || confirmPassword.length === 0) {
+      if (
+        registerFormData.password.length === 0 ||
+        registerFormData.confirm_password.length === 0
+      ) {
         return;
       }
 
-      if (isPasswordsEqual(password, confirmPassword)) {
+      if (
+        isPasswordsEqual(
+          registerFormData.password,
+          registerFormData.confirm_password
+        )
+      ) {
         setPasswordsMatch(true);
       } else {
         setPasswordsMatch(false);
@@ -209,12 +216,12 @@ const RegisterForm = ({
     }, 500);
 
     return () => clearTimeout(timeoutID);
-  }, [password, confirmPassword]);
+  }, [registerFormData.password, registerFormData.confirm_password]);
 
   // Handles checking if typed email is valid.
   useEffect(() => {
     // Ignores first page load.
-    if (email.length === 0) {
+    if (registerFormData.email.length === 0) {
       setEmailAvailable(undefined);
       return;
     }
@@ -223,7 +230,7 @@ const RegisterForm = ({
     setEmailAvailable(null);
 
     const timeoutID = setTimeout(async () => {
-      const result = await isEmailAvailable(email);
+      const result = await isEmailAvailable(registerFormData.email);
 
       if (result.emailAvailable) {
         setEmailAvailable(true);
@@ -233,12 +240,12 @@ const RegisterForm = ({
     }, 500);
 
     return () => clearTimeout(timeoutID);
-  }, [email]);
+  }, [registerFormData.email]);
 
   // Handles checking if typed username is available.
   useEffect(() => {
     // Ignores first page load.
-    if (username.length === 0) {
+    if (registerFormData.username.length === 0) {
       setUsernameAvailable(undefined);
       return;
     }
@@ -247,7 +254,7 @@ const RegisterForm = ({
     setUsernameAvailable(null);
 
     const timeoutID = setTimeout(async () => {
-      const result = await isUsernameAvailable(username);
+      const result = await isUsernameAvailable(registerFormData.username);
 
       if (result.usernameAvailable) {
         setUsernameAvailable(true);
@@ -257,7 +264,7 @@ const RegisterForm = ({
     }, 500);
 
     return () => clearTimeout(timeoutID);
-  }, [username]);
+  }, [registerFormData.username]);
 
   return (
     <div
@@ -303,7 +310,8 @@ const RegisterForm = ({
                 type="text"
                 name="email"
                 required
-                onChange={handleChangeEmail}
+                value={registerFormData.email}
+                onChange={handleChangeRegisterForm}
                 className="rounded-md border-2 border-slate-400 py-3 px-4 w-full focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
               />
               {EmailInputLoadingCircle}
@@ -332,7 +340,8 @@ const RegisterForm = ({
               type="password"
               name="password"
               required
-              onChange={handleChangePassword}
+              value={registerFormData.password}
+              onChange={handleChangeRegisterForm}
               className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
             />
 
@@ -370,7 +379,8 @@ const RegisterForm = ({
               type="password"
               name="confirm_password"
               required
-              onChange={handleChangeConfirmPassword}
+              value={registerFormData.confirm_password}
+              onChange={handleChangeRegisterForm}
               className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
             />
 
@@ -397,6 +407,7 @@ const RegisterForm = ({
               type="text"
               name="first_name"
               required
+              value={registerFormData.first_name}
               onChange={handleChangeRegisterForm}
               className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
             />
@@ -410,6 +421,7 @@ const RegisterForm = ({
               type="text"
               name="last_name"
               required
+              value={registerFormData.last_name}
               onChange={handleChangeRegisterForm}
               className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
             />
@@ -424,7 +436,8 @@ const RegisterForm = ({
                 type="text"
                 name="username"
                 required
-                onChange={handleChangeUsername}
+                value={registerFormData.username}
+                onChange={handleChangeRegisterForm}
                 className="rounded-md border-2 border-slate-400 py-3 px-4 w-full focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
               />
               {UsernameInputLoadingCircle}
