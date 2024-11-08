@@ -21,6 +21,15 @@ interface IRegisterPageProps {
   registerHandler: (e: React.FormEvent) => void;
   registerSubmitted: boolean;
   registerErrors: Array<string>;
+  setRegisterErrors: React.Dispatch<React.SetStateAction<Array<string>>>;
+  registerFormData: {
+    email: string;
+    password: string;
+    confirm_password: string;
+    first_name: string;
+    last_name: string;
+    username: string;
+  };
 }
 
 const RegisterForm = ({
@@ -30,6 +39,8 @@ const RegisterForm = ({
   registerHandler,
   registerSubmitted,
   registerErrors,
+  setRegisterErrors,
+  registerFormData,
 }: IRegisterPageProps) => {
   const [email, setEmail] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
