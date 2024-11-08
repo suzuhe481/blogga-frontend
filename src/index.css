@@ -12,3 +12,20 @@
   src: url("./assets/fonts/FuzzyBubbles-Bold.ttf");
   font-weight: bold;
 }
+
+/* This overwrites the default Tailwind behavior that removes bullet points. */
+/* This is used to properly display styles on user's blogs */
+@layer base {
+  ul,
+  ol {
+    list-style: revert;
+  }
+}
+
+/* This removes css styles from elements with the classname markdown */
+/* Used to display markdown files. */
+@layer base {
+  .markdown > * {
+    all: revert;
+  }
+}
