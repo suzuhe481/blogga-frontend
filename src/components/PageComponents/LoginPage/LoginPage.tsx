@@ -158,6 +158,7 @@ const LoginPage = () => {
         loginSubmitted={loginSubmitted}
         loginErrors={loginErrors}
         newUserSuccess={newUserSuccess}
+        signinFormData={signinFormData}
       />
       <RegisterForm
         onLogin={onLogin}
@@ -166,6 +167,8 @@ const LoginPage = () => {
         registerHandler={registerHandler}
         registerSubmitted={registerSubmitted}
         registerErrors={registerErrors}
+        setRegisterErrors={setRegisterErrors}
+        registerFormData={registerFormData}
       />
       <Footer />
     </div>
