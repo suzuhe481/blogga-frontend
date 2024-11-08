@@ -8,6 +8,8 @@ import LoginPage from "./components/PageComponents/LoginPage/LoginPage";
 import Verify from "./components/PageComponents/Verify/Verify";
 import CreateBlogPage from "./components/PageComponents/CreateBlogPage/CreateBlogPage";
 import UserSettingsPage from "./components/PageComponents/UserSettingsPage/UserSettingsPage";
+import TermsConditionsPage from "./components/PageComponents/TermsConditionsPage/TermsConditionsPage";
+import PrivacyPolicyPage from "./components/PageComponents/PrivacyPolicyPage/PrivacyPolicyPage";
 import ErrorPage from "./components/PageComponents/ErrorPage/ErrorPage";
 
 const Router = () => {
@@ -47,6 +49,14 @@ const Router = () => {
     {
       path: "/user/settings",
       element: <UserSettingsPage />,
+    },
+    {
+      path: "/terms-and-conditions",
+      element: <TermsConditionsPage />,
+    },
+    {
+      path: "/privacy-policy",
+      element: <PrivacyPolicyPage />,
     },
     {
       path: "*",

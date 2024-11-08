@@ -420,6 +420,28 @@ const RegisterForm = ({
             </div>
           </div>
 
+          <div className="flex flex-row w-full mb-6 gap-2">
+            <div className="relative">
+              <input
+                type="checkbox"
+                required
+                id="agreement"
+                className="rounded-md border-2 border-slate-400 py-3 px-4 w-full focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
+              />
+            </div>
+            <label htmlFor="agreement" className="mb-1">
+              I agree to the{" "}
+              <a href="/terms-and-conditions" className="font-bold">
+                Blogga Terms and Conditions
+              </a>{" "}
+              and the{" "}
+              <a href="/privacy-policy" className="font-bold">
+                Blogga Privacy Policy
+              </a>
+              .
+            </label>
+          </div>
+
           <div className="flex flex-col w-full mb-6">
             <button
               type="submit"
