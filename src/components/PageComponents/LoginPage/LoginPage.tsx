@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import SignInForm from "./SignInForm";
 import RegisterForm from "./RegisterForm";
@@ -6,8 +7,11 @@ import Footer from "../Welcome/Footer";
 
 import loginUtil from "../../../helpers/loginUtil";
 import signUpUtil from "../../../helpers/signupUtil";
+import checkUserVerificationUtil from "../../../helpers/checkUserVerificationUtil";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const [onLogin, setOnLogin] = useState<boolean>(true);
 
   const [loginErrors, setLoginErrors] = useState<Array<string>>([]);
@@ -146,6 +150,20 @@ const LoginPage = () => {
     return () => {
       window.removeEventListener("hashchange", handleHashChange);
     };
+  }, []);
+
+  // Gets the user's logged in and verified status.
+  useEffect(() => {
+    const getUserStatus = async () => {
+      const result = await checkUserVerificationUtil();
+
+      // Redirect to home is user is logged in
+      if (result.userLoggedIn) {
+        navigate("/");
+      }
+    };
+
+    getUserStatus();
   }, []);
 
   return (
