@@ -88,6 +88,7 @@ const SignInForm = ({
               type="text"
               name="email"
               required
+              value={signinFormData.email}
               onChange={handleChangeSigninForm}
               className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
             />
@@ -101,6 +102,7 @@ const SignInForm = ({
               type="password"
               name="password"
               required
+              value={signinFormData.password}
               onChange={handleChangeSigninForm}
               className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
             />
