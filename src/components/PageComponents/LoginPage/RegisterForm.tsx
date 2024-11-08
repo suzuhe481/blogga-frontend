@@ -112,38 +112,42 @@ const RegisterForm = ({
     </div>
   );
 
-  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleChangeRegisterForm(e);
+  // On form submission
+  const onFormSubmitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
 
-    const { value } = e.target as HTMLInputElement;
+    // Clear form errors
+    setRegisterErrors([]);
 
-    setEmail(value);
-  };
+    // Adds error messages if they exist.
+    const newErrors = [];
+    if (!isEmailValid) {
+      newErrors.push("Email is not valid.");
+    }
+    if (!emailAvailable) {
+      newErrors.push("Email is not available.");
+    }
+    if (!passwordValid) {
+      newErrors.push("Password is not in valid format.");
+    }
+    if (!passwordsMatch) {
+      newErrors.push("Passwords do not match.");
+    }
+    if (!usernameAvailable) {
+      newErrors.push("Username is not available.");
+    }
 
-  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleChangeRegisterForm(e);
+    // Prevents registering if form has errors.
+    if (newErrors.length > 0) {
+      setRegisterErrors(newErrors);
 
-    const { value } = e.target as HTMLInputElement;
+      return;
+    }
 
-    setPassword(value);
-  };
+    // Hides the password valid error when submitting form.
+    setPasswordValid(null);
 
-  const handleChangeConfirmPassword = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    handleChangeRegisterForm(e);
-
-    const { value } = e.target as HTMLInputElement;
-
-    setConfirmPassword(value);
-  };
-
-  const handleChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleChangeRegisterForm(e);
-
-    const { value } = e.target as HTMLInputElement;
-
-    setUsername(value);
+    registerHandler(e);
   };
 
   // Handles setting errors for email input.
@@ -300,7 +304,7 @@ const RegisterForm = ({
         <div className="w-full text-center font-bold font-FuzzyBubbles text-4xl mb-6">
           Create Account
         </div>
-        <form onSubmit={registerHandler} className="w-full">
+        <form onSubmit={onFormSubmitHandler} className="w-full">
           <div className="flex flex-col w-full mb-6">
             <label htmlFor="email" className="mb-1">
               Email
