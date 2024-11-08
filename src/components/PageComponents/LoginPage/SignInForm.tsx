@@ -10,6 +10,10 @@ interface ISignInPageProps {
   loginSubmitted: boolean;
   loginErrors: Array<string>;
   newUserSuccess: boolean;
+  signinFormData: {
+    email: string;
+    password: string;
+  };
 }
 
 const SignInForm = ({
@@ -20,6 +24,7 @@ const SignInForm = ({
   loginSubmitted,
   loginErrors,
   newUserSuccess,
+  signinFormData,
 }: ISignInPageProps) => {
   // Loading animation for submit button.
   const SubmitLoadingAnimation = (
