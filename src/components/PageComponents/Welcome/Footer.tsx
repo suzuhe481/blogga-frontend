@@ -2,7 +2,7 @@ import LOGO_WHITE from "../../../assets/images/LOGO_WHITE.png";
 
 const Footer = () => {
   return (
-    <div className="w-full flex flex-col justify-center items-center py-4 desktop:pt-10 mt-auto bg-sky-400 font-FuzzyBubbles">
+    <div className="w-full flex flex-col justify-center items-center py-4 desktop:pt-10 bg-sky-400 font-FuzzyBubbles">
       <div className="pb-6 desktop:pb-10">
         <img
           src={LOGO_WHITE}
