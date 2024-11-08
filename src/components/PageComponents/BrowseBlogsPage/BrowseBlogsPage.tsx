@@ -125,7 +125,7 @@ const BrowseBlogsPage = () => {
   }, [currentPage, blogsPerPage, setSearchParams]);
 
   return (
-    <div className="relative flex flex-col justify-between min-h-screen">
+    <div className="relative flex flex-col justify-between min-h-screen overflow-hidden">
       <Navbar />
       <div
         className={`flex flex-col justify-start items-center w-full min-h-screen`}
