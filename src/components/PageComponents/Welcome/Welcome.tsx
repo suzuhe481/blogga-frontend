@@ -14,11 +14,13 @@ const Welcome = () => {
   ];
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden min-h-screen">
       <Navbar />
-      <Header />
-      <FeatureCards featuresData={FeaturesData} />
-      <Footer />
+      <div className="flex flex-col justify-between min-h-screen">
+        <Header />
+        <FeatureCards featuresData={FeaturesData} />
+        <Footer />
+      </div>
     </div>
   );
 };
