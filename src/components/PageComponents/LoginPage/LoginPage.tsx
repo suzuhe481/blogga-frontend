@@ -61,6 +61,26 @@ const LoginPage = () => {
     });
   };
 
+  // Clears signin/login form.
+  const clearSignInForm = () => {
+    setSigninFormData({
+      email: "",
+      password: "",
+    });
+  };
+
+  // Clears the register form
+  const clearRegisterForm = () => {
+    setRegisterFormData({
+      email: "",
+      password: "",
+      confirm_password: "",
+      first_name: "",
+      last_name: "",
+      username: "",
+    });
+  };
+
   async function loginHandler(event: React.FormEvent) {
     const result = await loginUtil(event); // Call login to server.
     setLoginErrors([]);
@@ -96,9 +116,12 @@ const LoginPage = () => {
         setRegisterErrors(result.message);
         return;
       }
-
       // User successfully created.
       setNewUserSuccess(true);
+
+      // Clearing forms
+      clearSignInForm();
+      clearRegisterForm();
 
       // Redirects user to the login page.
       window.location.href = "/login/#login";
