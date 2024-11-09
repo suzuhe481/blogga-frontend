@@ -18,7 +18,7 @@ const Verify = () => {
   );
 
   const VerifiedErrorMessage = (
-    <div className="animate-fadeInSlideUp flex flex-col justify-center items-center gap-2 mb-8 desktop:w-[50vw] w-[90vw] bg-red-100 p-4 rounded-md border-[#75C1FF] shadow-[0_0_0_2px_#B3E0FF]">
+    <div className="animate-fadeInSlideUp flex flex-col justify-center items-center text-center gap-2 mb-8 desktop:w-[50vw] w-[90vw] bg-red-100 p-4 rounded-md border-[#75C1FF] shadow-[0_0_0_2px_#B3E0FF]">
       <h1 className="text-4xl font-bold">
         Verification link has expired or is invalid.
       </h1>
@@ -43,7 +43,7 @@ const Verify = () => {
   return (
     <div className="flex flex-col min-h-screen overflow-hidden justify-between">
       <Navbar />
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center my-2">
         {isVerified ? VerifiedSuccessMessage : null}
         {verifiedError ? VerifiedErrorMessage : null}
       </div>
