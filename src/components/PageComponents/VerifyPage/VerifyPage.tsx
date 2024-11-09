@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Navbar from "../../UI/Navbar/Navbar";
-import Footer from "../Welcome/Footer";
+import Footer from "../../UI/Footer/Footer";
 import verifyLinkUtil from "../../../helpers/verifyLinkUtil";
 
 const Verify = () => {

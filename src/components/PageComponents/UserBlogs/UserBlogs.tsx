@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate, useParams } from "react-router-dom";
 
 import Navbar from "../../UI/Navbar/Navbar";
-import Footer from "../Welcome/Footer";
+import Footer from "../../UI/Footer/Footer";
 import PageSwitcher from "../BrowseBlogsPage/PageSwitcher";
 import LoadingBlogCard from "../BrowseBlogsPage/LoadingBlogCard";
 import BlogCard from "../BrowseBlogsPage/BlogCard";
