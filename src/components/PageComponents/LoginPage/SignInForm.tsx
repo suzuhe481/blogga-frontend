@@ -1,6 +1,6 @@
 import LOGO from "../../../assets/images/LOGO_BLUE.png";
 
-import "ldrs/bouncy";
+import { bouncy } from "ldrs";
 
 interface ISignInPageProps {
   onLogin: boolean;
@@ -26,6 +26,8 @@ const SignInForm = ({
   newUserSuccess,
   signinFormData,
 }: ISignInPageProps) => {
+  bouncy.register();
+
   // Loading animation for submit button.
   const SubmitLoadingAnimation = (
     <l-bouncy size="30" speed="1.75" color="white" />

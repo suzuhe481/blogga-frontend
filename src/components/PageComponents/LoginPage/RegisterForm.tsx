@@ -11,8 +11,7 @@ import {
   isUsernameAvailable,
 } from "../../../helpers/registerUtil";
 
-import "ldrs/bouncy";
-import "ldrs/tailspin";
+import { bouncy, tailspin } from "ldrs";
 
 interface IRegisterPageProps {
   onLogin: boolean;
@@ -42,6 +41,9 @@ const RegisterForm = ({
   setRegisterErrors,
   registerFormData,
 }: IRegisterPageProps) => {
+  bouncy.register();
+  tailspin.register();
+
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
   const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
   const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
