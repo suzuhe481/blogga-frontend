@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSearchParams, useNavigate, useParams } from "react-router-dom";
+import { useSearchParams, useParams } from "react-router-dom";
 
 import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../../UI/Footer/Footer";
@@ -17,7 +17,6 @@ const UserBlogs = () => {
   const { id } = useParams();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
 
   const [userID, setUserID] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
@@ -120,11 +119,6 @@ const UserBlogs = () => {
           setDisplayLoadingCards(false);
           setShowSpinner(false);
           clearTimeout(timeoutId);
-
-          // Change url based on new currentPage and blogsPerPage states.
-          //   navigate(
-          //     `/user/${userID}/blogs?page=${currentPage}&blogsPerPage=${blogsPerPage}`
-          //   );
         });
     };
 
@@ -142,16 +136,18 @@ const UserBlogs = () => {
   return (
     <div className="relative flex flex-col justify-between min-h-screen">
       <Navbar />
-      <div
-        className={`flex flex-col justify-start items-center w-full min-h-screen`}
-      >
+      <div className="flex flex-col justify-start items-center w-full min-h-screen">
         {blogsLoading && showSpinner ? (
           <div className="grid grid-cols-1 lg:grid-cols-3">
             {loadingAnimation}
           </div>
         ) : null}
         {userExists ? (
-          <div>{author}'s Blogs</div>
+          <div className="flex w-[90vw] pt-4">
+            <h1 className="w-full font-bold text-2xl desktop:text-4xl">
+              {author}'s blogs
+            </h1>
+          </div>
         ) : (
           <div>This user does not exist.</div>
         )}
