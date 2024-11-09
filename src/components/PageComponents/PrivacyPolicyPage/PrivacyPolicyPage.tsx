@@ -1,5 +1,5 @@
 import Navbar from "../../UI/Navbar/Navbar";
-import Footer from "../Welcome/Footer";
+import Footer from "../../UI/Footer/Footer";
 import PrivacyPolicy from "./PrivacyPolicy";
 
 const PrivacyPolicyPage = () => {

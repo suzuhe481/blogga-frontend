@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import SignInForm from "./SignInForm";
 import RegisterForm from "./RegisterForm";
-import Footer from "../Welcome/Footer";
+import Footer from "../../UI/Footer/Footer";
 
 import loginUtil from "../../../helpers/loginUtil";
 import signUpUtil from "../../../helpers/signupUtil";

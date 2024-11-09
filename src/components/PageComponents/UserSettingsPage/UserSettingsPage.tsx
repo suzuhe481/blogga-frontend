@@ -1,6 +1,6 @@
 import Navbar from "../../UI/Navbar/Navbar";
 import UserSettings from "./UserSettings";
-import Footer from "../Welcome/Footer";
+import Footer from "../../UI/Footer/Footer";
 
 const UserSettingsPage = () => {
   return (

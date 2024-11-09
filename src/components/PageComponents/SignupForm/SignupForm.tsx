@@ -1,7 +1,7 @@
 import { useState, FormEvent } from "react";
 
 import Navbar from "../../UI/Navbar/Navbar";
-import Footer from "../Welcome/Footer";
+import Footer from "../../UI/Footer/Footer";
 
 import FormPageOne from "./FormPageOne";
 import FormPageTwo from "./FormPageTwo";

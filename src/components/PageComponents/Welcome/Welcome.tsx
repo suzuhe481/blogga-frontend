@@ -3,7 +3,7 @@ import LOGO_WHITE from "../../../assets/images/LOGO_WHITE.png";
 
 import Header from "./Header";
 import FeatureCards from "./FeatureCards";
-import Footer from "./Footer";
+import Footer from "../../UI/Footer/Footer";
 
 const Welcome = () => {
   const FeaturesData = [

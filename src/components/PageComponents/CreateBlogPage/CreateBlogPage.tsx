@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Navbar from "../../UI/Navbar/Navbar";
-import Footer from "../Welcome/Footer";
+import Footer from "../../UI/Footer/Footer";
 import BlogCreateForm from "./BlogCreateForm";
 import BlogCreateSuccess from "./BlogCreateSuccess";
 import NotVerifiedWarning from "./NotVerifiedWarning";
