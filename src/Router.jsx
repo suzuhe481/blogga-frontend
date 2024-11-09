@@ -5,7 +5,8 @@ import Blog from "./components/PageComponents/Blog/Blog";
 import UserBlogs from "./components/PageComponents/UserBlogs/UserBlogs";
 import BrowseBlogsPage from "./components/PageComponents/BrowseBlogsPage/BrowseBlogsPage";
 import LoginPage from "./components/PageComponents/LoginPage/LoginPage";
-import Verify from "./components/PageComponents/Verify/Verify";
+import SendVerifyPage from "./components/PageComponents/SendVerifyPage/SendVerifyPage";
+import Verify from "./components/PageComponents/VerifyPage/VerifyPage";
 import CreateBlogPage from "./components/PageComponents/CreateBlogPage/CreateBlogPage";
 import UserSettingsPage from "./components/PageComponents/UserSettingsPage/UserSettingsPage";
 import TermsConditionsPage from "./components/PageComponents/TermsConditionsPage/TermsConditionsPage";
@@ -36,7 +37,7 @@ const Router = () => {
     },
     {
       path: "/verify",
-      // element: <SendVerify />
+      element: <SendVerifyPage />,
     },
     {
       path: "/verify/:token",
