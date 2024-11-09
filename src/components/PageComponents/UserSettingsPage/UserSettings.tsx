@@ -3,9 +3,10 @@ import { useState } from "react";
 import AccountSettings from "./AccountSettings";
 import PublicProfileSettings from "./PublicProfileSettings";
 
-import "ldrs/ring";
+import { ring } from "ldrs";
 
 const UserSettings = () => {
+  ring.register();
   // Can be "profile" or "account"
   const [currentPage, setCurrentPage] = useState<string>("profile");
 
