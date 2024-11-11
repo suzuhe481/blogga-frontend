@@ -8,9 +8,9 @@ import ProfileContainer from "./ProfileContainer/ProfileContainer";
 import navbarDataUtil from "../../../helpers/navbarDataUtil";
 
 export interface Iuser {
-  first_name: string;
-  last_name: string;
+  author: string;
   verified: Boolean;
+  id: string;
 }
 
 const Navbar = () => {
@@ -27,9 +27,9 @@ const Navbar = () => {
       }
 
       const user: Iuser = {
-        first_name: result.first_name,
-        last_name: result.last_name,
+        author: result.author,
         verified: result.verified,
+        id: result.id,
       };
 
       setUser(user);

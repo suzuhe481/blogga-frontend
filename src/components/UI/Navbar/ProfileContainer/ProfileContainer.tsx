@@ -125,10 +125,10 @@ const ProfileContainer = ({ user }: IProps) => {
     <div ref={dropdownRef} className={calculateDropDownItemsClasses()}>
       <div className="flex flex-col justify-center items-center relative w-36 desktop:w-44 h-14 p-1 rounded-t-lg hover:bg-sky-600 px-2">
         <a
-          href="/"
+          href={`/user/${user.id}/blogs`}
           className="flex flex-col justify-center items-start w-full h-full"
         >
-          My profile
+          My Blogs
         </a>
       </div>
 
@@ -174,7 +174,7 @@ const ProfileContainer = ({ user }: IProps) => {
   const ProfileContainer = (
     <div className={calculateProfileContainerClasses()}>
       <div>
-        <div className="desktop:text-2xl text-xl font-FuzzyBubbles">{`${user.first_name} ${user.last_name}`}</div>
+        <div className="desktop:text-2xl text-xl font-FuzzyBubbles">{`${user.author}`}</div>
       </div>
       {profileIcon}
       <div className="relative">{dropdownItems}</div>
