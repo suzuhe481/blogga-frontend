@@ -5,7 +5,7 @@ import Markdown from "react-markdown";
 const TermsConditions = () => {
   const [termsConditionsMarkdown, setTermsConditionsMarkdown] = useState("");
 
-  const TermsConditionsFilePath = "src/assets/TermsConditions.md";
+  const TermsConditionsFilePath = "/markdown/TermsConditions.md";
 
   // Gets the Terms and Conditions markdown
   useEffect(() => {
@@ -18,7 +18,7 @@ const TermsConditions = () => {
     };
 
     fetchMarkdown();
-  });
+  }, []);
 
   return (
     <div className="flex justify-center w-full">
