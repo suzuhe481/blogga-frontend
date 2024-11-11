@@ -49,6 +49,7 @@ const VerifyBanner = ({ user }: IProps) => {
         You have not verified your account yet. Click here to verify.
       </div>
       <a
+        href="/verify"
         className="text-sky-400 font-bold text-lg p-3 border-2 border-sky-400 rounded-md cursor-pointer
       
     hover:text-white 

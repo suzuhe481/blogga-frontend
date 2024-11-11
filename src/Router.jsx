@@ -1,14 +1,18 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Welcome from "./components/PageComponents/Welcome/Welcome";
-import Post from "./components/PageComponents/Post/Post";
-import Profile from "./components/PageComponents/Profile/Profile";
-import Search from "./components/PageComponents/Search/Search";
-import LoginForm from "./components/PageComponents/LoginForm/LoginForm";
-import SignupForm from "./components/PageComponents/SignupForm/SignupForm";
-import Verify from "./components/PageComponents/Verify/Verify";
-
+import Blog from "./components/PageComponents/Blog/Blog";
+import UserBlogs from "./components/PageComponents/UserBlogs/UserBlogs";
+import BrowseBlogsPage from "./components/PageComponents/BrowseBlogsPage/BrowseBlogsPage";
+import LoginPage from "./components/PageComponents/LoginPage/LoginPage";
+import SendVerifyPage from "./components/PageComponents/SendVerifyPage/SendVerifyPage";
+import Verify from "./components/PageComponents/VerifyPage/VerifyPage";
+import CreateBlogPage from "./components/PageComponents/CreateBlogPage/CreateBlogPage";
+import UserSettingsPage from "./components/PageComponents/UserSettingsPage/UserSettingsPage";
+import TermsConditionsPage from "./components/PageComponents/TermsConditionsPage/TermsConditionsPage";
+import PrivacyPolicyPage from "./components/PageComponents/PrivacyPolicyPage/PrivacyPolicyPage";
 import ErrorPage from "./components/PageComponents/ErrorPage/ErrorPage";
+
 const Router = () => {
   const router = createBrowserRouter([
     {
@@ -16,32 +20,46 @@ const Router = () => {
       element: <Welcome />,
     },
     {
-      path: "/user/:id",
-      element: <Profile />,
+      path: "/user/:id/blogs",
+      element: <UserBlogs />,
     },
     {
-      path: "/post/:id",
-      element: <Post />,
+      path: "/blog/:id",
+      element: <Blog />,
     },
     {
-      path: "/search",
-      element: <Search />,
+      path: "/browse",
+      element: <BrowseBlogsPage />,
     },
     {
       path: "/login",
-      element: <LoginForm />,
-    },
-    {
-      path: "/signup",
-      element: <SignupForm />,
+      element: <LoginPage />,
     },
     {
       path: "/verify",
-      // element: <SendVerify />
+      element: <SendVerifyPage />,
     },
     {
       path: "/verify/:token",
       element: <Verify />,
+    },
+    {
+      path: "/create",
+      element: <CreateBlogPage />,
+    },
+    {
+      path: "/user/settings",
+      element: <UserSettingsPage />,
+    },
+    {
+      path: "/terms-and-conditions",
+      element: <TermsConditionsPage />,
+    },
+    {
+      path: "/privacy-policy",
+      element: <PrivacyPolicyPage />,
+    },
+    {
       path: "*",
       element: <ErrorPage />,
     },

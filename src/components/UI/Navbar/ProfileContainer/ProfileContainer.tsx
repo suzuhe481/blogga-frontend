@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +15,10 @@ interface IProps {
 const ProfileContainer = ({ user }: IProps) => {
   const [isdropDownOpen, setisDropDownOpen] = useState(false);
 
-  // Controls iddropDownOpen state.
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
+
+  // Controls isdropDownOpen state.
   function toggleDropDown() {
     setisDropDownOpen((prev) => {
       return !prev;
@@ -27,12 +30,41 @@ const ProfileContainer = ({ user }: IProps) => {
     setisDropDownOpen(false);
   }
 
+  function handleClickOutsideMenu(e: MouseEvent) {
+    const target = e.target as Node;
+
+    // If the profile icon is clicked while menu is open, does nothing HERE.
+    // Will continue into profileIcon's toggleDropDown, which will close the menu.
+    if (
+      isdropDownOpen &&
+      profileRef.current &&
+      profileRef.current.contains(target)
+    ) {
+    }
+    // If anywhere else on the page is clicked that isn't inside the menu, close the menu.
+    else if (
+      isdropDownOpen &&
+      dropdownRef.current &&
+      !dropdownRef.current.contains(target)
+    ) {
+      closeDropDown();
+    }
+  }
+
   async function logoutHandler(e: any) {
     await logoutUtil(e); // Call logout to server.
 
     // Redirects user to home page.
     window.location.href = "/";
   }
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutsideMenu);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideMenu);
+    };
+  });
 
   // Calculates classes for profile container
   function calculateProfileContainerClasses() {
@@ -79,20 +111,48 @@ const ProfileContainer = ({ user }: IProps) => {
 
   // Contains the round profile icon with an inner font awesome icon.
   const profileIcon = (
-    <div className="group flex justify-center items-center min-h-9 min-w-9 border-2 border-black rounded-full cursor-pointer">
+    <div
+      ref={profileRef}
+      onClick={toggleDropDown}
+      className="group flex justify-center items-center min-h-9 min-w-9 border-2 border-black rounded-full cursor-pointer"
+    >
       <FontAwesomeIcon icon={faUser} className={`${calculateIconClasses()}`} />
     </div>
   );
 
   // Dropdown menu contains "My profile", "Logout" links
   const dropdownItems = (
-    <div className={calculateDropDownItemsClasses()}>
+    <div ref={dropdownRef} className={calculateDropDownItemsClasses()}>
       <div className="flex flex-col justify-center items-center relative w-36 desktop:w-44 h-14 p-1 rounded-t-lg hover:bg-sky-600 px-2">
         <a
-          href="/"
+          href={`/user/${user.id}/blogs`}
           className="flex flex-col justify-center items-start w-full h-full"
         >
-          My profile
+          My Blogs
+        </a>
+      </div>
+
+      {/* Separator */}
+      <hr />
+
+      <div className="flex flex-col justify-center items-center relative w-36 desktop:w-44 h-14 p-1 rounded-t-lg hover:bg-sky-600 px-2">
+        <a
+          href="/create"
+          className="flex flex-col justify-center items-start w-full h-full"
+        >
+          Create Blog
+        </a>
+      </div>
+
+      {/* Separator */}
+      <hr />
+
+      <div className="flex flex-col justify-center items-center relative w-36 desktop:w-44 h-14 p-1 hover:bg-sky-600 px-2">
+        <a
+          href="/user/settings"
+          className="flex flex-col justify-center items-start w-full h-full"
+        >
+          Settings
         </a>
       </div>
 
@@ -121,14 +181,9 @@ const ProfileContainer = ({ user }: IProps) => {
 
   // Container with signed in user information (name) and dropdown menu.
   const ProfileContainer = (
-    <div
-      className={calculateProfileContainerClasses()}
-      onClick={toggleDropDown}
-      onBlur={closeDropDown}
-      tabIndex={0}
-    >
+    <div className={calculateProfileContainerClasses()}>
       <div>
-        <div className="desktop:text-2xl text-xl font-FuzzyBubbles">{`${user.first_name} ${user.last_name}`}</div>
+        <div className="desktop:text-2xl text-xl font-FuzzyBubbles">{`${user.author}`}</div>
       </div>
       {profileIcon}
       <div className="relative">{dropdownItems}</div>
