@@ -5,7 +5,7 @@ import Markdown from "react-markdown";
 const PrivacyPolicy = () => {
   const [privacyPolicyMarkdown, setPrivacyPolicyMarkdown] = useState("");
 
-  const PrivacyPolicysFilePath = "src/assets/PrivacyPolicy.md";
+  const PrivacyPolicysFilePath = "/markdown/PrivacyPolicy.md";
 
   // Gets the Privacy Policy markdown
   useEffect(() => {
@@ -18,7 +18,7 @@ const PrivacyPolicy = () => {
     };
 
     fetchMarkdown();
-  });
+  }, []);
 
   return (
     <div className="flex justify-center w-full">
