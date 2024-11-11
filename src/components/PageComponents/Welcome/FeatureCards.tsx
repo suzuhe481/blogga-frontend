@@ -1,16 +1,29 @@
+import ScrollAnimation from "react-animate-on-scroll";
+import "animate.css/animate.compat.css";
+
 import Card from "./Card";
 
-type FeaturesDataTypes = {
-  featuresData: string[];
-};
+const FeatureCards = () => {
+  const FeaturesData: string[] = [
+    "This is Blogga. A website where you can create blogs. Share your stories, ideas, articles, and more!",
+    "Use a feature filled text editor to emphasize your words, your way.",
+    "Making an account is completely FREE!",
+  ];
 
-const FeatureCards = ({ featuresData }: FeaturesDataTypes) => {
-  const featureCards = featuresData.map((cardData, index) => {
-    return <Card cardData={cardData} key={index} index={index} />;
+  const featureCards = FeaturesData.map((cardData, index) => {
+    return (
+      <ScrollAnimation
+        animateIn="fadeIn"
+        animatePreScroll={true}
+        animateOnce={true}
+      >
+        <Card cardData={cardData} key={index} index={index} />
+      </ScrollAnimation>
+    );
   });
 
   return (
-    <div className="grid grid-cols-1 desktop:grid-cols-2 desktop:grid-rows-2 my-12 desktop:mx-12 gap-y-6 font-FuzzyBubbles font-bold text-xl desktop:text-4xl">
+    <div className="flex flex-col justify-center items-center w-screen my-8 font-semibold desktop:text-4xl">
       {featureCards}
     </div>
   );

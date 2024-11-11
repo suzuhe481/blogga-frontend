@@ -31,3 +31,19 @@
     all: revert;
   }
 }
+
+@layer utilities {
+  /* Clip path designs to make containers where one end is larger then the other. */
+  .clip-trapezoid-left-large {
+    clip-path: polygon(0 0, 100% 10%, 100% 90%, 0 100%);
+  }
+  .clip-trapezoid-right-large {
+    clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 90%);
+  }
+  .clip-trapezoid-left {
+    clip-path: polygon(0 0, 100% 5%, 100% 95%, 0 100%);
+  }
+  .clip-trapezoid-right {
+    clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 95%);
+  }
+}

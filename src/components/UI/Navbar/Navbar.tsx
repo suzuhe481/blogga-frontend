@@ -37,8 +37,8 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="navbar-container flex flex-col justify-center items-center m-2 mb-0 desktop:mx-48">
-      <div className="navbar flex flex-row justify-between items-center h-12 desktop:h-20 w-full mx-2">
+    <div className="navbar-container flex flex-col justify-center items-center w-full bg-white border-slate-400 border-b-[1px] py-2 mb-0">
+      <div className="navbar flex flex-row justify-evenly items-center h-12 desktop:h-20 w-full mx-48">
         <LogoContainer />
         {user ? (
           <ProfileContainer user={user} />
