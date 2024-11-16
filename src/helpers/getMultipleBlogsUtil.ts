@@ -4,7 +4,7 @@ const getMultipleBlogsUtil = async (
 ) => {
   const URL = `${
     import.meta.env.VITE_DEV_BACKEND_URL
-  }/posts?currentPage=${currentPage}&blogsPerPage=${blogsPerPage}`;
+  }/blogs?currentPage=${currentPage}&blogsPerPage=${blogsPerPage}`;
 
   const headers = {
     accept: "application/json",
