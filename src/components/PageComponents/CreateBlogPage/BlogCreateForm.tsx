@@ -119,7 +119,7 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
       }
 
       setFormSuccess(true);
-      setBlogId(result.post.shortId);
+      setBlogId(result.blog.shortId);
 
       // Redirects user to home page.
       //   window.location.href = "/";

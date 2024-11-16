@@ -11,7 +11,7 @@ import { ring } from "ldrs";
 export interface Iblog {
   title: string;
   date: string;
-  post: string;
+  blog: string;
   author: string;
   shortId: string;
   authorID: string;
@@ -66,7 +66,7 @@ const BlogView = () => {
         return;
       }
 
-      const blog: Iblog = result.post;
+      const blog: Iblog = result.blog;
       setBlog(blog);
       setBlogLoading(false);
     });
@@ -97,7 +97,7 @@ const BlogView = () => {
           <div
             className="blog"
             dangerouslySetInnerHTML={{
-              __html: decodeHtml(DOMPurify.sanitize(blog.post)),
+              __html: decodeHtml(DOMPurify.sanitize(blog.blog)),
             }}
           />
         </div>

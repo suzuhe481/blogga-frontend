@@ -97,13 +97,14 @@ const UserBlogs = () => {
 
       getUserBlogsUtil(userID, currentPage, blogsPerPage)
         .then((result) => {
+          console.log(result);
           if (result.error) {
             throw result;
           }
 
           setCurrentPage(result.newCurrentPage);
           setTotalBlogCount(result.totalBlogCount);
-          setBlogData(result.userPosts);
+          setBlogData(result.userBlogs);
           setAuthor(result.author);
           setUserExists(true);
         })

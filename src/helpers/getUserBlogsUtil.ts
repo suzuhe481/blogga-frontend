@@ -5,7 +5,7 @@ const getUserBlogsUtil = async (
 ) => {
   const URL = `${
     import.meta.env.VITE_DEV_BACKEND_URL
-  }/users/posts/${userID}?currentPage=${currentPage}&blogsPerPage=${blogsPerPage}`;
+  }/users/blogs/${userID}?currentPage=${currentPage}&blogsPerPage=${blogsPerPage}`;
 
   const headers = {
     accept: "application/json",

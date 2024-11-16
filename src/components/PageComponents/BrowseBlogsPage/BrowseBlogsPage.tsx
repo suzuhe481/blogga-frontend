@@ -94,7 +94,7 @@ const BrowseBlogsPage = () => {
 
           setCurrentPage(result.newCurrentPage);
           setTotalBlogCount(result.totalBlogCount);
-          setBlogData(result.multiplePosts);
+          setBlogData(result.multipleBlogs);
         })
         .catch((error) => {
           console.log(error);
