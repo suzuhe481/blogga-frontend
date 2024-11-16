@@ -77,7 +77,7 @@ const BlogView = () => {
       {blogLoading ? loadingAnimation : null}
       {blogError ? blogErrorMessage : null}
       {blog ? (
-        <div className="flex flex-col w-full gap-4">
+        <div className="flex flex-col w-full gap-4 desktop:w-[60vw]">
           <div className="flex flex-col gap-1">
             <h1 className="w-full font-bold text-2xl desktop:text-4xl">
               {blog.title}
@@ -94,9 +94,8 @@ const BlogView = () => {
               </p>
             </div>
           </div>
-          <hr />
           <div
-            className="w-full"
+            className="blog"
             dangerouslySetInnerHTML={{
               __html: decodeHtml(DOMPurify.sanitize(blog.post)),
             }}
