@@ -5,7 +5,11 @@ import { faExclamation, faCheck, faX } from "@fortawesome/free-solid-svg-icons";
 
 import LOGO from "../../../assets/images/LOGO_BLUE.png";
 
-import { isPasswordsEqual, isValidEmail } from "../../../helpers/formUtil";
+import {
+  isPasswordsEqual,
+  isValidEmail,
+  isValidUsername,
+} from "../../../helpers/formUtil";
 import {
   isEmailAvailable,
   isUsernameAvailable,
@@ -248,7 +252,7 @@ const RegisterForm = ({
     return () => clearTimeout(timeoutID);
   }, [registerFormData.email]);
 
-  // Handles checking if typed username is available.
+  // Handles checking if typed username is available and valid.
   useEffect(() => {
     // Ignores first page load.
     if (registerFormData.username.length === 0) {
@@ -262,7 +266,10 @@ const RegisterForm = ({
     const timeoutID = setTimeout(async () => {
       const result = await isUsernameAvailable(registerFormData.username);
 
-      if (result.usernameAvailable) {
+      if (
+        result.usernameAvailable &&
+        isValidUsername(registerFormData.username)
+      ) {
         setUsernameAvailable(true);
       } else {
         setUsernameAvailable(false);
