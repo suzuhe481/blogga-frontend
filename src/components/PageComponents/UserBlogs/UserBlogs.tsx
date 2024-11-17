@@ -31,7 +31,7 @@ const UserBlogs = () => {
     Number(searchParams.get("page")) || 1
   );
   const [totalBlogCount, setTotalBlogCount] = useState<number | null>(null);
-  const [userExists, setUserExists] = useState<boolean>(false);
+  const [userExists, setUserExists] = useState<boolean | null>(null);
 
   ring.register();
 
@@ -97,7 +97,6 @@ const UserBlogs = () => {
 
       getUserBlogsUtil(userID, currentPage, blogsPerPage)
         .then((result) => {
-          console.log(result);
           if (result.error) {
             throw result;
           }
@@ -143,7 +142,7 @@ const UserBlogs = () => {
             {loadingAnimation}
           </div>
         ) : null}
-        {userExists ? (
+        {userExists === null ? null : userExists ? (
           <div className="flex w-[90vw] pt-4">
             <h1 className="w-full font-bold text-2xl desktop:text-4xl">
               {author}'s blogs
