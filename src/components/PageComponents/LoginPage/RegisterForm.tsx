@@ -455,6 +455,16 @@ const RegisterForm = ({
               />
               {UsernameInputLoadingCircle}
             </div>
+
+            <div className="flex flex-col text-slate-500">
+              <div>Your username must:</div>
+              <div className="flex flex-col items-start font-bold text-slate-500">
+                <div>Be unique</div>
+                <div>At least 4 characters</div>
+                <div>Only letters and numbers</div>
+                <div>No spaces</div>
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-row w-full mb-6 gap-2">
