@@ -140,7 +140,7 @@ const RegisterForm = ({
       newErrors.push("Passwords do not match.");
     }
     if (!usernameAvailable) {
-      newErrors.push("Username is not available.");
+      newErrors.push("Username is not available or is invalid.");
     }
 
     // Prevents registering if form has errors.
