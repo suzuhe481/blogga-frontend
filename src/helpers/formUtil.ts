@@ -31,3 +31,25 @@ export const isValidEmail = (email: string) => {
 
   return true;
 };
+
+// Checks if username is valid using regex.
+// Valid is...
+// -Minimum of 4 characters.
+// -Alphanumerical characters.
+// -No spaces.
+// Returns boolean
+export const isValidUsername = (username: string) => {
+  // Checks if email is empty.
+  if (username === "") {
+    return false;
+  }
+
+  // Username regex.
+  const reg = /^[a-zA-Z0-9]{4,}$/;
+
+  if (reg.test(username) == false) {
+    return false;
+  }
+
+  return true;
+};
