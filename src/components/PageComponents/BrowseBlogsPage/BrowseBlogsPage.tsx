@@ -21,6 +21,10 @@ export interface Iblog {
 }
 
 const BrowseBlogsPage = () => {
+  // Default values.
+  const defaultPage = 1;
+  const defaultBlogsPerPage = 5;
+
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -28,12 +32,19 @@ const BrowseBlogsPage = () => {
   const [blogsLoading, setBlogsLoading] = useState(true);
   const [showSpinner, setShowSpinner] = useState(true);
   const [displayLoadingCards, setDisplayLoadingCards] = useState(false);
-  const [blogsPerPage, setBlogsPerPage] = useState(
-    Number(searchParams.get("blogsPerPage")) || 5
-  );
-  const [currentPage, setCurrentPage] = useState<number>(
-    Number(searchParams.get("page")) || 1
-  );
+
+  // States for url search parameters
+  // Sets the initial state to the current parameters in the url or the default values.
+  const [blogsPerPage, setBlogsPerPage] = useState(() => {
+    const blogsPerPage = Number(searchParams.get("blogsPerPage"));
+
+    return blogsPerPage > 0 ? blogsPerPage : defaultBlogsPerPage;
+  });
+  const [currentPage, setCurrentPage] = useState<number>(() => {
+    const currentPage = Number(searchParams.get("page"));
+
+    return currentPage > 0 ? currentPage : defaultPage;
+  });
   const [totalBlogCount, setTotalBlogCount] = useState<number | null>(null);
 
   ring.register();
@@ -86,43 +97,107 @@ const BrowseBlogsPage = () => {
         }
       }, 0);
 
-      getMultipleBlogsUtil(currentPage, blogsPerPage)
-        .then((result) => {
-          if (result.error) {
-            throw result;
-          }
+      try {
+        const result = await getMultipleBlogsUtil(currentPage, blogsPerPage);
 
-          setCurrentPage(result.newCurrentPage);
-          setTotalBlogCount(result.totalBlogCount);
-          setBlogData(result.multipleBlogs);
-        })
-        .catch((error) => {
-          console.log(error);
-          setTotalBlogCount(0);
-          setBlogsLoading(false);
-        })
-        .finally(() => {
-          // After data is successfully retrieved.
-          setBlogsLoading(false);
-          setDisplayLoadingCards(false);
-          setShowSpinner(false);
-          clearTimeout(timeoutId);
+        // Throws errors if found
+        if (result.error) {
+          throw result;
+        }
 
-          // Change url based on new currentPage and blogsPerPage states.
-          navigate(`/browse/?page=${currentPage}&blogsPerPage=${blogsPerPage}`);
-        });
+        // Stops current execution to prevent race condition
+        if (didCancel) {
+          return;
+        }
+
+        setCurrentPage(result.newCurrentPage);
+        setTotalBlogCount(result.totalBlogCount);
+        setBlogData(result.multipleBlogs);
+      } catch (error) {
+        console.log(error);
+        setTotalBlogCount(0);
+        setBlogsLoading(false);
+      } finally {
+        // After data is successfully retrieved.
+        setBlogsLoading(false);
+        setDisplayLoadingCards(false);
+        setShowSpinner(false);
+        clearTimeout(timeoutId);
+      }
     };
 
+    // This variable prevents the race condition of calling the API multiple times when the
+    // parameters change.
+    // The API will not be called if canceled is set to true by the cleanup function.
+    // This also only allows the latest parameters to be used and ignore the earlier calls.
+    // If the user clicks forward/backward quickly in the browser history, it will fetch only
+    // the data for the last page the user landed on.
+    let didCancel = false;
+
     fetchBlogs();
+
+    return () => {
+      didCancel = true;
+    };
   }, [currentPage, blogsPerPage]);
 
-  // Used for the useSearchParams hook
+  // Updates the url parameters when states change.
   useEffect(() => {
-    setSearchParams({
-      page: currentPage.toString(),
-      blogsPerPage: blogsPerPage.toString(),
-    });
-  }, [currentPage, blogsPerPage, setSearchParams]);
+    if (
+      currentPage !== Number(searchParams.get("page")) ||
+      blogsPerPage !== Number(searchParams.get("blogsPerPage"))
+    ) {
+      setSearchParams({
+        page: currentPage.toString(),
+        blogsPerPage: blogsPerPage.toString(),
+      });
+    }
+  }, [currentPage, blogsPerPage]);
+
+  // Updates the browser history when the currentPage and blogsPerPage state differs
+  // from the url parameters.
+  // Also avoids adding duplicates to the browser history.
+  useEffect(() => {
+    if (
+      currentPage !== Number(searchParams.get("page")) ||
+      blogsPerPage !== Number(searchParams.get("blogsPerPage"))
+    ) {
+      const currentPageParam =
+        Number(searchParams.get("page")) > 0
+          ? Number(searchParams.get("page"))
+          : defaultPage;
+      const blogsPerPageParam = Number(searchParams.get("blogsPerPage"))
+        ? Number(searchParams.get("blogsPerPage"))
+        : defaultBlogsPerPage;
+
+      navigate(
+        `/browse?page=${currentPageParam}&blogsPerPage=${blogsPerPageParam}`,
+        {
+          replace: true,
+        }
+      );
+    }
+  }, [searchParams, navigate]);
+
+  // Updates currentPage and blogsPerPage state with url parameters when the url changes.
+  useEffect(() => {
+    const currentPageParam =
+      Number(searchParams.get("page")) > 0
+        ? Number(searchParams.get("page"))
+        : defaultPage;
+    const blogsPerPageParam =
+      Number(searchParams.get("blogsPerPage")) > 0
+        ? Number(searchParams.get("blogsPerPage"))
+        : defaultBlogsPerPage;
+
+    if (currentPage !== currentPageParam) {
+      setCurrentPage(currentPageParam);
+    }
+
+    if (blogsPerPage !== blogsPerPageParam) {
+      setBlogsPerPage(blogsPerPageParam);
+    }
+  }, [searchParams]);
 
   return (
     <div className="relative flex flex-col justify-between min-h-screen overflow-hidden">
