@@ -179,6 +179,26 @@ const BrowseBlogsPage = () => {
     }
   }, [searchParams, navigate]);
 
+  // Updates currentPage and blogsPerPage state with url parameters when the url changes.
+  useEffect(() => {
+    const currentPageParam =
+      Number(searchParams.get("page")) > 0
+        ? Number(searchParams.get("page"))
+        : defaultPage;
+    const blogsPerPageParam =
+      Number(searchParams.get("blogsPerPage")) > 0
+        ? Number(searchParams.get("blogsPerPage"))
+        : defaultBlogsPerPage;
+
+    if (currentPage !== currentPageParam) {
+      setCurrentPage(currentPageParam);
+    }
+
+    if (blogsPerPage !== blogsPerPageParam) {
+      setBlogsPerPage(blogsPerPageParam);
+    }
+  }, [searchParams]);
+
   return (
     <div className="relative flex flex-col justify-between min-h-screen overflow-hidden">
       <Navbar />
