@@ -21,6 +21,10 @@ export interface Iblog {
 }
 
 const BrowseBlogsPage = () => {
+  // Default values.
+  const defaultPage = 1;
+  const defaultBlogsPerPage = 5;
+
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
