@@ -141,13 +141,18 @@ const BrowseBlogsPage = () => {
     };
   }, [currentPage, blogsPerPage]);
 
-  // Used for the useSearchParams hook
+  // Updates the url parameters when states change.
   useEffect(() => {
-    setSearchParams({
-      page: currentPage.toString(),
-      blogsPerPage: blogsPerPage.toString(),
-    });
-  }, [currentPage, blogsPerPage, setSearchParams]);
+    if (
+      currentPage !== Number(searchParams.get("page")) ||
+      blogsPerPage !== Number(searchParams.get("blogsPerPage"))
+    ) {
+      setSearchParams({
+        page: currentPage.toString(),
+        blogsPerPage: blogsPerPage.toString(),
+      });
+    }
+  }, [currentPage, blogsPerPage]);
 
   return (
     <div className="relative flex flex-col justify-between min-h-screen overflow-hidden">
