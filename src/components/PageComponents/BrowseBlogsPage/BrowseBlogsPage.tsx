@@ -97,34 +97,48 @@ const BrowseBlogsPage = () => {
         }
       }, 0);
 
-      getMultipleBlogsUtil(currentPage, blogsPerPage)
-        .then((result) => {
-          if (result.error) {
-            throw result;
-          }
+      try {
+        const result = await getMultipleBlogsUtil(currentPage, blogsPerPage);
 
-          setCurrentPage(result.newCurrentPage);
-          setTotalBlogCount(result.totalBlogCount);
-          setBlogData(result.multipleBlogs);
-        })
-        .catch((error) => {
-          console.log(error);
-          setTotalBlogCount(0);
-          setBlogsLoading(false);
-        })
-        .finally(() => {
-          // After data is successfully retrieved.
-          setBlogsLoading(false);
-          setDisplayLoadingCards(false);
-          setShowSpinner(false);
-          clearTimeout(timeoutId);
+        // Throws errors if found
+        if (result.error) {
+          throw result;
+        }
 
-          // Change url based on new currentPage and blogsPerPage states.
-          navigate(`/browse/?page=${currentPage}&blogsPerPage=${blogsPerPage}`);
-        });
+        // Stops current execution to prevent race condition
+        if (didCancel) {
+          return;
+        }
+
+        setCurrentPage(result.newCurrentPage);
+        setTotalBlogCount(result.totalBlogCount);
+        setBlogData(result.multipleBlogs);
+      } catch (error) {
+        console.log(error);
+        setTotalBlogCount(0);
+        setBlogsLoading(false);
+      } finally {
+        // After data is successfully retrieved.
+        setBlogsLoading(false);
+        setDisplayLoadingCards(false);
+        setShowSpinner(false);
+        clearTimeout(timeoutId);
+      }
     };
 
+    // This variable prevents the race condition of calling the API multiple times when the
+    // parameters change.
+    // The API will not be called if canceled is set to true by the cleanup function.
+    // This also only allows the latest parameters to be used and ignore the earlier calls.
+    // If the user clicks forward/backward quickly in the browser history, it will fetch only
+    // the data for the last page the user landed on.
+    let didCancel = false;
+
     fetchBlogs();
+
+    return () => {
+      didCancel = true;
+    };
   }, [currentPage, blogsPerPage]);
 
   // Used for the useSearchParams hook
