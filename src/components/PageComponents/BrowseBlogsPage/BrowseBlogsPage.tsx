@@ -32,12 +32,19 @@ const BrowseBlogsPage = () => {
   const [blogsLoading, setBlogsLoading] = useState(true);
   const [showSpinner, setShowSpinner] = useState(true);
   const [displayLoadingCards, setDisplayLoadingCards] = useState(false);
-  const [blogsPerPage, setBlogsPerPage] = useState(
-    Number(searchParams.get("blogsPerPage")) || 5
-  );
-  const [currentPage, setCurrentPage] = useState<number>(
-    Number(searchParams.get("page")) || 1
-  );
+
+  // States for url search parameters
+  // Sets the initial state to the current parameters in the url or the default values.
+  const [blogsPerPage, setBlogsPerPage] = useState(() => {
+    const blogsPerPage = Number(searchParams.get("blogsPerPage"));
+
+    return blogsPerPage > 0 ? blogsPerPage : defaultBlogsPerPage;
+  });
+  const [currentPage, setCurrentPage] = useState<number>(() => {
+    const currentPage = Number(searchParams.get("page"));
+
+    return currentPage > 0 ? currentPage : defaultPage;
+  });
   const [totalBlogCount, setTotalBlogCount] = useState<number | null>(null);
 
   ring.register();
