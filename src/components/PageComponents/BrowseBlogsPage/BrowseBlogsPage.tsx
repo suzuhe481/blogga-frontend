@@ -154,6 +154,31 @@ const BrowseBlogsPage = () => {
     }
   }, [currentPage, blogsPerPage]);
 
+  // Updates the browser history when the currentPage and blogsPerPage state differs
+  // from the url parameters.
+  // Also avoids adding duplicates to the browser history.
+  useEffect(() => {
+    if (
+      currentPage !== Number(searchParams.get("page")) ||
+      blogsPerPage !== Number(searchParams.get("blogsPerPage"))
+    ) {
+      const currentPageParam =
+        Number(searchParams.get("page")) > 0
+          ? Number(searchParams.get("page"))
+          : defaultPage;
+      const blogsPerPageParam = Number(searchParams.get("blogsPerPage"))
+        ? Number(searchParams.get("blogsPerPage"))
+        : defaultBlogsPerPage;
+
+      navigate(
+        `/browse?page=${currentPageParam}&blogsPerPage=${blogsPerPageParam}`,
+        {
+          replace: true,
+        }
+      );
+    }
+  }, [searchParams, navigate]);
+
   return (
     <div className="relative flex flex-col justify-between min-h-screen overflow-hidden">
       <Navbar />
