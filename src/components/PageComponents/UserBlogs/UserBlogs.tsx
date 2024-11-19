@@ -67,6 +67,12 @@ const UserBlogs = () => {
       return;
     }
 
+    // Prevents a race condition that keeps rendering component when user
+    // exists but has no blogs
+    if (userExists && blogData.length === 0) {
+      return;
+    }
+
     // Function that fetches requested blogs based on current page and blogs per page.
     const fetchBlogs = async () => {
       // Set initial loading states for a blog fetch.
