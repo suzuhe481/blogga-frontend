@@ -18,7 +18,9 @@ const UserBlogs = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [userID, setUserID] = useState<string>("");
+  const [userID, setUserID] = useState<string>(() => {
+    return id ? id.toString() : "";
+  });
   const [author, setAuthor] = useState<string>("");
   const [blogData, setBlogData] = useState<IBlogCard[] | []>([]);
   const [blogsLoading, setBlogsLoading] = useState(true);
