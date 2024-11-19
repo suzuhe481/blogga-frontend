@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import Navbar from "../../UI/Navbar/Navbar";
@@ -110,6 +110,10 @@ const BrowseBlogsPage = () => {
       didCancel = true;
     };
   }, [currentPage, blogsPerPage]);
+
+  useLayoutEffect(() => {
+    document.title = "Browse | Blogga";
+  }, []);
 
   return (
     <div className="relative flex flex-col justify-between min-h-screen overflow-hidden">

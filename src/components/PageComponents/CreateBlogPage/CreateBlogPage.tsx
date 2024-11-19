@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Navbar from "../../UI/Navbar/Navbar";
@@ -41,6 +41,10 @@ const CreateBlogPage = () => {
     };
 
     getUserStatus();
+  }, []);
+
+  useLayoutEffect(() => {
+    document.title = "Create | Blogga";
   }, []);
 
   return (
