@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import SignInForm from "./SignInForm";
@@ -174,6 +174,14 @@ const LoginPage = () => {
 
     getUserStatus();
   }, []);
+
+  useLayoutEffect(() => {
+    if (onLogin) {
+      document.title = "Login | Blogga";
+    } else {
+      document.title = "Register | Blogga";
+    }
+  }, [onLogin]);
 
   return (
     <div className="relative flex flex-col justify-between min-h-screen">

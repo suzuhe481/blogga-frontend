@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { useSearchParams, useParams } from "react-router-dom";
 
 import Navbar from "../../UI/Navbar/Navbar";
@@ -140,6 +140,12 @@ const UserBlogs = () => {
       didCancel = true;
     };
   }, [userID, currentPage, blogsPerPage]);
+
+  useEffect(() => {
+    if (author !== "") {
+      document.title = `${author}'s Blogs | Blogga`;
+    }
+  }, [author]);
 
   return (
     <div className="relative flex flex-col justify-between min-h-screen overflow-hidden">

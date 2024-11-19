@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import DOMPurify from "dompurify";
@@ -71,6 +71,12 @@ const BlogView = () => {
       setBlogLoading(false);
     });
   }, []);
+
+  useLayoutEffect(() => {
+    if (blog) {
+      document.title = `${blog.title} | Blogga`;
+    }
+  }, [blog]);
 
   return (
     <div className="flex flex-col items-center justify-start flex-grow mx-4 desktop:mx-48 py-4">
