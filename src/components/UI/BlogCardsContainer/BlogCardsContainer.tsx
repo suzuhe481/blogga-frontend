@@ -10,7 +10,6 @@ import { ring } from "ldrs";
 export interface Iblog {
   title: string;
   date: string;
-  blog: string;
   author: string;
   shortId: string;
   authorID: string;
@@ -26,6 +25,7 @@ interface IBlogContainerProps {
   setBlogsPerPage: React.Dispatch<React.SetStateAction<number>>;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  navigateString: string;
 }
 
 const BlogCardsContainer = ({
@@ -38,6 +38,7 @@ const BlogCardsContainer = ({
   setBlogsPerPage,
   currentPage,
   setCurrentPage,
+  navigateString,
 }: IBlogContainerProps) => {
   // Default values.
   const defaultPage = 1;
@@ -104,12 +105,9 @@ const BlogCardsContainer = ({
         ? Number(searchParams.get("blogsPerPage"))
         : defaultBlogsPerPage;
 
-      navigate(
-        `/browse?page=${currentPageParam}&blogsPerPage=${blogsPerPageParam}`,
-        {
-          replace: true,
-        }
-      );
+      navigate(navigateString, {
+        replace: true,
+      });
     }
   }, [searchParams, navigate]);
 
