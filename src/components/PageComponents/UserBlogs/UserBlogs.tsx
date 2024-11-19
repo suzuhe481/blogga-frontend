@@ -18,18 +18,27 @@ const UserBlogs = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [userID, setUserID] = useState<string>("");
+  const [userID, setUserID] = useState<string>(() => {
+    return id ? id.toString() : "";
+  });
   const [author, setAuthor] = useState<string>("");
   const [blogData, setBlogData] = useState<IBlogCard[] | []>([]);
   const [blogsLoading, setBlogsLoading] = useState(true);
   const [showSpinner, setShowSpinner] = useState(true);
   const [displayLoadingCards, setDisplayLoadingCards] = useState(false);
-  const [blogsPerPage, setBlogsPerPage] = useState(
-    Number(searchParams.get("blogsPerPage")) || 5
-  );
-  const [currentPage, setCurrentPage] = useState<number>(
-    Number(searchParams.get("page")) || 1
-  );
+
+  // States for url search parameters
+  // Sets the initial state to the current parameters in the url or the default values.
+  const [blogsPerPage, setBlogsPerPage] = useState(() => {
+    const blogsPerPage = Number(searchParams.get("blogsPerPage"));
+
+    return blogsPerPage > 0 ? blogsPerPage : defaultBlogsPerPage;
+  });
+  const [currentPage, setCurrentPage] = useState<number>(() => {
+    const currentPage = Number(searchParams.get("page"));
+
+    return currentPage > 0 ? currentPage : defaultPage;
+  });
   const [totalBlogCount, setTotalBlogCount] = useState<number | null>(null);
   const [userExists, setUserExists] = useState<boolean | null>(null);
 
@@ -55,6 +64,12 @@ const UserBlogs = () => {
   useEffect(() => {
     // Prevents fetching if userID is empty
     if (userID === "") {
+      return;
+    }
+
+    // Prevents a race condition that keeps rendering component when user
+    // exists but has no blogs
+    if (userExists && blogData.length === 0) {
       return;
     }
 
@@ -127,7 +142,7 @@ const UserBlogs = () => {
   }, [userID, currentPage, blogsPerPage]);
 
   return (
-    <div className="relative flex flex-col justify-between min-h-screen">
+    <div className="relative flex flex-col justify-between min-h-screen overflow-hidden">
       <Navbar />
       <div className="flex flex-col justify-start items-center w-full min-h-screen">
         {userExists === null ? null : userExists ? (

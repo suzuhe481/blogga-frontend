@@ -7,7 +7,7 @@ import BlogCardsContainer from "../../UI/BlogCardsContainer/BlogCardsContainer";
 
 import getMultipleBlogsUtil from "../../../helpers/getMultipleBlogsUtil";
 
-import { IBlogCard } from "./BlogCard";
+import { IBlogCard } from "../../UI/BlogCardsContainer/BlogCard";
 
 const BrowseBlogsPage = () => {
   // Default values.
