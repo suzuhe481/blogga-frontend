@@ -41,7 +41,7 @@ const BlogCard = ({ title, author, date, shortId, authorID }: IBlogCard) => {
           />
           <div className="flex flex-row gap-4 mb-2">
             <a
-              href={`/user/${authorID}/blogs`}
+              href={`/user/${authorID}/`}
               dangerouslySetInnerHTML={{
                 __html: decodeHtml(DOMPurify.sanitize(author)),
               }}
