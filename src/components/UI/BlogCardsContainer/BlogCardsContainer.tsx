@@ -158,7 +158,7 @@ const BlogCardsContainer = ({
         </select>
       </div>
 
-      <div className="flex justify-center items-center">
+      <div className="flex flex-col justify-center items-center">
         {totalBlogCount === 0 ? EmptyBlogs : null}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {blogsLoading && displayLoadingCards ? LoadingBlogCards : null}
