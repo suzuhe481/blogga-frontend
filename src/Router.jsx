@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Welcome from "./components/PageComponents/Welcome/Welcome";
 import Blog from "./components/PageComponents/Blog/Blog";
-import UserBlogs from "./components/PageComponents/UserBlogs/UserBlogs";
+import ProfilePage from "./components/PageComponents/ProfilePage/ProfilePage";
 import BrowseBlogsPage from "./components/PageComponents/BrowseBlogsPage/BrowseBlogsPage";
 import LoginPage from "./components/PageComponents/LoginPage/LoginPage";
 import SendVerifyPage from "./components/PageComponents/SendVerifyPage/SendVerifyPage";
@@ -18,10 +18,6 @@ const Router = () => {
     {
       path: "/",
       element: <Welcome />,
-    },
-    {
-      path: "/user/:id/blogs",
-      element: <UserBlogs />,
     },
     {
       path: "/blog/:id",
@@ -58,6 +54,10 @@ const Router = () => {
     {
       path: "/privacy-policy",
       element: <PrivacyPolicyPage />,
+    },
+    {
+      path: "/user/:id/blogs",
+      element: <ProfilePage />,
     },
     {
       path: "*",
