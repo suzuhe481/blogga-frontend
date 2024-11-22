@@ -1,9 +1,12 @@
-const submitBlogUtil = (blogData: {
+const updateBlogUtil = (blogData: {
   title: string;
   blog: string;
   draft: boolean;
+  shortId: string;
 }) => {
-  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/blogs`;
+  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/blogs/${
+    blogData.shortId
+  }`;
 
   const headers = {
     accept: "application/json",
@@ -13,7 +16,7 @@ const submitBlogUtil = (blogData: {
   const body = JSON.stringify(blogData);
 
   return fetch(URL, {
-    method: "POST",
+    method: "PUT",
     headers: headers,
     credentials: "include",
     body: body,
@@ -36,4 +39,4 @@ const submitBlogUtil = (blogData: {
     });
 };
 
-export default submitBlogUtil;
+export default updateBlogUtil;

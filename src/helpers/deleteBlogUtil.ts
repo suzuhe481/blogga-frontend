@@ -1,22 +1,16 @@
-const submitBlogUtil = (blogData: {
-  title: string;
-  blog: string;
-  draft: boolean;
-}) => {
-  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/blogs`;
+// Deletes the user's profile.
+const deleteBlogUtil = (blogId: string) => {
+  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/blogs/${blogId}`;
 
   const headers = {
     accept: "application/json",
     "content-type": "application/json",
   };
 
-  const body = JSON.stringify(blogData);
-
   return fetch(URL, {
-    method: "POST",
+    method: "DELETE",
     headers: headers,
     credentials: "include",
-    body: body,
   })
     .then((response) => {
       return response.json();
@@ -36,4 +30,4 @@ const submitBlogUtil = (blogData: {
     });
 };
 
-export default submitBlogUtil;
+export default deleteBlogUtil;

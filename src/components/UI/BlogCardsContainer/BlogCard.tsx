@@ -41,14 +41,16 @@ const BlogCard = ({ title, author, date, shortId, authorID }: IBlogCard) => {
           />
           <div className="flex flex-row gap-4 mb-2">
             <a
-              href={`/user/${authorID}/blogs`}
+              href={`/user/${authorID}/`}
               dangerouslySetInnerHTML={{
                 __html: decodeHtml(DOMPurify.sanitize(author)),
               }}
             />
             <div>|</div>
             <div>
-              {DateTime.fromISO(date).toLocaleString(DateTime.DATETIME_MED)}
+              {date === null
+                ? "Unpublished"
+                : DateTime.fromISO(date).toLocaleString(DateTime.DATETIME_MED)}
             </div>
           </div>
         </div>

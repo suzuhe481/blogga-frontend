@@ -1,22 +1,21 @@
-const submitBlogUtil = (blogData: {
-  title: string;
-  blog: string;
-  draft: boolean;
-}) => {
-  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/blogs`;
+const getUserDraftsUtil = async (
+  userID: string,
+  currentPage: number,
+  blogsPerPage: number
+) => {
+  const URL = `${
+    import.meta.env.VITE_DEV_BACKEND_URL
+  }/users/drafts/${userID}?currentPage=${currentPage}&blogsPerPage=${blogsPerPage}`;
 
   const headers = {
     accept: "application/json",
     "content-type": "application/json",
   };
 
-  const body = JSON.stringify(blogData);
-
   return fetch(URL, {
-    method: "POST",
+    method: "GET",
     headers: headers,
     credentials: "include",
-    body: body,
   })
     .then((response) => {
       return response.json();
@@ -36,4 +35,4 @@ const submitBlogUtil = (blogData: {
     });
 };
 
-export default submitBlogUtil;
+export default getUserDraftsUtil;

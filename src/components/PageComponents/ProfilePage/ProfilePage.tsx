@@ -1,6 +1,8 @@
 import { useState, useEffect, useLayoutEffect } from "react";
 import { useSearchParams, useParams } from "react-router-dom";
 
+import { DateTime } from "luxon";
+
 import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../../UI/Footer/Footer";
 import BlogCardsContainer from "../../UI/BlogCardsContainer/BlogCardsContainer";
@@ -8,8 +10,17 @@ import BlogCardsContainer from "../../UI/BlogCardsContainer/BlogCardsContainer";
 import { IBlogCard } from "../../UI/BlogCardsContainer/BlogCard";
 
 import getUserBlogsUtil from "../../../helpers/getUserBlogsUtil";
+import getUserDraftsUtil from "../../../helpers/getUserDraftsUtil";
 
-const UserBlogs = () => {
+interface IAuthorData {
+  name: string;
+  memberSince: string;
+  isLoggedInUser: boolean;
+  blogsPublished: number;
+  blogDrafts?: number;
+}
+
+const ProfilePage = () => {
   // Default values.
   const defaultPage = 1;
   const defaultBlogsPerPage = 5;
@@ -21,7 +32,7 @@ const UserBlogs = () => {
   const [userID, setUserID] = useState<string>(() => {
     return id ? id.toString() : "";
   });
-  const [author, setAuthor] = useState<string>("");
+  const [authorData, setAuthorData] = useState<IAuthorData | null>(null);
   const [blogData, setBlogData] = useState<IBlogCard[] | []>([]);
   const [blogsLoading, setBlogsLoading] = useState(true);
   const [showSpinner, setShowSpinner] = useState(true);
@@ -42,6 +53,8 @@ const UserBlogs = () => {
   const [totalBlogCount, setTotalBlogCount] = useState<number | null>(null);
   const [userExists, setUserExists] = useState<boolean | null>(null);
 
+  const [blogType, setBlogType] = useState("blogs");
+
   // This sets up the navigateString that gets passed to the BlogCardsContainer component.
   // This is the template of the URL for this component, which can change based on variables.
   const currentPageParam =
@@ -51,7 +64,33 @@ const UserBlogs = () => {
   const blogsPerPageParam = Number(searchParams.get("blogsPerPage"))
     ? Number(searchParams.get("blogsPerPage"))
     : defaultBlogsPerPage;
-  const navigateString = `/user/${id}/blogs?page=${currentPageParam}&blogsPerPage=${blogsPerPageParam}`;
+  const navigateString = `/user/${id}/?page=${currentPageParam}&blogsPerPage=${blogsPerPageParam}`;
+
+  const BlogSwitcher = (
+    <div className="flex flex-row gap-4 mb-6">
+      <button
+        onClick={(e) => changeBlogType("blogs")}
+        className={`italic hover:bg-slate-400 py-2 px-4 rounded-md ${
+          blogType === "blogs" ? "bg-slate-300" : null
+        }`}
+      >
+        My Blogs
+      </button>
+      <button
+        onClick={(e) => changeBlogType("drafts")}
+        className={`italic hover:bg-slate-400 py-2 px-4 rounded-md ${
+          blogType === "drafts" ? "bg-slate-300" : null
+        }`}
+      >
+        Drafts
+      </button>
+    </div>
+  );
+
+  // Changes the page
+  const changeBlogType = (newPage: string) => {
+    setBlogType(newPage);
+  };
 
   // Sets the users id
   useEffect(() => {
@@ -64,12 +103,7 @@ const UserBlogs = () => {
   useEffect(() => {
     // Prevents fetching if userID is empty
     if (userID === "") {
-      return;
-    }
-
-    // Prevents a race condition that keeps rendering component when user
-    // exists but has no blogs
-    if (userExists && blogData.length === 0) {
+      // console.log("empty");
       return;
     }
 
@@ -93,11 +127,10 @@ const UserBlogs = () => {
       }, 0);
 
       try {
-        const result = await getUserBlogsUtil(
-          userID,
-          currentPage,
-          blogsPerPage
-        );
+        const result =
+          blogType === "blogs"
+            ? await getUserBlogsUtil(userID, currentPage, blogsPerPage)
+            : await getUserDraftsUtil(userID, currentPage, blogsPerPage);
 
         if (result.error) {
           throw result;
@@ -109,9 +142,15 @@ const UserBlogs = () => {
         }
 
         setCurrentPage(result.newCurrentPage);
-        setTotalBlogCount(result.totalBlogCount);
+        // setTotalBlogCount(result.blogTypeCount);
+        setTotalBlogCount(
+          blogType === "blogs"
+            ? result.authorData.blogsPublished
+            : result.authorData.blogDrafts
+        );
+        // setTotalBlogCount(result.authorData.blogsPublished);
         setBlogData(result.userBlogs);
-        setAuthor(result.author);
+        setAuthorData(result.authorData);
         setUserExists(true);
       } catch (error) {
         console.log(error);
@@ -139,27 +178,39 @@ const UserBlogs = () => {
     return () => {
       didCancel = true;
     };
-  }, [userID, currentPage, blogsPerPage]);
+  }, [userID, currentPage, blogsPerPage, blogType]);
 
   useEffect(() => {
-    if (author !== "") {
-      document.title = `${author}'s Blogs | Blogga`;
+    if (authorData !== null) {
+      document.title = `${authorData?.name} | Blogga`;
     }
-  }, [author]);
+  }, [authorData]);
 
   return (
     <div className="relative flex flex-col justify-between min-h-screen overflow-hidden">
       <Navbar />
       <div className="flex flex-col justify-start items-center w-full min-h-screen">
-        {userExists === null ? null : userExists ? (
-          <div className="flex w-[90vw] pt-4">
+        {authorData === null ? null : authorData ? (
+          <div className="flex flex-col w-[90vw] pt-4 gap-2">
             <h1 className="w-full font-bold text-2xl desktop:text-4xl">
-              {author}'s blogs
+              {authorData.name}
             </h1>
+            <div className="flex flex-col gap-1">
+              <p className="font-bold">
+                Member since:{" "}
+                {DateTime.fromISO(authorData.memberSince).toLocaleString(
+                  DateTime.DATE_FULL
+                )}
+              </p>
+              <p className="font-bold">
+                Blogs created: {authorData.blogsPublished}
+              </p>
+            </div>
           </div>
         ) : (
           <div>This user does not exist.</div>
         )}
+        {authorData?.isLoggedInUser ? BlogSwitcher : null}
         <BlogCardsContainer
           blogData={blogData}
           blogsLoading={blogsLoading}
@@ -178,4 +229,4 @@ const UserBlogs = () => {
   );
 };
 
-export default UserBlogs;
+export default ProfilePage;
