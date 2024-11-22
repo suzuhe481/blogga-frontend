@@ -48,7 +48,9 @@ const BlogCard = ({ title, author, date, shortId, authorID }: IBlogCard) => {
             />
             <div>|</div>
             <div>
-              {DateTime.fromISO(date).toLocaleString(DateTime.DATETIME_MED)}
+              {date === null
+                ? "Unpublished"
+                : DateTime.fromISO(date).toLocaleString(DateTime.DATETIME_MED)}
             </div>
           </div>
         </div>
