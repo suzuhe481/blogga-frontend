@@ -64,7 +64,7 @@ const ProfilePage = () => {
   const blogsPerPageParam = Number(searchParams.get("blogsPerPage"))
     ? Number(searchParams.get("blogsPerPage"))
     : defaultBlogsPerPage;
-  const navigateString = `/user/${id}/blogs?page=${currentPageParam}&blogsPerPage=${blogsPerPageParam}`;
+  const navigateString = `/user/${id}/?page=${currentPageParam}&blogsPerPage=${blogsPerPageParam}`;
 
   const BlogSwitcher = (
     <div className="flex flex-row gap-4 mb-6">
