@@ -21,6 +21,7 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
   const [blogValue, setBlogValue] = useState("");
 
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [draftSubmitted, setDraftSubmitted] = useState(false);
   const [submitHovered, setSubmitHovered] = useState(false);
 
   const [errors, setErrors] = useState<Array<string>>([]);
@@ -51,12 +52,10 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
   }
 
   // White - When Login button is hovered after form submit, animation is white.
-  const HoveredAnimation = <l-bouncy size="30" speed="1.75" color="white" />;
+  const WhiteAnimation = <l-bouncy size="30" speed="1.75" color="white" />;
 
   // Blue - When Login button is NOT hovered after form submit, animation is blue.
-  const UnHoveredAnimation = (
-    <l-bouncy size="30" speed="1.75" color="#00A9FF" />
-  );
+  const BlueAnimation = <l-bouncy size="30" speed="1.75" color="#00A9FF" />;
 
   // Loading animation for form.
   // Note: TinyMCE editor cannot be conditionally rendered or it won't initialize.
@@ -80,9 +79,13 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
     setIsFormLoading(false);
   };
 
-  async function onSubmitHandler(e: { preventDefault: () => void }) {
-    e.preventDefault();
-    setFormSubmitted(true);
+  async function onSubmitHandler(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+    if (event.currentTarget.value === "draft") {
+      setDraftSubmitted(true);
+    } else {
+      setFormSubmitted(true);
+    }
 
     // Clears errors
     setErrors([]);
@@ -91,12 +94,14 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
     const blogData = {
       title: titleValue,
       blog: blogValue,
+      draft: event.currentTarget.value === "draft" ? true : false,
     };
 
-    const result = await submitBlogUtil(blogData); // Call login to server.
+    const result = await submitBlogUtil(blogData);
 
     setTimeout(() => {
       setFormSubmitted(false);
+      setDraftSubmitted(false);
 
       if (result.error) {
         var errorsArray = result.msg; // Contains an array of objects from server
@@ -184,18 +189,27 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
           }}
         />
 
-        <div>
+        <div className="flex flex-col gap-2">
           <button
             onClick={onSubmitHandler}
             onMouseEnter={loginMouseEnterHandler}
             onMouseLeave={loginMouseLeaveHandler}
-            className="p-2 border-2 border-sky-400 w-full text-sky-400 hover:bg-sky-400 hover:text-white rounded-lg"
+            className="p-2 border-2 border-sky-400 w-full bg-sky-400 text-white hover:bg-sky-600 rounded-lg font-bold"
           >
-            {formSubmitted
+            {formSubmitted ? WhiteAnimation : "Blog it"}
+          </button>
+          <button
+            onClick={onSubmitHandler}
+            onMouseEnter={loginMouseEnterHandler}
+            onMouseLeave={loginMouseLeaveHandler}
+            value={"draft"}
+            className="p-2 border-2 border-slate-400 w-full text-slate-600 hover:bg-slate-400 hover:text-white rounded-lg font-bold"
+          >
+            {draftSubmitted
               ? submitHovered
-                ? HoveredAnimation
-                : UnHoveredAnimation
-              : "Blog it!"}
+                ? WhiteAnimation
+                : BlueAnimation
+              : "Save as Draft"}
           </button>
         </div>
       </form>
