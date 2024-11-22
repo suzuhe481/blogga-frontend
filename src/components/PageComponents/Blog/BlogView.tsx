@@ -10,6 +10,7 @@ import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 import getBlogUtil from "../../../helpers/getBlogUtil";
 import deleteBlogUtil from "../../../helpers/deleteBlogUtil";
+import toggleBlogVisibilityUtil from "../../../helpers/toggleBlogVisibilityUtil";
 
 import { ring } from "ldrs";
 
@@ -37,10 +38,30 @@ const BlogView = () => {
   const [blogDeletedError, setBlogDeletedError] = useState<boolean>(false);
   const [deleteBlogModalOpen, setDeleteBlogModalOpen] =
     useState<boolean>(false);
+  const [toggleBlogModalOpen, setToggleBlogModalOpen] =
+    useState<boolean>(false);
 
-  // Text for the Delete Blogg modal.
+  // Text for the Delete Blog modal.
   const DeleteBlogTitle = "Delete Blog";
   const DeleteBlogDescription = "Are you sure you want to delete this blog?";
+
+  // Text for Blog Visibility Modal.
+  const ToggleBlogTitle = `${
+    !blog?.isBlogOwner
+      ? null
+      : blog.published
+      ? "Unpublish Blog"
+      : "Publish Blog"
+  }`;
+  const ToggleBlogDescription = `Do you want to ${
+    !blog?.isBlogOwner ? null : blog.published ? "unpublish" : "publish"
+  } this blog? This will ${
+    !blog?.isBlogOwner
+      ? null
+      : blog.published
+      ? "save it as a draft and hide it from the public."
+      : "make it public."
+  }`;
 
   // Display loading spinner.
   // Loading animation is fixed in the center of the screen.
@@ -105,6 +126,20 @@ const BlogView = () => {
     setDeleteBlogModalOpen(false);
   };
 
+  // Opens the toggle blog visibility modal.
+  const openToggleBlogModalHandler = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+
+    setToggleBlogModalOpen(true);
+  };
+
+  // Closes the toggle blog visibility modal.
+  const closeToggleBlogModalHandler = () => {
+    setToggleBlogModalOpen(false);
+  };
+
   // Deletes the blog
   async function deleteBlogConfirmHandler() {
     if (blog === null) {
@@ -124,6 +159,29 @@ const BlogView = () => {
     setblogDeleted(true);
     setBlogLoading(false);
     setBlog(null);
+  }
+
+  // Toggles blog visibility
+  async function toggleBlogVisibilityHandler() {
+    if (blog === null) {
+      return;
+    }
+
+    setToggleBlogModalOpen(false);
+    setBlogLoading(true);
+
+    const result = await toggleBlogVisibilityUtil(blog.shortId);
+
+    if (result.error) {
+      console.log(result.error);
+      setBlogLoading(false);
+      return;
+    }
+
+    setBlogLoading(false);
+
+    // Refresh page
+    window.location.reload();
   }
 
   // Retrieves and sets blog data.
@@ -158,6 +216,14 @@ const BlogView = () => {
           description={DeleteBlogDescription}
           confirmAction={deleteBlogConfirmHandler}
           cancelAction={deleteBlogCancelHandler}
+        />
+      ) : null}
+      {toggleBlogModalOpen ? (
+        <Modal
+          title={ToggleBlogTitle}
+          description={ToggleBlogDescription}
+          confirmAction={toggleBlogVisibilityHandler}
+          cancelAction={closeToggleBlogModalHandler}
         />
       ) : null}
       {blogDeleted ? blogDeletedMessage : null}
@@ -203,6 +269,12 @@ const BlogView = () => {
                     Edit
                     <FontAwesomeIcon icon={faPenToSquare} />
                   </a>
+                  <button
+                    onClick={openToggleBlogModalHandler}
+                    className="flex flex-row justify-center items-center gap-2 border-black border-2 p-2 rounded-xl bg-sky-400 hover:bg-sky-600"
+                  >
+                    {blog.published ? "Unpublish" : "Publish"}
+                  </button>
                   <button
                     onClick={deleteBlogSubmitHandler}
                     className="flex flex-row justify-center items-center gap-2 border-black border-2 p-2 rounded-xl bg-red-600 hover:bg-red-800"
