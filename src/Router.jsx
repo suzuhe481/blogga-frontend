@@ -61,7 +61,7 @@ const Router = () => {
       element: <PrivacyPolicyPage />,
     },
     {
-      path: "/user/:id/blogs",
+      path: "/user/:id",
       element: <ProfilePage />,
     },
     {
