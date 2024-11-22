@@ -8,6 +8,7 @@ import LoginPage from "./components/PageComponents/LoginPage/LoginPage";
 import SendVerifyPage from "./components/PageComponents/SendVerifyPage/SendVerifyPage";
 import Verify from "./components/PageComponents/VerifyPage/VerifyPage";
 import CreateBlogPage from "./components/PageComponents/CreateBlogPage/CreateBlogPage";
+import EditBlogPage from "./components/PageComponents/EditBlogPage/EditBlogPage";
 import UserSettingsPage from "./components/PageComponents/UserSettingsPage/UserSettingsPage";
 import TermsConditionsPage from "./components/PageComponents/TermsConditionsPage/TermsConditionsPage";
 import PrivacyPolicyPage from "./components/PageComponents/PrivacyPolicyPage/PrivacyPolicyPage";
@@ -42,6 +43,10 @@ const Router = () => {
     {
       path: "/create",
       element: <CreateBlogPage />,
+    },
+    {
+      path: "/blog/edit/:id",
+      element: <EditBlogPage />,
     },
     {
       path: "/user/settings",
