@@ -1,10 +1,11 @@
-const getMultipleBlogsUtil = async (
+const getUserDraftsUtil = async (
+  userID: string,
   currentPage: number,
   blogsPerPage: number
 ) => {
   const URL = `${
     import.meta.env.VITE_DEV_BACKEND_URL
-  }/blogs?currentPage=${currentPage}&blogsPerPage=${blogsPerPage}`;
+  }/users/drafts/${userID}?currentPage=${currentPage}&blogsPerPage=${blogsPerPage}`;
 
   const headers = {
     accept: "application/json",
@@ -34,4 +35,4 @@ const getMultipleBlogsUtil = async (
     });
 };
 
-export default getMultipleBlogsUtil;
+export default getUserDraftsUtil;

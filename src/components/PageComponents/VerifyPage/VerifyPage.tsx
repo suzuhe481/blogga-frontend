@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Navbar from "../../UI/Navbar/Navbar";
@@ -38,6 +38,10 @@ const Verify = () => {
         setIsVerified(true);
       }
     });
+  }, []);
+
+  useLayoutEffect(() => {
+    document.title = "Verify | Blogga";
   }, []);
 
   return (

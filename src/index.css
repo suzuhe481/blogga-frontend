@@ -32,6 +32,16 @@
   }
 }
 
+/* 
+This removes tailwind styles from the blog to allow the user selected
+settings to be shown.
+*/
+@layer base {
+  .blog > * {
+    all: revert;
+  }
+}
+
 @layer utilities {
   /* Clip path designs to make containers where one end is larger then the other. */
   .clip-trapezoid-left-large {

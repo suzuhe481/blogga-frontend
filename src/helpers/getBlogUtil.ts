@@ -1,5 +1,5 @@
 const getBlogUtil = (blogId: string) => {
-  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/posts/${blogId}`;
+  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/blogs/${blogId}`;
 
   const headers = {
     accept: "application/json",

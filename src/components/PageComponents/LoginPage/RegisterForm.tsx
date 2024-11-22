@@ -5,7 +5,11 @@ import { faExclamation, faCheck, faX } from "@fortawesome/free-solid-svg-icons";
 
 import LOGO from "../../../assets/images/LOGO_BLUE.png";
 
-import { isPasswordsEqual, isValidEmail } from "../../../helpers/formUtil";
+import {
+  isPasswordsEqual,
+  isValidEmail,
+  isValidUsername,
+} from "../../../helpers/formUtil";
 import {
   isEmailAvailable,
   isUsernameAvailable,
@@ -136,7 +140,7 @@ const RegisterForm = ({
       newErrors.push("Passwords do not match.");
     }
     if (!usernameAvailable) {
-      newErrors.push("Username is not available.");
+      newErrors.push("Username is not available or is invalid.");
     }
 
     // Prevents registering if form has errors.
@@ -248,7 +252,7 @@ const RegisterForm = ({
     return () => clearTimeout(timeoutID);
   }, [registerFormData.email]);
 
-  // Handles checking if typed username is available.
+  // Handles checking if typed username is available and valid.
   useEffect(() => {
     // Ignores first page load.
     if (registerFormData.username.length === 0) {
@@ -262,7 +266,10 @@ const RegisterForm = ({
     const timeoutID = setTimeout(async () => {
       const result = await isUsernameAvailable(registerFormData.username);
 
-      if (result.usernameAvailable) {
+      if (
+        result.usernameAvailable &&
+        isValidUsername(registerFormData.username)
+      ) {
         setUsernameAvailable(true);
       } else {
         setUsernameAvailable(false);
@@ -447,6 +454,16 @@ const RegisterForm = ({
                 className="rounded-md border-2 border-slate-400 py-3 px-4 w-full focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
               />
               {UsernameInputLoadingCircle}
+            </div>
+
+            <div className="flex flex-col text-slate-500">
+              <div>Your username must:</div>
+              <div className="flex flex-col items-start font-bold text-slate-500">
+                <div>Be unique</div>
+                <div>At least 4 characters</div>
+                <div>Only letters and numbers</div>
+                <div>No spaces</div>
+              </div>
             </div>
           </div>
 

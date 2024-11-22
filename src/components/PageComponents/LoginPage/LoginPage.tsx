@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import SignInForm from "./SignInForm";
@@ -114,12 +114,21 @@ const LoginPage = () => {
     setTimeout(() => {
       setRegisterSubmitted(false);
 
-      // NOTE: Register: result.message is an array of strings receieved from the backend.
+      // NOTE: result.message contiains an array of objects.
+      // Each object contains a string named "message" that is the error.
       if (result.error) {
-        console.log(result.message);
-        setRegisterErrors(result.message);
+        // Add errors to this array then set to state
+        const errorMessages: Array<string> = [];
+
+        result.message.forEach((error: { message: string }) => {
+          errorMessages.push(error.message);
+        });
+
+        setRegisterErrors(errorMessages);
+
         return;
       }
+
       // User successfully created.
       setNewUserSuccess(true);
 
@@ -165,6 +174,14 @@ const LoginPage = () => {
 
     getUserStatus();
   }, []);
+
+  useLayoutEffect(() => {
+    if (onLogin) {
+      document.title = "Login | Blogga";
+    } else {
+      document.title = "Register | Blogga";
+    }
+  }, [onLogin]);
 
   return (
     <div className="relative flex flex-col justify-between min-h-screen">

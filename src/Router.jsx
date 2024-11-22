@@ -2,12 +2,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Welcome from "./components/PageComponents/Welcome/Welcome";
 import Blog from "./components/PageComponents/Blog/Blog";
-import UserBlogs from "./components/PageComponents/UserBlogs/UserBlogs";
+import ProfilePage from "./components/PageComponents/ProfilePage/ProfilePage";
 import BrowseBlogsPage from "./components/PageComponents/BrowseBlogsPage/BrowseBlogsPage";
 import LoginPage from "./components/PageComponents/LoginPage/LoginPage";
 import SendVerifyPage from "./components/PageComponents/SendVerifyPage/SendVerifyPage";
 import Verify from "./components/PageComponents/VerifyPage/VerifyPage";
 import CreateBlogPage from "./components/PageComponents/CreateBlogPage/CreateBlogPage";
+import EditBlogPage from "./components/PageComponents/EditBlogPage/EditBlogPage";
 import UserSettingsPage from "./components/PageComponents/UserSettingsPage/UserSettingsPage";
 import TermsConditionsPage from "./components/PageComponents/TermsConditionsPage/TermsConditionsPage";
 import PrivacyPolicyPage from "./components/PageComponents/PrivacyPolicyPage/PrivacyPolicyPage";
@@ -18,10 +19,6 @@ const Router = () => {
     {
       path: "/",
       element: <Welcome />,
-    },
-    {
-      path: "/user/:id/blogs",
-      element: <UserBlogs />,
     },
     {
       path: "/blog/:id",
@@ -48,6 +45,10 @@ const Router = () => {
       element: <CreateBlogPage />,
     },
     {
+      path: "/blog/edit/:id",
+      element: <EditBlogPage />,
+    },
+    {
       path: "/user/settings",
       element: <UserSettingsPage />,
     },
@@ -58,6 +59,10 @@ const Router = () => {
     {
       path: "/privacy-policy",
       element: <PrivacyPolicyPage />,
+    },
+    {
+      path: "/user/:id",
+      element: <ProfilePage />,
     },
     {
       path: "*",

@@ -1,10 +1,6 @@
-const getMultipleBlogsUtil = async (
-  currentPage: number,
-  blogsPerPage: number
-) => {
-  const URL = `${
-    import.meta.env.VITE_DEV_BACKEND_URL
-  }/blogs?currentPage=${currentPage}&blogsPerPage=${blogsPerPage}`;
+// Deletes the user's profile.
+const deleteBlogUtil = (blogId: string) => {
+  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/blogs/${blogId}`;
 
   const headers = {
     accept: "application/json",
@@ -12,7 +8,7 @@ const getMultipleBlogsUtil = async (
   };
 
   return fetch(URL, {
-    method: "GET",
+    method: "DELETE",
     headers: headers,
     credentials: "include",
   })
@@ -34,4 +30,4 @@ const getMultipleBlogsUtil = async (
     });
 };
 
-export default getMultipleBlogsUtil;
+export default deleteBlogUtil;

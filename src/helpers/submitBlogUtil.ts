@@ -1,5 +1,9 @@
-const submitBlogUtil = (blogData: { title: string; blog: string }) => {
-  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/posts`;
+const submitBlogUtil = (blogData: {
+  title: string;
+  blog: string;
+  draft: boolean;
+}) => {
+  const URL = `${import.meta.env.VITE_DEV_BACKEND_URL}/blogs`;
 
   const headers = {
     accept: "application/json",

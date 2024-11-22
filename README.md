@@ -1,5 +1,12 @@
 # Blogga Frontend
 
-Using Passport for user authentication and authorization.
-Passport JWT for account verification via email.
-Express sessions stored in MongoDB.
+A blogging website where users can create and share blogs.
+
+User Settings
+
+- Change preferred display name.
+- Change real name.
+- Change username.
+- Change email.
+- Change password.
+- Delete profile.

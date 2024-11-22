@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 import Navbar from "../../UI/Navbar/Navbar";
 import Footer from "../../UI/Footer/Footer";
-import BlogCreateForm from "./BlogCreateForm";
-import BlogCreateSuccess from "./BlogCreateSuccess";
+import BlogEditForm from "./BlogEditForm";
+import BlogEditSuccess from "./BlogEditSuccess";
 import NotVerifiedWarning from "./NotVerifiedWarning";
 
 import checkUserVerificationUtil from "../../../helpers/checkUserVerificationUtil";
 
-const CreateBlogPage = () => {
+const EditBlogPage = () => {
   const navigate = useNavigate();
 
   const [formSuccess, setFormSuccess] = useState(false);
@@ -44,7 +44,7 @@ const CreateBlogPage = () => {
   }, []);
 
   useLayoutEffect(() => {
-    document.title = "Create | Blogga";
+    document.title = "Edit | Blogga";
   }, []);
 
   return (
@@ -54,12 +54,9 @@ const CreateBlogPage = () => {
         {userLoggedIn && !userVerified ? <NotVerifiedWarning /> : null}
 
         {userLoggedIn && userVerified && formSuccess ? (
-          <BlogCreateSuccess blogId={blogId} />
+          <BlogEditSuccess blogId={blogId} />
         ) : userLoggedIn && userVerified ? (
-          <BlogCreateForm
-            setFormSuccess={setFormSuccess}
-            setBlogId={setBlogId}
-          />
+          <BlogEditForm setFormSuccess={setFormSuccess} setBlogId={setBlogId} />
         ) : null}
       </div>
       <Footer />
@@ -67,4 +64,4 @@ const CreateBlogPage = () => {
   );
 };
 
-export default CreateBlogPage;
+export default EditBlogPage;

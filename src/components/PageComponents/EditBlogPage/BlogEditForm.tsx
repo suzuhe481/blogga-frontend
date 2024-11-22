@@ -1,21 +1,27 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { Editor } from "@tinymce/tinymce-react";
-import { Editor as TinyMCEEditor } from "tinymce";
+import tinymce, { Editor as TinyMCEEditor } from "tinymce";
 
 import { bouncy } from "ldrs";
 import { ring } from "ldrs";
 
-import submitBlogUtil from "../../../helpers/submitBlogUtil";
+import getDraftUtil from "../../../helpers/getDraftUtil";
+import updateBlogUtil from "../../../helpers/updateBlogUtil";
 
-interface IBlogCreateForm {
+interface IBlogEditForm {
   setFormSuccess: (value: boolean) => void;
   setBlogId: (id: string) => void;
 }
 
-const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
+const BlogEditForm = ({ setFormSuccess, setBlogId }: IBlogEditForm) => {
   bouncy.register();
   ring.register();
+
+  const navigate = useNavigate();
+
+  const { id = "" } = useParams() as { id: string }; // Fallback value of ""
 
   const [titleValue, setTitleValue] = useState("");
   const [blogValue, setBlogValue] = useState("");
@@ -95,9 +101,10 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
       title: titleValue,
       blog: blogValue,
       draft: event.currentTarget.value === "draft" ? true : false,
+      shortId: id,
     };
 
-    const result = await submitBlogUtil(blogData);
+    const result = await updateBlogUtil(blogData);
 
     setTimeout(() => {
       setFormSubmitted(false);
@@ -131,6 +138,30 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
     }, 1000);
   }
 
+  // Retrieves and sets blog data.
+  useEffect(() => {
+    getDraftUtil(id).then((result) => {
+      if (result.error === true) {
+        // setBlogError(true);
+        // setBlogLoading(false);
+
+        // redirect to 404 page
+        navigate("whoops");
+        return;
+      }
+
+      setTitleValue(result.blog.title);
+      // Blog value needs to be decoded to be properly formatted before it can be set in the form.
+      setBlogValue(decodeHtmlEntities(result.blog.blog));
+    });
+  }, [id, editorRef]);
+
+  // Utility function to decode HTML entities
+  const decodeHtmlEntities = (str: string) => {
+    const doc = new DOMParser().parseFromString(str, "text/html");
+    return doc.body.textContent || doc.body.innerText;
+  };
+
   return (
     <div className="w-[95vw] desktop:w-[75rem] m-4">
       {isFormLoading ? loadingAnimation : ""}
@@ -145,6 +176,7 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
             name="title"
             required
             onChange={handleTitleChange}
+            value={titleValue}
             className="rounded-md border-2 border-slate-400 py-3 px-4 focus:outline-none focus:border-[#75C1FF] focus:shadow-[0_0_0_2px_#B3E0FF]"
           />
         </div>
@@ -154,6 +186,7 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
           licenseKey="gpl"
           onEditorChange={(newValue) => handleEditorChange(newValue)}
           onInit={handleEditorInit}
+          value={blogValue}
           init={{
             height: 500,
             menubar: true,
@@ -221,4 +254,4 @@ const BlogCreateForm = ({ setFormSuccess, setBlogId }: IBlogCreateForm) => {
     </div>
   );
 };
-export default BlogCreateForm;
+export default BlogEditForm;
